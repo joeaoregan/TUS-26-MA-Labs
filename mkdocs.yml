@@ -2,6 +2,12 @@ site_name: TUS-26-MA-Labs
 docs_dir: docs
 site_dir: site
 theme:
+  icon:
+    admonition:
+      note: material/car-sports
+      success: material/car-sports
+      warning: material/car-sports
+      danger: material/car-sports
   logo: images/logo.png
   palette: 
 
@@ -37,9 +43,13 @@ nav:
       - MA CA2 GitHub: https://github.com/joeaoregan/TUS-26-MA-CA2-Distributed-Microservice-App
   - RESTFUL APIs 1-7:
     - Labs 1-7: labs1-7/index.md
-    - Lab 1 Getting Started with Spring Boot: labs1-7/lab1.md
+    - 1. Getting Started with Spring Boot: labs1-7/lab1/index.md
+    - 2. Configuring H2 DB and YAML application.properties: labs1-7/lab2/index.md
+    - 3. Building a Rest API to support the creation of a new account and customer details: labs1-7/lab3/index.md
   - RESTFUL APIs 8, 9:
     - Labs 8-9: labs8-9/index.md
+  - API:
+    - API Endpoints: api/index.md
   
 markdown_extensions:
   - pymdownx.tasklist:
