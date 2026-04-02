@@ -1,4 +1,4 @@
-package com.tus.accounts.controller;
+package com.tus.accounts.repository;
 
 import java.util.Optional;
 

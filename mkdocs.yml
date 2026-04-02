@@ -4,10 +4,10 @@ site_dir: site
 theme:
   icon:
     admonition:
-      note: material/car-sports
-      success: material/car-sports
-      warning: material/car-sports
-      danger: material/car-sports
+      note: material/account
+      success: material/account
+      warning: material/account
+      danger: material/account
   logo: images/logo.png
   palette: 
 
@@ -47,6 +47,7 @@ nav:
     - 2. Configuring H2 DB and YAML application.properties: labs1-7/lab2/index.md
     - 3. Building a Rest API to support the creation of a new account and customer details: labs1-7/lab3/index.md
     - 4. Exception Handling –check if customer already exists: labs1-7/lab4/index.md
+    - 5. Implementing a READ API that fetches the details based on mobile number: labs1-7/lab5/index.md
   - RESTFUL APIs 8, 9:
     - Labs 8-9: labs8-9/index.md
   - API:

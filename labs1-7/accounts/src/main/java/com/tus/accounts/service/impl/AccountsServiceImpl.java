@@ -7,11 +7,14 @@ import java.util.Random;
 import org.springframework.stereotype.Service;
 
 import com.tus.accounts.constants.AccountsConstants;
-import com.tus.accounts.controller.AccountsRepository;
+import com.tus.accounts.repository.AccountsRepository;
+import com.tus.accounts.dto.AccountsDto;
 import com.tus.accounts.dto.CustomerDto;
 import com.tus.accounts.entity.Accounts;
 import com.tus.accounts.entity.Customer;
 import com.tus.accounts.exception.CustomerAlreadyExistsException;
+import com.tus.accounts.exception.ResourceNotFoundException;
+import com.tus.accounts.mapper.AccountsMapper;
 import com.tus.accounts.mapper.CustomerMapper;
 import com.tus.accounts.repository.CustomerRepository;
 import com.tus.accounts.service.IAccountsService;
@@ -58,5 +61,16 @@ public class AccountsServiceImpl implements IAccountsService {
 		newAccount.setUpdatedAt(LocalDateTime.now());
 		newAccount.setUpdatedBy("default");
 		return newAccount;
+	}
+
+	@Override
+	public CustomerDto fetchAccount(String mobileNumber) {
+		Customer customer = customerRepository.findByMobileNumber(mobileNumber)
+				.orElseThrow(() -> new ResourceNotFoundException("Customer", "mobileNumber", mobileNumber));
+		Accounts accounts = accountsRepository.findByCustomerId(customer.getCustomerId()).orElseThrow(
+				() -> new ResourceNotFoundException("Account", "customerId", customer.getCustomerId().toString()));
+		CustomerDto customerDto = CustomerMapper.mapToCustomerDto(customer, new CustomerDto());
+		customerDto.setAccountsDto(AccountsMapper.mapToAccountsDto(accounts, new AccountsDto()));
+		return customerDto;
 	}
 }
