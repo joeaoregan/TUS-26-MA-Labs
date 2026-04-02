@@ -816,6 +816,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../labs1-7/lab7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7. Exceptions, Data Validations and Audit Columns
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1077,6 +1105,45 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#input-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Input Validation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Input Validation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#post" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        POST
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1160,6 +1227,45 @@
       
     </span>
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#input-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Input Validation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Input Validation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#post" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        POST
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1292,6 +1398,39 @@ Response 404 Not Found:
 <span class="w">    </span><span class="nt">&quot;errorCode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;404 NOT_FOUND&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">&quot;errorMessage&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Customer not found with the given input data mobileNumber : &#39;086-123457&#39;&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">&quot;errortime&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-04-02T20:59:58.8186726&quot;</span>
+<span class="p">}</span>
+</code></pre></div></p>
+</div>
+<h2 id="input-validation">Input Validation</h2>
+<h3 id="post">POST</h3>
+<div class="admonition success">
+<p class="admonition-title">POST /account [400 Bad Request]</p>
+<p>Create a new customer passing name, email, and mobileNumber that don't meet valiation requirements</p>
+<p>Request (Bad Input):
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Joe&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;joegmail.com&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;mobileNumber&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;086-123456&quot;</span><span class="w">    </span>
+<span class="p">}</span>
+</code></pre></div>
+Response 400 Bad Request:
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;mobileNumber&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Mobile number must be 10 digits&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;the length of the customer name should be between 5 and 30&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Email adderess should be a valid value&quot;</span>
+<span class="p">}</span>
+</code></pre></div></p>
+</div>
+<h3 id="get">GET</h3>
+<div class="admonition note">
+<p class="admonition-title">GET localhost:8080/api/account?mobileNumber=123456789</p>
+<p>Fetch phone number with invalid length (must be 10 digits)</p>
+<p>Response 500 Internal Server Error:
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;apiPath&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;uri=/api/account&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;errorCode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;500 INTERNAL_SERVER_ERROR&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;errorMessage&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fetchAccountDetails.mobileNumber: Mobile number must be 10 digits&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;errortime&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-04-02T22:44:20.8069826&quot;</span>
 <span class="p">}</span>
 </code></pre></div></p>
 </div>
