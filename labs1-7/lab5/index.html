@@ -14,7 +14,7 @@
         <link rel="prev" href="../lab4/">
       
       
-        <link rel="next" href="../../labs8-9/">
+        <link rel="next" href="../lab6/">
       
       
         
@@ -101,7 +101,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#lab5-implementing-a-read-api-that-fetches-the-details-based-on-mobile-number" class="md-skip">
+        <a href="#restful-api-lab-5" class="md-skip">
           Skip to content
         </a>
       
@@ -783,6 +783,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Implementing a READ API that fetches the details based on mobile number
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -800,6 +818,147 @@
 
       </a>
       
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#lab5-implementing-a-read-api-that-fetches-the-details-based-on-mobile-number" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab#5 Implementing a READ API that fetches the details based on mobile number.
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Lab#5 Implementing a READ API that fetches the details based on mobile number.">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-first-we-need-to-add-a-check-to-see-if-customer-already-exists-add-the-method-findbycustomerid-in-accountsrepository-interface" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. First we need to add a check to see if customer already exists. Add the method findByCustomerId in AccountsRepository interface.
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-add-a-new-resourcenotfoundexception-the-comtusaccountsexception-package" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Add a new ResourceNotFoundException the com.tus.accounts.exception package.
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-update-globallogicexceptionhandler-to-handle-the-exception-and-return-an-appropriate-errorresponsedto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Update GlobalLogicExceptionHandler to handle the exception and return an appropriate ErrorResponseDto.
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-update-the-customerdto-to-add-a-new-field-to-keep-the-account-information-we-could-create-a-new-dto-for-the-combined-customer-and-account-information-but-will-leave-like-this-for-now" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Update the CustomerDto to add a new field to keep the account information. We could create a new Dto for the combined Customer and Account information but will leave like this for now.
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-add-a-new-method-to-the-controller-class-for-the-read-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Add a new method to the controller class for the read API.
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-implement-the-fetchaccount-method-by-adding-to-the-service-interface-and-the-implementation-class-this-uses-lambda-expressions-to-throw-the-exception" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Implement the fetchAccount method by adding to the Service Interface and the implementation class. This uses Lambda expressions to throw the exception.
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-test-the-application-add-a-customer-and-then-fetch-the-details-as-shown-then-use-a-different-phone-number-and-check-that-the-404-response-with-appropriate-error-message-is-found" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Test the Application. Add a customer and then fetch the details as shown. Then use a different phone number and check that the 404 response with appropriate error message is found.
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lab6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. RESTfulAPI for Updating and Deleting customer accounts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -1006,6 +1165,108 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#lab5-implementing-a-read-api-that-fetches-the-details-based-on-mobile-number" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab#5 Implementing a READ API that fetches the details based on mobile number.
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Lab#5 Implementing a READ API that fetches the details based on mobile number.">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-first-we-need-to-add-a-check-to-see-if-customer-already-exists-add-the-method-findbycustomerid-in-accountsrepository-interface" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. First we need to add a check to see if customer already exists. Add the method findByCustomerId in AccountsRepository interface.
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-add-a-new-resourcenotfoundexception-the-comtusaccountsexception-package" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Add a new ResourceNotFoundException the com.tus.accounts.exception package.
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-update-globallogicexceptionhandler-to-handle-the-exception-and-return-an-appropriate-errorresponsedto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Update GlobalLogicExceptionHandler to handle the exception and return an appropriate ErrorResponseDto.
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-update-the-customerdto-to-add-a-new-field-to-keep-the-account-information-we-could-create-a-new-dto-for-the-combined-customer-and-account-information-but-will-leave-like-this-for-now" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Update the CustomerDto to add a new field to keep the account information. We could create a new Dto for the combined Customer and Account information but will leave like this for now.
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-add-a-new-method-to-the-controller-class-for-the-read-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Add a new method to the controller class for the read API.
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-implement-the-fetchaccount-method-by-adding-to-the-service-interface-and-the-implementation-class-this-uses-lambda-expressions-to-throw-the-exception" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Implement the fetchAccount method by adding to the Service Interface and the implementation class. This uses Lambda expressions to throw the exception.
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-test-the-application-add-a-customer-and-then-fetch-the-details-as-shown-then-use-a-different-phone-number-and-check-that-the-404-response-with-appropriate-error-message-is-found" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Test the Application. Add a customer and then fetch the details as shown. Then use a different phone number and check that the 404 response with appropriate error message is found.
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1030,37 +1291,24 @@
   
 
 
-<h1 id="lab5-implementing-a-read-api-that-fetches-the-details-based-on-mobile-number">Lab#5 Implementing a READ API that fetches the details based on mobile number.</h1>
+<h1 id="restful-api-lab-5">RESTful API Lab 5</h1>
+<h2 id="lab5-implementing-a-read-api-that-fetches-the-details-based-on-mobile-number">Lab#5 Implementing a READ API that fetches the details based on mobile number.</h2>
 <hr />
 <p>In this lab we are going to fetch the customer and account details based on the customers mobile number. We will find the customer object base on the mobile number. Then we will find the account based on the customer id. The account data is returned as part of the CustomerDto object. The case where a customer does not exist is handled with exceptions.</p>
-<ol>
-<li>First we need to add a check to see if customer already exists. Add the method findByCustomerId in AccountsRepository interface.</li>
-</ol>
+<h3 id="1-first-we-need-to-add-a-check-to-see-if-customer-already-exists-add-the-method-findbycustomerid-in-accountsrepository-interface">1.  First we need to add a check to see if customer already exists. Add the method findByCustomerId in AccountsRepository interface.</h3>
 <p><img alt="Check Customer Already Exists" src="1.png" /></p>
-<ol>
-<li>Add a new ResourceNotFoundException the com.tus.accounts.exception package.</li>
-</ol>
+<h3 id="2-add-a-new-resourcenotfoundexception-the-comtusaccountsexception-package">2.  Add a new ResourceNotFoundException the com.tus.accounts.exception package.</h3>
 <p><img alt="Resource Not Found Exception" src="2.png" /></p>
-<ol>
-<li>Update GlobalLogicExceptionHandler to handle the exception and return an appropriate ErrorResponseDto.</li>
-</ol>
+<h3 id="3-update-globallogicexceptionhandler-to-handle-the-exception-and-return-an-appropriate-errorresponsedto">3.  Update GlobalLogicExceptionHandler to handle the exception and return an appropriate ErrorResponseDto.</h3>
 <p><img alt="Handle Exception Return Response" src="3.png" /></p>
-<ol>
-<li>Update the CustomerDto to add a new field to keep the account information. We could create a new Dto for the combined Customer and Account information but will leave like this for now.</li>
-</ol>
+<h3 id="4-update-the-customerdto-to-add-a-new-field-to-keep-the-account-information-we-could-create-a-new-dto-for-the-combined-customer-and-account-information-but-will-leave-like-this-for-now">4.  Update the CustomerDto to add a new field to keep the account information. We could create a new Dto for the combined Customer and Account information but will leave like this for now.</h3>
 <p><img alt="Update CustomerDto" src="4.png" /></p>
-<ol>
-<li>Add a new method to the controller class for the read API.</li>
-</ol>
+<h3 id="5-add-a-new-method-to-the-controller-class-for-the-read-api">5.  Add a new method to the controller class for the read API.</h3>
 <p><img alt="Read API" src="5.png" /></p>
-<ol>
-<li>Implement the fetchAccount method by adding to the Service Interface and the implementation class. This uses Lambda expressions to throw the exception.</li>
-</ol>
+<h3 id="6-implement-the-fetchaccount-method-by-adding-to-the-service-interface-and-the-implementation-class-this-uses-lambda-expressions-to-throw-the-exception">6.  Implement the fetchAccount method by adding to the Service Interface and the implementation class. This uses Lambda expressions to throw the exception.</h3>
 <p><img alt="interface fetchAccount method" src="6.png" /></p>
 <p><img alt="fetchAccount implementatoin" src="6b.png" /></p>
-<ol>
-<li>Test the Application. Add a customer and then fetch the details as shown. Then use a different phone number and check that the 404 response with appropriate error message is found. </li>
-</ol>
+<h3 id="7-test-the-application-add-a-customer-and-then-fetch-the-details-as-shown-then-use-a-different-phone-number-and-check-that-the-404-response-with-appropriate-error-message-is-found">7.  Test the Application. Add a customer and then fetch the details as shown. Then use a different phone number and check that the 404 response with appropriate error message is found.</h3>
 <p><img alt="Test customer found" src="7.png" /></p>
 <p><img alt="Test customer not found" src="7b.png" /></p>
 
@@ -1115,13 +1363,13 @@
         
         
           
-          <a href="../../labs8-9/" class="md-footer__link md-footer__link--next" aria-label="Next: Labs 8-9">
+          <a href="../lab6/" class="md-footer__link md-footer__link--next" aria-label="Next: 6. RESTfulAPI for Updating and Deleting customer accounts">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Labs 8-9
+                6. RESTfulAPI for Updating and Deleting customer accounts
               </div>
             </div>
             <div class="md-footer__button md-icon">

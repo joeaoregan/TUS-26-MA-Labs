@@ -101,7 +101,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#lab3-building-a-rest-api-to-support-the-creation-of-a-new-account-and-customer-details" class="md-skip">
+        <a href="#restful-api-lab-3" class="md-skip">
           Skip to content
         </a>
       
@@ -727,6 +727,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Building a Rest API to support the creation of a new account and customer details
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -743,6 +761,141 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#lab3-building-a-rest-api-to-support-the-creation-of-a-new-account-and-customer-details" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab#3 Building a Rest API to support the creation of a new account and customer details.
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Lab#3 Building a Rest API to support the creation of a new account and customer details.">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-add-class-accountsconstants-provided-to-a-new-package-comtusaccountsconstants-this-class-will-store-error-messages" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Add class AccountsConstants provided to a new package com.tus.accounts.constants. This class will store error messages.
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-update-the-accountcontroller-class-for-the-postmapping-as-shown-you-can-add-accounts-to-the-postmapping-path" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Update the AccountController class for the PostMapping as shown. You can add /accounts to the PostMapping path
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-add-a-packages-service-and-serviceimpl-these-will-hold-the-interface-for-the-service-layer-and-its-implementation-note-dont-need-to-use-autowired-in-springboot-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Add a packages service and serviceImpl. These will hold the interface for the Service layer and its implementation. Note: don’t need to use @Autowired in Springboot 3.
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-we-will-now-create-a-mapper-class-code-given-for-accountsmapper-and-customermapper-this-is-to-map-data-between-the-entity-classes-and-the-dto-classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. We will now create a mapper class (code given) for AccountsMapper and CustomerMapper. This is to map data between the Entity classes and the DTO classes.
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-update-the-accountsserviceimpl-with-the-method-for-creating-a-new-account-base-on-a-customerdto-object" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Update the AccountsServiceImpl with the method for creating a new account base on a CustomerDto object.
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-update-the-controller-to-call-the-service-layer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Update the controller to call the service layer
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-run-the-project-and-check-the-h2-console-the-tables-should-be-created-and-empty" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Run the project and check the h2-console. The tables should be created and empty.
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-create-a-new-customer-from-postman-you-should-get-response-code-201-and-message-as-shown-below" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Create a new customer from postman. You should get response code 201 and message as shown below.
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-check-that-the-data-has-been-written-to-the-database" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Check that the data has been written to the database
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -792,6 +945,34 @@
     
   
     5. Implementing a READ API that fetches the details based on mobile number
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lab6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. RESTfulAPI for Updating and Deleting customer accounts
   
 
     
@@ -1006,6 +1187,130 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#lab3-building-a-rest-api-to-support-the-creation-of-a-new-account-and-customer-details" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab#3 Building a Rest API to support the creation of a new account and customer details.
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Lab#3 Building a Rest API to support the creation of a new account and customer details.">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-add-class-accountsconstants-provided-to-a-new-package-comtusaccountsconstants-this-class-will-store-error-messages" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Add class AccountsConstants provided to a new package com.tus.accounts.constants. This class will store error messages.
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-update-the-accountcontroller-class-for-the-postmapping-as-shown-you-can-add-accounts-to-the-postmapping-path" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Update the AccountController class for the PostMapping as shown. You can add /accounts to the PostMapping path
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-add-a-packages-service-and-serviceimpl-these-will-hold-the-interface-for-the-service-layer-and-its-implementation-note-dont-need-to-use-autowired-in-springboot-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Add a packages service and serviceImpl. These will hold the interface for the Service layer and its implementation. Note: don’t need to use @Autowired in Springboot 3.
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-we-will-now-create-a-mapper-class-code-given-for-accountsmapper-and-customermapper-this-is-to-map-data-between-the-entity-classes-and-the-dto-classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. We will now create a mapper class (code given) for AccountsMapper and CustomerMapper. This is to map data between the Entity classes and the DTO classes.
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-update-the-accountsserviceimpl-with-the-method-for-creating-a-new-account-base-on-a-customerdto-object" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Update the AccountsServiceImpl with the method for creating a new account base on a CustomerDto object.
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-update-the-controller-to-call-the-service-layer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Update the controller to call the service layer
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-run-the-project-and-check-the-h2-console-the-tables-should-be-created-and-empty" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Run the project and check the h2-console. The tables should be created and empty.
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-create-a-new-customer-from-postman-you-should-get-response-code-201-and-message-as-shown-below" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Create a new customer from postman. You should get response code 201 and message as shown below.
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-check-that-the-data-has-been-written-to-the-database" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Check that the data has been written to the database
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1030,50 +1335,33 @@
   
 
 
-<h1 id="lab3-building-a-rest-api-to-support-the-creation-of-a-new-account-and-customer-details">Lab#3 Building a Rest API to support the creation of a new account and customer details.</h1>
+<h1 id="restful-api-lab-3">RESTful API Lab 3</h1>
+<h2 id="lab3-building-a-rest-api-to-support-the-creation-of-a-new-account-and-customer-details">Lab#3 Building a Rest API to support the creation of a new account and customer details.</h2>
 <p>In this lab we are creating the API that will allow the creation of a new account and customer.</p>
 <hr />
 <p>Note: If you have problems with Lombok<br />
 <a href="https://stackoverflow.com/questions/35842751/lombok-not-working-with-sts">https://stackoverflow.com/questions/35842751/lombok-not-working-with-sts</a></p>
 <hr />
-<ol>
-<li>Add class AccountsConstants provided to a new package com.tus.accounts.constants. This class will store error messages.</li>
-</ol>
+<h3 id="1-add-class-accountsconstants-provided-to-a-new-package-comtusaccountsconstants-this-class-will-store-error-messages">1.  Add class AccountsConstants provided to a new package com.tus.accounts.constants. This class will store error messages.</h3>
 <p><img alt="Accounts Constant" src="1.png" /></p>
-<ol>
-<li>Update the AccountController class for the PostMapping as shown. You can add /accounts to the PostMapping path</li>
-</ol>
+<h3 id="2-update-the-accountcontroller-class-for-the-postmapping-as-shown-you-can-add-accounts-to-the-postmapping-path">2.  Update the AccountController class for the PostMapping as shown. You can add /accounts to the PostMapping path</h3>
 <p><img alt="Account Controller" src="2.png" /></p>
-<ol>
-<li>Add a packages service and serviceImpl. These will hold the interface for the Service layer and its implementation. Note: don’t need to use @Autowired in Springboot 3.</li>
-</ol>
+<h3 id="3-add-a-packages-service-and-serviceimpl-these-will-hold-the-interface-for-the-service-layer-and-its-implementation-note-dont-need-to-use-autowired-in-springboot-3">3.  Add a packages service and serviceImpl. These will hold the interface for the Service layer and its implementation. Note: don’t need to use @Autowired in Springboot 3.</h3>
 <p><img alt="Service" src="3a.png" /></p>
 <p><img alt="Accounts Service" src="3b.png" /></p>
 <p><img alt="Accounts Service Impl" src="3c.png" /></p>
-<ol>
-<li>We will now create a mapper class (code given) for AccountsMapper and CustomerMapper. This is to map data between the Entity classes and the DTO classes.</li>
-</ol>
+<h3 id="4-we-will-now-create-a-mapper-class-code-given-for-accountsmapper-and-customermapper-this-is-to-map-data-between-the-entity-classes-and-the-dto-classes">4.  We will now create a mapper class (code given) for AccountsMapper and CustomerMapper. This is to map data between the Entity classes and the DTO classes.</h3>
 <p><img alt="Customer Mapper" src="4a.png" /></p>
 <p><img alt="Accounts Mapper" src="4b.png" /></p>
-<ol>
-<li>Update the AccountsServiceImpl with the method for creating a new account base on a CustomerDto object.</li>
-</ol>
+<h3 id="5-update-the-accountsserviceimpl-with-the-method-for-creating-a-new-account-base-on-a-customerdto-object">5.  Update the AccountsServiceImpl with the method for creating a new account base on a CustomerDto object.</h3>
 <p><img alt="Update Accounts Service Impl" src="5.png" /></p>
-<ol>
-<li>Update the controller to call the service layer</li>
-</ol>
+<h3 id="6-update-the-controller-to-call-the-service-layer">6.  Update the controller to call the service layer</h3>
 <p><img alt="Update Controller" src="6.png" /></p>
-<ol>
-<li>Run the project and check the h2-console. The tables should be created and empty.</li>
-</ol>
+<h3 id="7-run-the-project-and-check-the-h2-console-the-tables-should-be-created-and-empty">7.  Run the project and check the h2-console. The tables should be created and empty.</h3>
 <p><img alt="H2 Console" src="7.png" /></p>
-<ol>
-<li>Create a new customer from postman. You should get response code 201 and message as shown below.</li>
-</ol>
+<h3 id="8-create-a-new-customer-from-postman-you-should-get-response-code-201-and-message-as-shown-below">8.  Create a new customer from postman. You should get response code 201 and message as shown below.</h3>
 <p><img alt="Postman Create New Customer" src="8.png" /></p>
-<ol>
-<li>Check that the data has been written to the database</li>
-</ol>
+<h3 id="9-check-that-the-data-has-been-written-to-the-database">9.  Check that the data has been written to the database</h3>
 <p><img alt="Check Data in Database" src="9.png" /></p>
 <p><img alt="Check Data in Database" src="9b.png" /></p>
 

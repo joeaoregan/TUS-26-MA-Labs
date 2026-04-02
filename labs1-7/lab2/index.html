@@ -101,7 +101,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#lab2-configuring-h2-db-and-yaml-applicationproperties" class="md-skip">
+        <a href="#restful-api-lab-2" class="md-skip">
           Skip to content
         </a>
       
@@ -699,6 +699,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Configuring H2 DB and YAML application.properties
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -715,6 +733,141 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#lab2-configuring-h2-db-and-yaml-applicationproperties" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab#2 Configuring H2 DB and YAML application.properties
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Lab#2 Configuring H2 DB and YAML application.properties">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-rename-applicationproperties-as-applicationyml-and-update-with-following-properties-file-provided" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Rename application.properties as application.yml and update with following properties (file provided)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-create-a-file-called-schemesql-provided-in-the-resources-folder-with-the-following-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Create a file called scheme.sql (provided) in the resources folder with the following data.
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-restart-the-server-it-will-start-on-port-8080-based-on-yml-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Restart the server. It will start on port 8080 based on yml file.
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-go-to-the-h2-console-in-the-browser-you-should-see-the-two-tables-have-bee-created" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Go to the h2-console in the browser. You should see the two tables have bee created.
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-create-a-new-package-for-the-entity-classes-as-show-below" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Create a new package for the entity classes as show below.
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-add-the-classes-baseentity-accounts-and-customers-given-and-examine-the-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Add the classes BaseEntity, Accounts and Customers (given) and examine the code.
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-now-add-the-repository-interfaces" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Now Add the Repository interfaces
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-create-a-new-package-with-class-accountsdto-and-customerdto-these-classes-uses-lombok-you-may-need-to-turn-on-annotations-in-your-ide-or-install-a-lombok-jar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Create a new package with class AccountsDto and CustomerDto. These classes uses Lombok (You may need to turn on annotations in your IDE or install a Lombok jar)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-also-add-a-responsedto-and-an-errorresponsedto-class" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Also add a ResponseDto and an ErrorResponseDto class
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -792,6 +945,34 @@
     
   
     5. Implementing a READ API that fetches the details based on mobile number
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lab6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. RESTfulAPI for Updating and Deleting customer accounts
   
 
     
@@ -1006,6 +1187,130 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#lab2-configuring-h2-db-and-yaml-applicationproperties" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab#2 Configuring H2 DB and YAML application.properties
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Lab#2 Configuring H2 DB and YAML application.properties">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-rename-applicationproperties-as-applicationyml-and-update-with-following-properties-file-provided" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Rename application.properties as application.yml and update with following properties (file provided)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-create-a-file-called-schemesql-provided-in-the-resources-folder-with-the-following-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Create a file called scheme.sql (provided) in the resources folder with the following data.
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-restart-the-server-it-will-start-on-port-8080-based-on-yml-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Restart the server. It will start on port 8080 based on yml file.
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-go-to-the-h2-console-in-the-browser-you-should-see-the-two-tables-have-bee-created" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Go to the h2-console in the browser. You should see the two tables have bee created.
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-create-a-new-package-for-the-entity-classes-as-show-below" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Create a new package for the entity classes as show below.
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-add-the-classes-baseentity-accounts-and-customers-given-and-examine-the-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Add the classes BaseEntity, Accounts and Customers (given) and examine the code.
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-now-add-the-repository-interfaces" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Now Add the Repository interfaces
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-create-a-new-package-with-class-accountsdto-and-customerdto-these-classes-uses-lombok-you-may-need-to-turn-on-annotations-in-your-ide-or-install-a-lombok-jar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Create a new package with class AccountsDto and CustomerDto. These classes uses Lombok (You may need to turn on annotations in your IDE or install a Lombok jar)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-also-add-a-responsedto-and-an-errorresponsedto-class" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Also add a ResponseDto and an ErrorResponseDto class
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1030,46 +1335,31 @@
   
 
 
-<h1 id="lab2-configuring-h2-db-and-yaml-applicationproperties">Lab#2 Configuring H2 DB and YAML application.properties</h1>
+<h1 id="restful-api-lab-2">RESTful API Lab 2</h1>
+<h2 id="lab2-configuring-h2-db-and-yaml-applicationproperties">Lab#2 Configuring H2 DB and YAML application.properties</h2>
 <p>In this lab we will continue from the previous lab and configure the application to use an in-memory H2 database.</p>
-<ol>
-<li>Rename application.properties as application.yml  and update with following properties (file provided)</li>
-</ol>
+<h3 id="1-rename-applicationproperties-as-applicationyml-and-update-with-following-properties-file-provided">1. Rename application.properties as application.yml  and update with following properties (file provided)</h3>
 <p><img alt="application.yml" src="1.png" /></p>
-<ol>
-<li>Create a file called scheme.sql (provided) in the resources folder with the following data.</li>
-</ol>
+<h3 id="2-create-a-file-called-schemesql-provided-in-the-resources-folder-with-the-following-data">2. Create a file called scheme.sql (provided) in the resources folder with the following data.</h3>
 <p><img alt="scheme.sql" src="2.png" /></p>
-<ol>
-<li>Restart the server. It will start on port 8080 based on yml file.</li>
-<li>Go to the h2-console in the browser. You should see the two tables have bee created.</li>
-</ol>
+<h3 id="3-restart-the-server-it-will-start-on-port-8080-based-on-yml-file">3. Restart the server. It will start on port 8080 based on yml file.</h3>
+<h3 id="4-go-to-the-h2-console-in-the-browser-you-should-see-the-two-tables-have-bee-created">4. Go to the h2-console in the browser. You should see the two tables have bee created.</h3>
 <p><img alt="H2 Console" src="4.png" /></p>
 <p>Now we will write Spring Data JPA entities &amp; repositories to interact with DB tables</p>
-<ol>
-<li>Create a new package for the entity classes as show below.</li>
-</ol>
+<h3 id="4-create-a-new-package-for-the-entity-classes-as-show-below">4. Create a new package for the entity classes as show below.</h3>
 <p><img alt="New package" src="4b.png" /></p>
-<ol>
-<li>Add the classes BaseEntity, Accounts and Customers (given) and examine the code.</li>
-</ol>
+<h3 id="5-add-the-classes-baseentity-accounts-and-customers-given-and-examine-the-code">5. Add the classes BaseEntity, Accounts and Customers (given) and examine the code.</h3>
 <p><img alt="Add Classes" src="5.png" /></p>
-<ol>
-<li>Now Add the Repository interfaces</li>
-</ol>
+<h3 id="6-now-add-the-repository-interfaces">6. Now Add the Repository interfaces</h3>
 <p><img alt="Repository Interfacese" src="6.png" /></p>
 <p><img alt="Customer Repository" src="6b.png" /></p>
 <p><img alt="Accounts Repository" src="6c.png" /></p>
 <p>We will use the Data Transfer Object pattern to transfer data – not the entity classes themselves.</p>
-<ol>
-<li>Create a new package with class AccountsDto and CustomerDto. These classes uses Lombok (You may need to turn on annotations in your IDE or install a Lombok jar)</li>
-</ol>
+<h3 id="7-create-a-new-package-with-class-accountsdto-and-customerdto-these-classes-uses-lombok-you-may-need-to-turn-on-annotations-in-your-ide-or-install-a-lombok-jar">7. Create a new package with class AccountsDto and CustomerDto. These classes uses Lombok (You may need to turn on annotations in your IDE or install a Lombok jar)</h3>
 <p><img alt="DTOs" src="7.png" /> </p>
 <p><img alt="Accounts DTO" src="7b.png" /> </p>
 <p><img alt="Customer DTO" src="7c.png" /> </p>
-<ol>
-<li>Also add a ResponseDto and an ErrorResponseDto class</li>
-</ol>
+<h3 id="8-also-add-a-responsedto-and-an-errorresponsedto-class">8. Also add a ResponseDto and an ErrorResponseDto class</h3>
 <p><img alt="Customer DTO" src="8.png" /> </p>
 <p><img alt="Error DTO" src="8b.png" /> </p>
 

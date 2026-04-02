@@ -8,27 +8,31 @@
       
       
       
-        <link rel="canonical" href="https://joeaoregan.github.io/TUS-26-MA-Labs/mkdocs/">
+        <link rel="canonical" href="https://joeaoregan.github.io/TUS-26-MA-Labs/labs1-7/lab6/">
       
       
+        <link rel="prev" href="../lab5/">
+      
+      
+        <link rel="next" href="../../labs8-9/">
       
       
         
       
       
-      <link rel="icon" href="../assets/images/favicon.png">
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
       
-        <title>MkDocs - TUS-26-MA-Labs</title>
+        <title>6. RESTfulAPI for Updating and Deleting customer accounts - TUS-26-MA-Labs</title>
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
   
@@ -72,7 +76,7 @@
       
     
     
-    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -97,7 +101,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#mkdocs" class="md-skip">
+        <a href="#restful-api-lab-6" class="md-skip">
           Skip to content
         </a>
       
@@ -113,9 +117,9 @@
 
 <header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href=".." title="TUS-26-MA-Labs" class="md-header__button md-logo" aria-label="TUS-26-MA-Labs" data-md-component="logo">
+    <a href="../.." title="TUS-26-MA-Labs" class="md-header__button md-logo" aria-label="TUS-26-MA-Labs" data-md-component="logo">
       
-  <img src="../images/logo.png" alt="logo">
+  <img src="../../images/logo.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -132,7 +136,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              MkDocs
+              6. RESTfulAPI for Updating and Deleting customer accounts
             
           </span>
         </div>
@@ -239,7 +243,7 @@
     
     
       <li class="md-tabs__item">
-        <a href=".." class="md-tabs__link">
+        <a href="../.." class="md-tabs__link">
           
   
   
@@ -255,11 +259,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../labs1-7/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
           
   
   
@@ -279,7 +285,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../labs8-9/" class="md-tabs__link">
+        <a href="../../labs8-9/" class="md-tabs__link">
           
   
   
@@ -299,7 +305,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../api/" class="md-tabs__link">
+        <a href="../../api/" class="md-tabs__link">
           
   
   
@@ -339,9 +345,9 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="TUS-26-MA-Labs" class="md-nav__button md-logo" aria-label="TUS-26-MA-Labs" data-md-component="logo">
+    <a href="../.." title="TUS-26-MA-Labs" class="md-nav__button md-logo" aria-label="TUS-26-MA-Labs" data-md-component="logo">
       
-  <img src="../images/logo.png" alt="logo">
+  <img src="../../images/logo.png" alt="logo">
 
     </a>
     TUS-26-MA-Labs
@@ -420,7 +426,7 @@
   
   
     <li class="md-nav__item">
-      <a href=".." class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         
   
   
@@ -568,26 +574,31 @@
       
   
   
+    
   
   
+  
     
     
     
     
+      
+        
+        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
             
   
   
@@ -605,7 +616,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             
@@ -623,7 +634,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../labs1-7/" class="md-nav__link">
+      <a href="../" class="md-nav__link">
         
   
   
@@ -651,7 +662,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../labs1-7/lab1/" class="md-nav__link">
+      <a href="../lab1/" class="md-nav__link">
         
   
   
@@ -679,7 +690,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../labs1-7/lab2/" class="md-nav__link">
+      <a href="../lab2/" class="md-nav__link">
         
   
   
@@ -707,7 +718,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../labs1-7/lab3/" class="md-nav__link">
+      <a href="../lab3/" class="md-nav__link">
         
   
   
@@ -735,7 +746,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../labs1-7/lab4/" class="md-nav__link">
+      <a href="../lab4/" class="md-nav__link">
         
   
   
@@ -763,7 +774,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../labs1-7/lab5/" class="md-nav__link">
+      <a href="../lab5/" class="md-nav__link">
         
   
   
@@ -788,10 +799,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../labs1-7/lab6/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. RESTfulAPI for Updating and Deleting customer accounts
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -807,6 +845,176 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#lab6-restfulapi-for-updating-and-deleting-customer-accounts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab#6 RESTfulAPI for Updating and Deleting customer accounts.
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Lab#6 RESTfulAPI for Updating and Deleting customer accounts.">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#part-1-update-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part 1 Update API
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Part 1 Update API">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-update-the-service-interface-with-the-updateaccount-method" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Update the service interface with the updateAccount method.
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-implement-the-updateaccount-method-the-resourcenotfoundexception-is-thrown-if-the-account-is-not-found-or-the-customer-is-not-found" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Implement the updateAccount method. The ResourceNotFoundException is thrown if the account is not found or the customer is not found.
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-update-the-controller-with-the-end-point-for-updating-for-now-we-are-returning-internal-server-error-if-something-goes-wrong-check-that-the-codes-are-in-the-accountsconstants" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Update the controller with the end point for updating. For now we are returning internal server error if something goes wrong. Check that the codes are in the AccountsConstants.
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-add-the-constants-if-necessary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Add the constants if necessary.
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-test-the-api-first-add-a-customer-account-then-fetch-the-data-based-on-the-mobile-number-now-use-the-put-method-and-update-some-of-the-attributes-check-in-the-database-that-the-values-have-been-updated" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Test the API. First add a customer account. Then fetch the data based on the mobile number. Now use the PUT method and update some of the attributes. Check in the database that the values have been updated.
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#part2-adding-the-delete-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part#2 Adding the DELETE API
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Part#2 Adding the DELETE API">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-update-the-service-interface-with-the-deleteaccount-method" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Update the service interface with the deleteAccount method.
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-implement-the-deleteaccount-method-in-the-service-implementation-class-the-resourcenotfoundexception-is-thrown-if-the-customer-is-not-found-the-method-deletebycustomerid-should-be-added-to-the-accountsrepository-interface" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Implement the deleteAccount method in the Service Implementation class. The ResourceNotFoundException is thrown if the customer is not found. The method deleteByCustomerId should be added to the AccountsRepository interface.
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-finally-update-the-controller-to-add-the-delete-endpoint-again-internal-serer-error-is-thrown-for-now-if-the-customer-or-account-is-not-found" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Finally update the controller to add the delete endpoint. Again internal serer error is thrown for now if the customer or account is not found.
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-finally-test-the-api-add-a-customer-fetch-the-details-and-check-the-database-now-use-the-delete-method-to-delete-the-customer-and-their-account-check-the-database-again-and-it-should-be-empty" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Finally test the API. Add a customer. Fetch the details and check the database. Now use the DELETE method to delete the customer and their account. Check the database again and it should be empty.
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -878,7 +1086,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../labs8-9/" class="md-nav__link">
+      <a href="../../labs8-9/" class="md-nav__link">
         
   
   
@@ -965,7 +1173,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../api/" class="md-nav__link">
+      <a href="../../api/" class="md-nav__link">
         
   
   
@@ -1020,24 +1228,152 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#commands" class="md-nav__link">
+  <a href="#lab6-restfulapi-for-updating-and-deleting-customer-accounts" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Commands
+        Lab#6 RESTfulAPI for Updating and Deleting customer accounts.
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Lab#6 RESTfulAPI for Updating and Deleting customer accounts.">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#part-1-update-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part 1 Update API
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Part 1 Update API">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-update-the-service-interface-with-the-updateaccount-method" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Update the service interface with the updateAccount method.
       
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#project-layout" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#2-implement-the-updateaccount-method-the-resourcenotfoundexception-is-thrown-if-the-account-is-not-found-or-the-customer-is-not-found" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Project layout
+        2. Implement the updateAccount method. The ResourceNotFoundException is thrown if the account is not found or the customer is not found.
       
     </span>
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-update-the-controller-with-the-end-point-for-updating-for-now-we-are-returning-internal-server-error-if-something-goes-wrong-check-that-the-codes-are-in-the-accountsconstants" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Update the controller with the end point for updating. For now we are returning internal server error if something goes wrong. Check that the codes are in the AccountsConstants.
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-add-the-constants-if-necessary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Add the constants if necessary.
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-test-the-api-first-add-a-customer-account-then-fetch-the-data-based-on-the-mobile-number-now-use-the-put-method-and-update-some-of-the-attributes-check-in-the-database-that-the-values-have-been-updated" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Test the API. First add a customer account. Then fetch the data based on the mobile number. Now use the PUT method and update some of the attributes. Check in the database that the values have been updated.
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#part2-adding-the-delete-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part#2 Adding the DELETE API
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Part#2 Adding the DELETE API">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-update-the-service-interface-with-the-deleteaccount-method" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Update the service interface with the deleteAccount method.
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-implement-the-deleteaccount-method-in-the-service-implementation-class-the-resourcenotfoundexception-is-thrown-if-the-customer-is-not-found-the-method-deletebycustomerid-should-be-added-to-the-accountsrepository-interface" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Implement the deleteAccount method in the Service Implementation class. The ResourceNotFoundException is thrown if the customer is not found. The method deleteByCustomerId should be added to the AccountsRepository interface.
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-finally-update-the-controller-to-add-the-delete-endpoint-again-internal-serer-error-is-thrown-for-now-if-the-customer-or-account-is-not-found" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Finally update the controller to add the delete endpoint. Again internal serer error is thrown for now if the customer or account is not found.
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-finally-test-the-api-add-a-customer-fetch-the-details-and-check-the-database-now-use-the-delete-method-to-delete-the-customer-and-their-account-check-the-database-again-and-it-should-be-empty" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Finally test the API. Add a customer. Fetch the details and check the database. Now use the DELETE method to delete the customer and their account. Check the database again and it should be empty.
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1067,21 +1403,38 @@
   
 
 
-<h1 id="mkdocs">MkDocs</h1>
-<p>For full documentation visit <a href="https://www.mkdocs.org">mkdocs.org</a>.</p>
-<h2 id="commands">Commands</h2>
-<ul>
-<li><code>mkdocs new [dir-name]</code> - Create a new project.</li>
-<li><code>mkdocs serve</code> - Start the live-reloading docs server.</li>
-<li><code>mkdocs build</code> - Build the documentation site.</li>
-<li><code>mkdocs -h</code> - Print help message and exit.</li>
-</ul>
-<h2 id="project-layout">Project layout</h2>
-<pre><code>mkdocs.yml    # The configuration file.
-docs/
-    index.md  # The documentation homepage.
-    ...       # Other markdown pages, images and other files.
-</code></pre>
+<h1 id="restful-api-lab-6">RESTful API Lab 6</h1>
+<h2 id="lab6-restfulapi-for-updating-and-deleting-customer-accounts">Lab#6 RESTfulAPI for Updating and Deleting customer accounts.</h2>
+<hr />
+<p>In this lab we will complete the RESTful API CRUD actions by adding the Update and Delete parts. </p>
+<h3 id="part-1-update-api">Part 1 Update API</h3>
+<p>Note:- All data can be updated except the accountNumber</p>
+<h4 id="1-update-the-service-interface-with-the-updateaccount-method">1. Update the service interface with the updateAccount method.</h4>
+<p><img alt="Update Service Interface" src="1.png" /></p>
+<h4 id="2-implement-the-updateaccount-method-the-resourcenotfoundexception-is-thrown-if-the-account-is-not-found-or-the-customer-is-not-found">2. Implement the updateAccount method. The ResourceNotFoundException is thrown if the account is not found or the customer is not found.</h4>
+<p><img alt="Implement updateAccount" src="2.png" /></p>
+<h4 id="3-update-the-controller-with-the-end-point-for-updating-for-now-we-are-returning-internal-server-error-if-something-goes-wrong-check-that-the-codes-are-in-the-accountsconstants">3. Update the controller with the end point for updating. For now we are returning internal server error if something goes wrong. Check that the codes are in the AccountsConstants.</h4>
+<p><img alt="Update Controller" src="3.png" /></p>
+<h4 id="4-add-the-constants-if-necessary">4. Add the constants if necessary.</h4>
+<p><img alt="Add Constants" src="4.png" /></p>
+<h4 id="5-test-the-api-first-add-a-customer-account-then-fetch-the-data-based-on-the-mobile-number-now-use-the-put-method-and-update-some-of-the-attributes-check-in-the-database-that-the-values-have-been-updated">5. Test the API. First add a customer account. Then fetch the data based on the mobile number. Now use the PUT method and update some of the attributes. Check in the database that the values have been updated.</h4>
+<p><img alt="Test API Add Customer Account" src="5.png" /></p>
+<p><img alt="Test API Fetch Customer Data" src="5b.png" /></p>
+<p><img alt="Test API Update Customer Account" src="5c.png" /></p>
+<h3 id="part2-adding-the-delete-api">Part#2 Adding the DELETE API</h3>
+<h4 id="1-update-the-service-interface-with-the-deleteaccount-method">1. Update the service interface with the deleteAccount method.</h4>
+<p><img alt="Update Service Interface" src="2_1.png" /></p>
+<h4 id="2-implement-the-deleteaccount-method-in-the-service-implementation-class-the-resourcenotfoundexception-is-thrown-if-the-customer-is-not-found-the-method-deletebycustomerid-should-be-added-to-the-accountsrepository-interface">2. Implement the deleteAccount method in the Service Implementation class. The ResourceNotFoundException is thrown if the customer is not found. The method deleteByCustomerId should be added to the AccountsRepository interface.</h4>
+<p><img alt="Implement deleteAccount" src="2_2.png" /></p>
+<p><img alt="Add deleteByCustomerId to AccountsRepository" src="2_2b.png" /></p>
+<h4 id="3-finally-update-the-controller-to-add-the-delete-endpoint-again-internal-serer-error-is-thrown-for-now-if-the-customer-or-account-is-not-found">3. Finally update the controller to add the delete endpoint. Again internal serer error is thrown for now if the customer or account is not found.</h4>
+<p><img alt="Add Delete Endpoint" src="2_3.png" /></p>
+<h4 id="4-finally-test-the-api-add-a-customer-fetch-the-details-and-check-the-database-now-use-the-delete-method-to-delete-the-customer-and-their-account-check-the-database-again-and-it-should-be-empty">4. Finally test the API. Add a customer. Fetch the details and check the database. Now use the DELETE method to delete the customer and their account. Check the database again and it should be empty.</h4>
+<p><img alt="Test API Add Customer" src="2_4.png" /></p>
+<p><img alt="Test API Get Customer" src="2_4b.png" /></p>
+<p><img alt="Test Api Check Database" src="2_4c.png" /></p>
+<p><img alt="Test API Delete Customer" src="2_4d.png" /></p>
+<p><img alt="Test API Check Database" src="2_4e.png" /></p>
 
 
 
@@ -1113,6 +1466,44 @@ docs/
         <footer class="md-footer">
   
     
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../lab5/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 5. Implementing a READ API that fetches the details based on mobile number">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                5. Implementing a READ API that fetches the details based on mobile number
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../../labs8-9/" class="md-footer__link md-footer__link--next" aria-label="Next: Labs 8-9">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Labs 8-9
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
@@ -1139,10 +1530,10 @@ docs/
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "toc.follow", "navigation.footer", "navigation.instant.preview", "navigation.tracking", "navigation.path", "navigation.top"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "toc.follow", "navigation.footer", "navigation.instant.preview", "navigation.tracking", "navigation.path", "navigation.top"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
     
   </body>
