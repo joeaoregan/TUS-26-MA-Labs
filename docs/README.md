@@ -1,11 +1,15 @@
 # Microservices Architecture - Labs
 ## Technological University of the Shannon
 
+### Docs
+
+[MkDocs Documentation on GitHub Pages](https://joeaoregan.github.io/TUS-26-MA-Labs/)
+
 ### Labs
 
 #### RESTful APIs
 
-- Lab#1 Getting started with Springboot – Helloworld Example
+- [Lab#1 Getting started with Springboot – Helloworld Example](https://joeaoregan.github.io/TUS-26-MA-Labs/labs1-7/lab1/)
 
 ---
 
@@ -34,3 +38,6 @@ Create a new site in the current folder:
 python -m mkdocs new .
 ```
 
+### Spring Initializr
+
+<https://start.spring.io/>
