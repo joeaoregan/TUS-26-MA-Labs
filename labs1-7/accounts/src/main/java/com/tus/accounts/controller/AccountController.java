@@ -3,6 +3,7 @@ package com.tus.accounts.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -47,6 +48,18 @@ public class AccountController {
 	public ResponseEntity<ResponseDto> updateAccountDetails(@RequestBody CustomerDto customerDto) {
 		boolean isUpdated = iAccountsService.updateAccount(customerDto);
 		if (isUpdated) {
+			return ResponseEntity.status(HttpStatus.OK)
+					.body(new ResponseDto(AccountsConstants.STATUS_200, AccountsConstants.MESSAGE_200));
+		} else {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body(new ResponseDto(AccountsConstants.STATUS_500, AccountsConstants.MESSAGE_500));
+		}
+	}
+
+	@DeleteMapping("/account")
+	public ResponseEntity<ResponseDto> deleteAccountDetails(@RequestParam String mobileNumber) {
+		boolean isDeleted = iAccountsService.deleteAccount(mobileNumber);
+		if (isDeleted) {
 			return ResponseEntity.status(HttpStatus.OK)
 					.body(new ResponseDto(AccountsConstants.STATUS_200, AccountsConstants.MESSAGE_200));
 		} else {

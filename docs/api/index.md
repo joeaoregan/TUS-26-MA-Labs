@@ -1,10 +1,41 @@
 # API Endpoints
 
+## Fetch
+
 !!! note "GET /sayHello"
     Test GET API request with Account Controller
 
+!!! note "GET /account?mobileNumber=086-123456"
+    Fetch the customer details by phone number
+
+    Response 200 OK:
+    ```json
+    {
+        "accountsDto": {
+            "accountNumber": 1624831019,
+            "accountType": "Savings",
+            "branchAddress": "123 Main Street, New York"
+        },
+        "email": "joe@gmail.com",
+        "mobileNumber": "086-123456",
+        "name": "Joe Bloggs"
+    }
+    ```
+
+    Response 404 Not Found:
+    ```json
+    {
+        "apiPath": "uri=/api/account",
+        "errorCode": "404 NOT_FOUND",
+        "errorMessage": "Customer not found with the given input data mobileNumber : '086-123457'",
+        "errortime": "2026-04-02T19:51:51.4683013"
+    }
+    ```
+
+## Create
+
 !!! success "POST /account"
-    Create a new customer
+    Create a new customer passing name, email, and mobileNumber
     
     Request:
     ```json
@@ -31,32 +62,7 @@
     }
     ```
 
-!!! note "GET /account?mobileNumber"
-    Fetch the customer details by phone number
-
-    Response 200 OK:
-    ```json
-    {
-        "accountsDto": {
-            "accountNumber": 1624831019,
-            "accountType": "Savings",
-            "branchAddress": "123 Main Street, New York"
-        },
-        "email": "joe@gmail.com",
-        "mobileNumber": "086-123456",
-        "name": "Joe Bloggs"
-    }
-    ```
-
-    Response 404 Not Found:
-    ```json
-    {
-        "apiPath": "uri=/api/account",
-        "errorCode": "404 NOT_FOUND",
-        "errorMessage": "Customer not found with the given input data mobileNumber : '086-123457'",
-        "errortime": "2026-04-02T19:51:51.4683013"
-    }
-    ```
+## Update
 
 !!! warning "PUT /account"
     Update the customer details
@@ -89,5 +95,27 @@
         "errorCode": "404 NOT_FOUND",
         "errorMessage": "Account not found with the given input data AccountNumber : '179823808'",
         "errortime": "2026-04-02T20:42:36.6743506"
+    }
+    ```
+
+## Delete
+
+!!! danger "DELETE /account?mobileNumber=086-123456"
+    Delete customer by mobileNumber
+
+    Response 200 OK:
+    ```json
+    {
+        "statusCode": "200",
+        "statusMsg": "Request processed successfully"
+    }
+    ```    
+    Response 404 Not Found:
+    ```json
+    {
+        "apiPath": "uri=/api/account",
+        "errorCode": "404 NOT_FOUND",
+        "errorMessage": "Customer not found with the given input data mobileNumber : '086-123457'",
+        "errortime": "2026-04-02T20:59:58.8186726"
     }
     ```
