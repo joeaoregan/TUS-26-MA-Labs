@@ -1,0 +1,62 @@
+site_name: TUS-26-MA-Labs
+docs_dir: docs
+site_dir: site
+theme:
+  logo: images/logo.png
+  palette: 
+
+    # Palette toggle for dark mode
+    - scheme: slate
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+
+    # Palette toggle for light mode
+    - scheme: default
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+
+  name: material
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - toc.follow
+    - navigation.footer
+    - navigation.instant.preview
+    - navigation.tracking
+    - navigation.path
+    - navigation.top
+
+nav:
+  - Home: 
+    - index.md
+    - External Links:    
+      - MA CA1 GitHub: https://github.com/joeaoregan/TUS-26-MA-CA1-Guitar-Store-API
+      - MA CA2 GitHub: https://github.com/joeaoregan/TUS-26-MA-CA2-Distributed-Microservice-App
+  - RESTFUL APIs 1-7:
+    - Labs 1-7: labs1-7/index.md
+    - Lab 1 Getting Started with Spring Boot: labs1-7/lab1.md
+  - RESTFUL APIs 8, 9:
+    - Labs 8-9: labs8-9/index.md
+  
+markdown_extensions:
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - def_list
+  - pymdownx.superfences
+  - admonition
+  - pymdownx.details
+  
+  - material.extensions.preview:
+      configurations:
+        - targets:
+            include:
+              - labs1-7/*
+              - labs8-9/*
+
+repo_url: https://github.com/joeaoregan/TUS-26-MA-Labs
+repo_name: GitHub
+
+site_url: https://joeaoregan.github.io/TUS-26-MA-Labs/
