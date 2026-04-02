@@ -9,7 +9,9 @@
 
 #### RESTful APIs
 
-- [Lab#1 Getting started with Springboot – Helloworld Example](https://joeaoregan.github.io/TUS-26-MA-Labs/labs1-7/lab1/)
+- [Lab#1 Getting started with Springboot – Helloworld Example](https://joeaoregan.github.io/TUS-26-MA-Labs/labs1-7/lab1/index.md)
+- [Lab#2 Configuring H2 DB and YAML application.properties](https://joeaoregan.github.io/TUS-26-MA-Labs/labs1-7/lab2/index.md)
+- [Lab#3 Building a Rest API to support the creation of a new account and customer details](https://joeaoregan.github.io/TUS-26-MA-Labs/labs1-7/lab3/index.md)
 
 ---
 

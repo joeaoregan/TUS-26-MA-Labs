@@ -7,7 +7,7 @@ import java.util.Optional;
 
 import com.tus.accounts.entity.Customer;
 
-public interface CustomerRepository extends JpaRepository<Customer, Long>{
+public interface CustomerRepository extends JpaRepository<Customer, Long> {
 
 	Optional<Customer> findByMobileNumber(String mobileNumber);
 }
