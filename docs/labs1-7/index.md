@@ -8,3 +8,4 @@
 4. [Exception Handling –check if customer already exists](lab4/index.md)
 5. [Implementing a READ API that fetches the details based on mobile number](lab5/index.md)
 6. [RESTfulAPI for Updating and Deleting customer accounts](lab6/index.md)
+7. [Exceptions, Data Validations and Audit Columns](lab7/index.md)

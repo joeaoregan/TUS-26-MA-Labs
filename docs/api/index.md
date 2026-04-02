@@ -119,3 +119,43 @@
         "errortime": "2026-04-02T20:59:58.8186726"
     }
     ```
+
+
+## Input Validation
+
+### POST
+
+!!! success "POST /account [400 Bad Request]"
+    Create a new customer passing name, email, and mobileNumber that don't meet valiation requirements
+    
+    Request (Bad Input):
+    ```json
+    {
+        "name": "Joe",
+        "email": "joegmail.com",
+        "mobileNumber": "086-123456"    
+    }
+    ```
+    Response 400 Bad Request:
+    ```json
+    {
+        "mobileNumber": "Mobile number must be 10 digits",
+        "name": "the length of the customer name should be between 5 and 30",
+        "email": "Email adderess should be a valid value"
+    }
+    ```
+
+### GET
+
+!!! note "GET localhost:8080/api/account?mobileNumber=123456789"
+    Fetch phone number with invalid length (must be 10 digits)
+
+    Response 500 Internal Server Error:
+    ```json
+    {
+        "apiPath": "uri=/api/account",
+        "errorCode": "500 INTERNAL_SERVER_ERROR",
+        "errorMessage": "fetchAccountDetails.mobileNumber: Mobile number must be 10 digits",
+        "errortime": "2026-04-02T22:44:20.8069826"
+    }
+    ```
