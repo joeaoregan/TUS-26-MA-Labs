@@ -8,13 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://joeaoregan.github.io/TUS-26-MA-Labs/labs1-7/lab2/">
+        <link rel="canonical" href="https://joeaoregan.github.io/TUS-26-MA-Labs/labs1-7/lab4/">
       
       
-        <link rel="prev" href="../lab1/">
+        <link rel="prev" href="../lab3/">
       
       
-        <link rel="next" href="../lab3/">
+        <link rel="next" href="../../labs8-9/">
       
       
         
@@ -25,7 +25,7 @@
     
     
       
-        <title>2. Configuring H2 DB and YAML application.properties - TUS-26-MA-Labs</title>
+        <title>4. Exception Handling –check if customer already exists - TUS-26-MA-Labs</title>
       
     
     
@@ -101,7 +101,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#lab2-configuring-h2-db-and-yaml-applicationproperties" class="md-skip">
+        <a href="#lab4-exception-handling-check-if-customer-already-exists" class="md-skip">
           Skip to content
         </a>
       
@@ -136,7 +136,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              2. Configuring H2 DB and YAML application.properties
+              4. Exception Handling –check if customer already exists
             
           </span>
         </div>
@@ -687,19 +687,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../lab2/" class="md-nav__link">
         
   
   
@@ -715,7 +706,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -753,10 +743,19 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../lab4/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -772,6 +771,7 @@
   
 
       </a>
+      
     </li>
   
 
@@ -1002,48 +1002,31 @@
   
 
 
-<h1 id="lab2-configuring-h2-db-and-yaml-applicationproperties">Lab#2 Configuring H2 DB and YAML application.properties</h1>
-<p>In this lab we will continue from the previous lab and configure the application to use an in-memory H2 database.</p>
+<h1 id="lab4-exception-handling-check-if-customer-already-exists">Lab#4 Exception Handling –check if customer already exists</h1>
+<hr />
+<p>The customers mobile phone number must be unique. In this lab we will check if a customer with the given phone number already exists and we will reject the request accordingly.</p>
 <ol>
-<li>Rename application.properties as application.yml  and update with following properties (file provided)</li>
+<li>Add a package com.tus.accounts.exception with a class CustomerAlreadyExistsException</li>
 </ol>
-<p><img alt="application.yml" src="1.png" /></p>
+<p><img alt="Exception package" src="1a.png" /></p>
+<p><img alt="Customer Already Exists Exception" src="1b.png" /></p>
 <ol>
-<li>Create a file called scheme.sql (provided) in the resources folder with the following data.</li>
+<li>In the CustomerRepository interface add a query to find a Customer based on the mobile number. (This may be in your file already).</li>
 </ol>
-<p><img alt="scheme.sql" src="2.png" /></p>
+<p><img alt="Find a Customer" src="2.png" /></p>
 <ol>
-<li>Restart the server. It will start on port 8080 based on yml file.</li>
-<li>Go to the h2-console in the browser. You should see the two tables have bee created.</li>
+<li>Now in the Service class add code that will throw the CustomerAlreadyExistsException.</li>
 </ol>
-<p><img alt="H2 Console" src="4.png" /></p>
-<p>Now we will write Spring Data JPA entities &amp; repositories to interact with DB tables</p>
+<p><img alt="Throw the CustomerAlreadyExistsException" src="3.png" /></p>
 <ol>
-<li>Create a new package for the entity classes as show below.</li>
+<li>Add a class in the exception package called GlobalExceptionHandler. This will handle exceptions in one location rather than duplicating the handlng. It is annotated with @ControllerAdvice and will handle the exception when thrown by the controller.</li>
 </ol>
-<p><img alt="New package" src="4b.png" /></p>
+<p><img alt="Global Exception Handler" src="4.png" /></p>
 <ol>
-<li>Add the classes BaseEntity, Accounts and Customers (given) and examine the code.</li>
+<li>Test the application. Add a customer. Customer is created successfully. Then add a customer with the same mobile number again. The request is rejected with error message as shown.</li>
 </ol>
-<p><img alt="Add Classes" src="5.png" /></p>
-<ol>
-<li>Now Add the Repository interfaces</li>
-</ol>
-<p><img alt="Repository Interfacese" src="6.png" /></p>
-<p><img alt="Customer Repository" src="6b.png" /></p>
-<p><img alt="Accounts Repository" src="6c.png" /></p>
-<p>We will use the Data Transfer Object pattern to transfer data – not the entity classes themselves.</p>
-<ol>
-<li>Create a new package with class AccountsDto and CustomerDto. These classes uses Lombok (You may need to turn on annotations in your IDE or install a Lombok jar)</li>
-</ol>
-<p><img alt="DTOs" src="7.png" /> </p>
-<p><img alt="Accounts DTO" src="7b.png" /> </p>
-<p><img alt="Customer DTO" src="7c.png" /> </p>
-<ol>
-<li>Also add a ResponseDto and an ErrorResponseDto class</li>
-</ol>
-<p><img alt="Customer DTO" src="8.png" /> </p>
-<p><img alt="Error DTO" src="8b.png" /> </p>
+<p><img alt="Test Application 201 Created" src="5a.png" /></p>
+<p><img alt="Test Application 400 Bad Request" src="5b.png" /></p>
 
 
 
@@ -1079,7 +1062,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../lab1/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 1. Getting Started with Spring Boot">
+          <a href="../lab3/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 3. Building a Rest API to support the creation of a new account and customer details">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -1089,20 +1072,20 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                1. Getting Started with Spring Boot
+                3. Building a Rest API to support the creation of a new account and customer details
               </div>
             </div>
           </a>
         
         
           
-          <a href="../lab3/" class="md-footer__link md-footer__link--next" aria-label="Next: 3. Building a Rest API to support the creation of a new account and customer details">
+          <a href="../../labs8-9/" class="md-footer__link md-footer__link--next" aria-label="Next: Labs 8-9">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                3. Building a Rest API to support the creation of a new account and customer details
+                Labs 8-9
               </div>
             </div>
             <div class="md-footer__button md-icon">
