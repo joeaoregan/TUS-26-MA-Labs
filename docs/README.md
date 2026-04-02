@@ -21,13 +21,13 @@
 
 #### RESTful APIs
 
-- [Lab#1 Getting started with Springboot – Helloworld Example](https://joeaoregan.github.io/TUS-26-MA-Labs/labs1-7/lab1/index.md)
-- [Lab#2 Configuring H2 DB and YAML application.properties](https://joeaoregan.github.io/TUS-26-MA-Labs/labs1-7/lab2/index.md)
-- [Lab#3 Building a Rest API to support the creation of a new account and customer details](https://joeaoregan.github.io/TUS-26-MA-Labs/labs1-7/lab3/index.md)
-- [Lab#4 Exception Handling –check if customer already exists](https://joeaoregan.github.io/TUS-26-MA-Labslabs1-7/lab4/index.md)
-- [Lab#5 Implementing a READ API that fetches the details based on mobile number](https://joeaoregan.github.io/TUS-26-MA-Labslabs1-7/lab5/index.md)
-- [Lab#6 RESTfulAPI for Updating and Deleting customer accounts](https://joeaoregan.github.io/TUS-26-MA-Labslabs1-7/lab6/index.md)
-- [Lab#7 Exceptions , Data Validations and Audit Columns](https://joeaoregan.github.io/TUS-26-MA-Labslabs1-7/lab7/index.md)
+- [Lab#1 Getting started with Springboot – Helloworld Example](https://joeaoregan.github.io/TUS-26-MA-Labs/labs1-7/lab1/)
+- [Lab#2 Configuring H2 DB and YAML application.properties](https://joeaoregan.github.io/TUS-26-MA-Labs/labs1-7/lab2/)
+- [Lab#3 Building a Rest API to support the creation of a new account and customer details](https://joeaoregan.github.io/TUS-26-MA-Labs/labs1-7/lab3/)
+- [Lab#4 Exception Handling –check if customer already exists](https://joeaoregan.github.io/TUS-26-MA-Labslabs1-7/lab4/)
+- [Lab#5 Implementing a READ API that fetches the details based on mobile number](https://joeaoregan.github.io/TUS-26-MA-Labslabs1-7/lab5/)
+- [Lab#6 RESTfulAPI for Updating and Deleting customer accounts](https://joeaoregan.github.io/TUS-26-MA-Labslabs1-7/lab6/)
+- [Lab#7 Exceptions , Data Validations and Audit Columns](https://joeaoregan.github.io/TUS-26-MA-Labslabs1-7/lab7/)
 
 ---
 
