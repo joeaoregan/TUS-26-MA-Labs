@@ -1015,10 +1015,18 @@
 <span class="w">    </span><span class="nt">&quot;mobileNumber&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;086-123456&quot;</span><span class="w">    </span>
 <span class="p">}</span>
 </code></pre></div>
-Response:<br />
+Response 201 (Account Created):<br />
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
 <span class="w">    </span><span class="nt">&quot;statusCode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;201&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">&quot;statusMsg&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Account created successfully&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+Response 400 (Customer Exists):<br />
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;apiPath&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;uri=/api/account&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;errorCode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;400 BAD_REQUEST&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;errorMessage&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Customer already registerd with given mobile Number 086-123456&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;errortime&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-04-02T19:02:29.2406524&quot;</span>
 <span class="p">}</span>
 </code></pre></div></p>
 </div>
