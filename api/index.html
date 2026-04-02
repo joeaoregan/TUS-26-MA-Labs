@@ -983,6 +983,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Endpoints
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -999,6 +1017,69 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#fetch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fetch
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#update" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Update
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#delete" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Delete
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1032,6 +1113,58 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#fetch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fetch
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#update" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Update
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#delete" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Delete
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1057,37 +1190,13 @@
 
 
 <h1 id="api-endpoints">API Endpoints</h1>
+<h2 id="fetch">Fetch</h2>
 <div class="admonition note">
 <p class="admonition-title">GET /sayHello</p>
 <p>Test GET API request with Account Controller</p>
 </div>
-<div class="admonition success">
-<p class="admonition-title">POST /account</p>
-<p>Create a new customer</p>
-<p>Request:
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Joe Bloggs&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;joe@gmail.com&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;mobileNumber&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;086-123456&quot;</span>
-<span class="p">}</span>
-</code></pre></div>
-Response 201 (Account Created):
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;statusCode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;201&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;statusMsg&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Account created successfully&quot;</span>
-<span class="p">}</span>
-</code></pre></div>
-Response 400 (Customer Exists):
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;apiPath&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;uri=/api/account&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;errorCode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;400 BAD_REQUEST&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;errorMessage&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Customer already registerd with given mobile Number 086-123456&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;errortime&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-04-02T19:02:29.2406524&quot;</span>
-<span class="p">}</span>
-</code></pre></div></p>
-</div>
 <div class="admonition note">
-<p class="admonition-title">GET /account?mobileNumber</p>
+<p class="admonition-title">GET /account?mobileNumber=086-123456</p>
 <p>Fetch the customer details by phone number</p>
 <p>Response 200 OK:
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
@@ -1110,6 +1219,33 @@ Response 400 (Customer Exists):
 <span class="p">}</span>
 </code></pre></div></p>
 </div>
+<h2 id="create">Create</h2>
+<div class="admonition success">
+<p class="admonition-title">POST /account</p>
+<p>Create a new customer passing name, email, and mobileNumber</p>
+<p>Request:
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Joe Bloggs&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;joe@gmail.com&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;mobileNumber&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;086-123456&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+Response 201 (Account Created):
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;statusCode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;201&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;statusMsg&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Account created successfully&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+Response 400 (Customer Exists):
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;apiPath&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;uri=/api/account&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;errorCode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;400 BAD_REQUEST&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;errorMessage&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Customer already registerd with given mobile Number 086-123456&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;errortime&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-04-02T19:02:29.2406524&quot;</span>
+<span class="p">}</span>
+</code></pre></div></p>
+</div>
+<h2 id="update">Update</h2>
 <div class="admonition warning">
 <p class="admonition-title">PUT /account</p>
 <p>Update the customer details</p>
@@ -1137,6 +1273,25 @@ Response 404 Not Found:
 <span class="w">    </span><span class="nt">&quot;errorCode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;404 NOT_FOUND&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">&quot;errorMessage&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Account not found with the given input data AccountNumber : &#39;179823808&#39;&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">&quot;errortime&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-04-02T20:42:36.6743506&quot;</span>
+<span class="p">}</span>
+</code></pre></div></p>
+</div>
+<h2 id="delete">Delete</h2>
+<div class="admonition danger">
+<p class="admonition-title">DELETE /account?mobileNumber=086-123456</p>
+<p>Delete customer by mobileNumber</p>
+<p>Response 200 OK:
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;statusCode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;200&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;statusMsg&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Request processed successfully&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+Response 404 Not Found:
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;apiPath&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;uri=/api/account&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;errorCode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;404 NOT_FOUND&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;errorMessage&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Customer not found with the given input data mobileNumber : &#39;086-123457&#39;&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;errortime&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-04-02T20:59:58.8186726&quot;</span>
 <span class="p">}</span>
 </code></pre></div></p>
 </div>
