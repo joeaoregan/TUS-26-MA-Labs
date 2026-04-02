@@ -4,56 +4,47 @@ In this lab we will continue from the previous lab and configure the application
 
 1. Rename application.properties as application.yml  and update with following properties (file provided)
  
-![application.yml](lab2-1.png)
+![application.yml](1.png)
 
 2. Create a file called scheme.sql (provided) in the resources folder with the following data.
  
-![scheme.sql](lab2-2.png)
+![scheme.sql](2.png)
 
 3. Restart the server. It will start on port 8080 based on yml file.
 4. Go to the h2-console in the browser. You should see the two tables have bee created.
  
-![H2 Console](lab2-4.png)
+![H2 Console](4.png)
 
 Now we will write Spring Data JPA entities & repositories to interact with DB tables
 
 4. Create a new package for the entity classes as show below.
  
-![New package](lab2-4b.png)
+![New package](4b.png)
 
 5. Add the classes BaseEntity, Accounts and Customers (given) and examine the code.
  
-![Add Classes](lab2-5.png)
+![Add Classes](5.png)
 
 6. Now Add the Repository interfaces
  
-![Repository Interfacese](lab2-6.png)
+![Repository Interfacese](6.png)
 
-![Customer Repository](lab2-6b.png)
+![Customer Repository](6b.png)
 
-![Accounts Repository](lab2-6c.png)
- 
+![Accounts Repository](6c.png)
  
 We will use the Data Transfer Object pattern to transfer data – not the entity classes themselves.
 
-
-
-
-
-
 7. Create a new package with class AccountsDto and CustomerDto. These classes uses Lombok (You may need to turn on annotations in your IDE or install a Lombok jar)
  
-![DTOs](lab2-7.png) 
+![DTOs](7.png) 
 
-![Accounts DTO](lab2-7b.png) 
+![Accounts DTO](7b.png) 
 
-![Customer DTO](lab2-7c.png) 
+![Customer DTO](7c.png) 
  
 8. Also add a ResponseDto and an ErrorResponseDto class
  
-![Customer DTO](lab2-8.png) 
+![Customer DTO](8.png) 
 
-![Error DTO](lab2-8b.png) 
-
-
- 
+![Error DTO](8b.png) 
