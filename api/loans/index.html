@@ -1176,6 +1176,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#health-check" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Health Check
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#create-a-loan" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1373,6 +1384,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#health-check" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Health Check
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#create-a-loan" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1529,6 +1551,13 @@
 <p>URL:</p>
 <div class="highlight"><pre><span></span><code><span class="nl">http</span><span class="p">:</span><span class="c1">//localhost:8090/api/loans</span>
 </code></pre></div>
+<h3 id="health-check">Health Check</h3>
+<div class="admonition note">
+<p class="admonition-title">GET /sayHello</p>
+<p>Test GET API request with Loans Controller</p>
+<div class="highlight"><pre><span></span><code><span class="nl">http</span><span class="p">:</span><span class="c1">//localhost:8090/api/loans/sayHello</span>
+</code></pre></div>
+</div>
 <h3 id="create-a-loan">Create A Loan</h3>
 <div class="admonition success">
 <p class="admonition-title">POST ?mobileNumber=1234567890</p>
@@ -1648,7 +1677,8 @@ Loan doesn't exist or already deleted
 <h3 id="input-validation">Input Validation</h3>
 <h4 id="loansdto">LoansDto</h4>
 <p>Input validation handled in LoansDto</p>
-<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">LoansDto</span><span class="w"> </span><span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="nd">@Data</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">LoansDto</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nd">@NotEmpty</span><span class="p">(</span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;MobileNumber cannot be null or empty&quot;</span><span class="p">)</span>
 <span class="w">    </span><span class="nd">@Pattern</span><span class="p">(</span><span class="n">regexp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;(^$|[0-9]{10})&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Mobile Number must be 10 digits&quot;</span><span class="p">)</span>
 <span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">mobileNumber</span><span class="p">;</span>
