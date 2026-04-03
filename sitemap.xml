@@ -2,50 +2,62 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://joeaoregan.github.io/TUS-26-MA-Labs/</loc>
-         <lastmod>2026-04-02</lastmod>
+         <lastmod>2026-04-03</lastmod>
     </url>
     <url>
          <loc>https://joeaoregan.github.io/TUS-26-MA-Labs/mkdocs/</loc>
-         <lastmod>2026-04-02</lastmod>
+         <lastmod>2026-04-03</lastmod>
     </url>
     <url>
          <loc>https://joeaoregan.github.io/TUS-26-MA-Labs/api/</loc>
-         <lastmod>2026-04-02</lastmod>
+         <lastmod>2026-04-03</lastmod>
+    </url>
+    <url>
+         <loc>https://joeaoregan.github.io/TUS-26-MA-Labs/api/accounts/</loc>
+         <lastmod>2026-04-03</lastmod>
+    </url>
+    <url>
+         <loc>https://joeaoregan.github.io/TUS-26-MA-Labs/api/loans/</loc>
+         <lastmod>2026-04-03</lastmod>
     </url>
     <url>
          <loc>https://joeaoregan.github.io/TUS-26-MA-Labs/labs1-7/</loc>
-         <lastmod>2026-04-02</lastmod>
+         <lastmod>2026-04-03</lastmod>
     </url>
     <url>
          <loc>https://joeaoregan.github.io/TUS-26-MA-Labs/labs1-7/lab1/</loc>
-         <lastmod>2026-04-02</lastmod>
+         <lastmod>2026-04-03</lastmod>
     </url>
     <url>
          <loc>https://joeaoregan.github.io/TUS-26-MA-Labs/labs1-7/lab2/</loc>
-         <lastmod>2026-04-02</lastmod>
+         <lastmod>2026-04-03</lastmod>
     </url>
     <url>
          <loc>https://joeaoregan.github.io/TUS-26-MA-Labs/labs1-7/lab3/</loc>
-         <lastmod>2026-04-02</lastmod>
+         <lastmod>2026-04-03</lastmod>
     </url>
     <url>
          <loc>https://joeaoregan.github.io/TUS-26-MA-Labs/labs1-7/lab4/</loc>
-         <lastmod>2026-04-02</lastmod>
+         <lastmod>2026-04-03</lastmod>
     </url>
     <url>
          <loc>https://joeaoregan.github.io/TUS-26-MA-Labs/labs1-7/lab5/</loc>
-         <lastmod>2026-04-02</lastmod>
+         <lastmod>2026-04-03</lastmod>
     </url>
     <url>
          <loc>https://joeaoregan.github.io/TUS-26-MA-Labs/labs1-7/lab6/</loc>
-         <lastmod>2026-04-02</lastmod>
+         <lastmod>2026-04-03</lastmod>
     </url>
     <url>
          <loc>https://joeaoregan.github.io/TUS-26-MA-Labs/labs1-7/lab7/</loc>
-         <lastmod>2026-04-02</lastmod>
+         <lastmod>2026-04-03</lastmod>
     </url>
     <url>
          <loc>https://joeaoregan.github.io/TUS-26-MA-Labs/labs8-9/</loc>
-         <lastmod>2026-04-02</lastmod>
+         <lastmod>2026-04-03</lastmod>
+    </url>
+    <url>
+         <loc>https://joeaoregan.github.io/TUS-26-MA-Labs/labs8-9/lab8/</loc>
+         <lastmod>2026-04-03</lastmod>
     </url>
 </urlset>
