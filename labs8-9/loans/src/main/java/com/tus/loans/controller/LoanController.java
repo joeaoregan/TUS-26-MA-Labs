@@ -23,19 +23,19 @@ import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 
 @RestController
-@RequestMapping(path = "/api", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(path = "/api/loans", produces = MediaType.APPLICATION_JSON_VALUE)
 @AllArgsConstructor
 @Validated
 public class LoanController {
 
 	private ILoansService iLoansService;
 
-	@GetMapping("sayHello")
+	@GetMapping("/sayHello")
 	public String sayHello() {
 		return "Hello World";
 	}
-
-	@PostMapping("/loans")
+	
+	@PostMapping()
 	public ResponseEntity<ResponseDto> createAccount(
 			@RequestParam @Pattern(regexp = "(^$|[0-9]{10})", message = "Mobile number must be 10 digits") String mobileNumber) {
 		iLoansService.createLoan(mobileNumber);
@@ -43,14 +43,14 @@ public class LoanController {
 				.body(new ResponseDto(LoansConstants.STATUS_201, LoansConstants.MESSAGE_201));
 	}
 
-	@GetMapping("/loans")
+	@GetMapping()
 	public ResponseEntity<LoansDto> fetchAccountDetails(
 			@RequestParam @Pattern(regexp = "(^$|[0-9]{10})", message = "Mobile number must be 10 digits") String mobileNumber) {
 		LoansDto loansDto = iLoansService.fetchLoan(mobileNumber);
 		return ResponseEntity.status(HttpStatus.OK).body(loansDto);
 	}
 
-	@PutMapping("/loans")
+	@PutMapping()
 	public ResponseEntity<ResponseDto> updateAccountDetails(@Valid @RequestBody LoansDto loansDto) {
 		boolean isUpdated = iLoansService.updateLoan(loansDto);
 		if (isUpdated) {
@@ -62,7 +62,7 @@ public class LoanController {
 		}
 	}
 
-	@DeleteMapping("/loans")
+	@DeleteMapping()
 	public ResponseEntity<ResponseDto> deleteAccountDetails(
 			@RequestParam @Pattern(regexp = "(^$|[0-9]{10})", message = "Mobile number must be 10 digits") String mobileNumber) {
 		boolean isDeleted = iLoansService.deleteLoan(mobileNumber);

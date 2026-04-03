@@ -5,10 +5,18 @@
 !!! note "GET /sayHello"
     Test GET API request with Account Controller
 
+    ```java
+    http://localhost:8080/api/accounts/sayHello
+        
+    http://localhost:8090/api/loans/sayHello
+    
+    http://localhost:9000/api/cards/sayHello
+    ```
+
 ## Accounts URL
 
 ```java
-http://localhost:8080/api/account
+http://localhost:8080/api/accounts
 ```
 
 ## Loans URL

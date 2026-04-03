@@ -1,5 +1,6 @@
 package com.tus.accounts.dto;
 
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
@@ -19,5 +20,7 @@ public class CustomerDto {
 
 	@Pattern(regexp = "(^$|[0-9]{10})", message = "Mobile number must be 10 digits")
 	private String mobileNumber;
+
+	@Valid
 	private AccountsDto accountsDto;
 }

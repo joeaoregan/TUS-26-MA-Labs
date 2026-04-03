@@ -6,6 +6,15 @@ URL:
 http://localhost:8090/api/loans
 ```
 
+### Health Check
+
+!!! note "GET /sayHello"
+    Test GET API request with Loans Controller
+
+    ```java
+    http://localhost:8090/api/loans/sayHello
+    ```
+
 ### Create A Loan
 
 !!! success "POST ?mobileNumber=1234567890"
@@ -150,6 +159,7 @@ http://localhost:8090/api/loans
 Input validation handled in LoansDto
 
 ```java
+@Data
 public class LoansDto {
 	@NotEmpty(message = "MobileNumber cannot be null or empty")
 	@Pattern(regexp = "(^$|[0-9]{10})", message = "Mobile Number must be 10 digits")
