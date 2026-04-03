@@ -53,10 +53,12 @@ nav:
   - RESTFUL APIs 8, 9:
     - Labs 8-9: labs8-9/index.md
     - 8. Loans MicroService: labs8-9/lab8/index.md
+    - 9. Cards MicroService: labs8-9/lab9/index.md
   - API:
     - API Endpoints: api/index.md
     - Accounts API: api/accounts.md
     - Loans API: api/loans.md
+    - Cards API: api/cards.md
   
 markdown_extensions:
   - pymdownx.tasklist:

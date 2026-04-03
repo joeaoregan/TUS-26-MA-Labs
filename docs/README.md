@@ -32,6 +32,14 @@
 #### RESTful APIs 2
 
 - [Lab#8 Loans MicroService](https://joeaoregan.github.io/TUS-26-MA-Labs/labs8-9/lab8/)
+- [Lab#9 Cards MicroService](https://joeaoregan.github.io/TUS-26-MA-Labs/labs8-9/lab9/)
+
+#### API
+
+- [API Overview](https://joeaoregan.github.io/TUS-26-MA-Labs/api/)
+- [Accounts API](https://joeaoregan.github.io/TUS-26-MA-Labs/api/accounts/)
+- [Loans API](https://joeaoregan.github.io/TUS-26-MA-Labs/api/loans/)
+- [Cards API](https://joeaoregan.github.io/TUS-26-MA-Labs/api/cards/)
 
 ---
 

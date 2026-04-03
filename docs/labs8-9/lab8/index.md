@@ -1,4 +1,4 @@
-# RESTful API Lab 7
+# RESTful API Lab 8
 
 ## Lab#8 Loans MicroService
 

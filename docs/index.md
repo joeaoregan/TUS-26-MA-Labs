@@ -20,7 +20,9 @@ Technological University of the Shannon, 2026.
     - [Lab#7 Exceptions, Data Validations and Audit Columns](labs1-7/lab7/index.md)
 - [Labs 8-9 RESTful APIs](labs8-9/index.md)
     - [Lab#8 Loans MicroService](labs8-9/lab8/index.md)
+    - [Lab#9 Cards MicroService](labs8-9/lab9/index.md)
 - [API](api/index.md)
     - [Accounts API](api/accounts.md)
     - [Loans API](api/loans.md)
+    - [Cards API](api/cards.md)
 
