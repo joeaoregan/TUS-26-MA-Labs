@@ -1,6 +1,20 @@
 site_name: TUS-26-MA-Labs
 docs_dir: docs
 site_dir: site
+
+copyright: Copyright &copy; 2026 Joe O'Regan
+
+extra:
+  social:
+    - icon: fontawesome/brands/linkedin
+      link: https://www.linkedin.com/in/joeaoregan/
+    - icon: fontawesome/brands/github
+      link: https://github.com/joeaoregan
+    - icon: material/certificate
+      link: https://www.credly.com/users/joe-o-regan
+    - icon: simple/githubpages
+      link: https://joeaoregan.github.io/      
+
 theme:
   icon:
     admonition:
