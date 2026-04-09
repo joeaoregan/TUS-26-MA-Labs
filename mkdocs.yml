@@ -38,6 +38,7 @@ theme:
         name: Switch to dark mode
 
   name: material
+  favicon: images/favicon.ico
   features:
     - navigation.tabs
     - navigation.tabs.sticky
