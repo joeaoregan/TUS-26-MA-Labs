@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.tus</groupId>
-	<artifactId>cards</artifactId>
+	<artifactId>ma-labs-cards</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name/>
 	<description/>
