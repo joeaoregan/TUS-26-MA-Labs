@@ -39,6 +39,10 @@
 - [Lab#8 Loans MicroService](https://joeaoregan.github.io/TUS-26-MA-Labs/labs8-9/lab8/)
 - [Lab#9 Cards MicroService](https://joeaoregan.github.io/TUS-26-MA-Labs/labs8-9/lab9/)
 
+#### Spring Cloud Config
+
+- [Lab#10 Configuration with Springboot alone](https://joeaoregan.github.io/TUS-26-MA-Labs/labs10-19/lab10/index.md)
+
 #### API
 
 - [API Overview](https://joeaoregan.github.io/TUS-26-MA-Labs/api/)

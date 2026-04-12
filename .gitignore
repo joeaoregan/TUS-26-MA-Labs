@@ -4,3 +4,4 @@ venv/
 # MkDocs
 site/
 mkdocs.md
+.github/

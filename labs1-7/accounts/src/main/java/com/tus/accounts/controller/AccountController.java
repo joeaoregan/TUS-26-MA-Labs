@@ -1,5 +1,6 @@
 package com.tus.accounts.controller;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -20,15 +21,28 @@ import com.tus.accounts.service.IAccountsService;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
-import lombok.AllArgsConstructor;
+//import lombok.AllArgsConstructor;
 
 @RestController
 @RequestMapping(path = "/api/accounts", produces = MediaType.APPLICATION_JSON_VALUE)
-@AllArgsConstructor
+//@AllArgsConstructor
 @Validated
 public class AccountController {
 
 	private IAccountsService iAccountsService;
+	
+	// Single arg constructor for dependency injection
+	public AccountController(IAccountsService iAccountsService) {
+		this.iAccountsService = iAccountsService;
+	}
+
+	@Value("${build.version}")
+	private String buildVersion;
+
+	@GetMapping("/build-info")
+	public ResponseEntity<String> getBuildInfo() {
+		return ResponseEntity.status(HttpStatus.OK).body(buildVersion);
+	}
 
 	@GetMapping("/sayHello")
 	public String sayHello() {

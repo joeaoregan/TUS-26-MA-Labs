@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.tus</groupId>
-	<artifactId>configserver</artifactId>
+	<artifactId>ma-labs-configserver</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name/>
 	<description/>

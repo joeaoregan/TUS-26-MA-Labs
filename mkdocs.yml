@@ -56,7 +56,7 @@ nav:
     - External Links:    
       - MA CA1 GitHub: https://github.com/joeaoregan/TUS-26-MA-CA1-Guitar-Store-API
       - MA CA2 GitHub: https://github.com/joeaoregan/TUS-26-MA-CA2-Distributed-Microservice-App
-  - RESTFUL APIs 1-7:
+  - 1-7 RESTFUL APIs:
     - Labs 1-7: labs1-7/index.md
     - 1. Getting Started with Spring Boot: labs1-7/lab1/index.md
     - 2. Configuring H2 DB and YAML application.properties: labs1-7/lab2/index.md
@@ -65,10 +65,13 @@ nav:
     - 5. Implementing a READ API that fetches the details based on mobile number: labs1-7/lab5/index.md
     - 6. RESTfulAPI for Updating and Deleting customer accounts: labs1-7/lab6/index.md
     - 7. Exceptions, Data Validations and Audit Columns: labs1-7/lab7/index.md
-  - RESTFUL APIs 8, 9:
+  - 8-9 RESTFUL APIs:
     - Labs 8-9: labs8-9/index.md
     - 8. Loans MicroService: labs8-9/lab8/index.md
     - 9. Cards MicroService: labs8-9/lab9/index.md
+  - 10-19 Spring Cloud Config:
+    - Labs 10-19: labs10-19/index.md
+    - 10. Introduction to Spring Cloud Config: labs10-19/lab10/index.md
   - API:
     - API Endpoints: api/index.md
     - Accounts API: api/accounts.md

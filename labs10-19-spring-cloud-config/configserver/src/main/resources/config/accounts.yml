@@ -1,0 +1,10 @@
+build:
+  version: "3.0"
+accounts:
+  message: "Welcome to accounts related local APIs"
+  contactDetails:
+    name: "Joe Bloggs - Developer"
+    email: "joe@tus.ie"
+  onCallSupport:
+    - (086) 555-1234
+    - (086) 523-1345
