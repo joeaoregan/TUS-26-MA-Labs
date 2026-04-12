@@ -11,7 +11,7 @@
         <link rel="canonical" href="https://joeaoregan.github.io/TUS-26-MA-Labs/api/">
       
       
-        <link rel="prev" href="../labs8-9/lab9/">
+        <link rel="prev" href="../labs10-19/lab10/">
       
       
         <link rel="next" href="accounts/">
@@ -267,7 +267,7 @@
           
   
   
-  RESTFUL APIs 1-7
+  1-7 RESTFUL APIs
 
         </a>
       </li>
@@ -287,7 +287,27 @@
           
   
   
-  RESTFUL APIs 8, 9
+  8-9 RESTFUL APIs
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../labs10-19/" class="md-tabs__link">
+          
+  
+  
+  10-19 Spring Cloud Config
 
         </a>
       </li>
@@ -600,7 +620,7 @@
   <span class="md-ellipsis">
     
   
-    RESTFUL APIs 1-7
+    1-7 RESTFUL APIs
   
 
     
@@ -616,7 +636,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    RESTFUL APIs 1-7
+    1-7 RESTFUL APIs
   
 
           </label>
@@ -883,7 +903,7 @@
   <span class="md-ellipsis">
     
   
-    RESTFUL APIs 8, 9
+    8-9 RESTFUL APIs
   
 
     
@@ -899,7 +919,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    RESTFUL APIs 8, 9
+    8-9 RESTFUL APIs
   
 
           </label>
@@ -1000,6 +1020,121 @@
       
   
   
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10-19 Spring Cloud Config
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    10-19 Spring Cloud Config
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../labs10-19/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Labs 10-19
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../labs10-19/lab10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10. Introduction to Spring Cloud Config
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
     
   
   
@@ -1021,10 +1156,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
         
           
-          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
             
   
   
@@ -1042,8 +1177,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_4">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -1364,7 +1499,7 @@
 <div class="admonition note">
 <p class="admonition-title">GET /sayHello</p>
 <p>Test GET API request with Account Controller</p>
-<div class="highlight"><pre><span></span><code><span class="nl">http</span><span class="p">:</span><span class="c1">//localhost:8080/api/accounts/sayHello</span>
+<div class="highlight"><pre><span></span><code><span class="nl">http</span><span class="p">:</span><span class="c1">//localhost:8081/api/accounts/sayHello</span>
 
 <span class="nl">http</span><span class="p">:</span><span class="c1">//localhost:8090/api/loans/sayHello</span>
 
@@ -1372,7 +1507,10 @@
 </code></pre></div>
 </div>
 <h2 id="accounts-url">Accounts URL</h2>
-<div class="highlight"><pre><span></span><code><span class="nl">http</span><span class="p">:</span><span class="c1">//localhost:8080/api/accounts</span>
+<p><strong>Note</strong>: Moved <code>api/accounts</code> to top level path, so required for health check, build-info, etc.</p>
+<div class="highlight"><pre><span></span><code><span class="nl">http</span><span class="p">:</span><span class="c1">//localhost:8081/api/accounts</span>
+</code></pre></div>
+<div class="highlight"><span class="filename">Use @Value annotation to display Build Information from application.yml (Lab 10)</span><pre><span></span><code><span class="nl">http</span><span class="p">:</span><span class="c1">//localhost:8081/api/accounts/build-info</span>
 </code></pre></div>
 <h2 id="loans-url">Loans URL</h2>
 <div class="highlight"><pre><span></span><code><span class="nl">http</span><span class="p">:</span><span class="c1">//localhost:8090/api/loans</span>
@@ -1415,7 +1553,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../labs8-9/lab9/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 9. Cards MicroService">
+          <a href="../labs10-19/lab10/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 10. Introduction to Spring Cloud Config">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -1425,7 +1563,7 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                9. Cards MicroService
+                10. Introduction to Spring Cloud Config
               </div>
             </div>
           </a>

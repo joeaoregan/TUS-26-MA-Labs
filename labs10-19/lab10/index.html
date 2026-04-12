@@ -8,29 +8,31 @@
       
       
       
-        <link rel="canonical" href="https://joeaoregan.github.io/TUS-26-MA-Labs/">
+        <link rel="canonical" href="https://joeaoregan.github.io/TUS-26-MA-Labs/labs10-19/lab10/">
       
       
+        <link rel="prev" href="../">
       
-        <link rel="next" href="labs1-7/">
+      
+        <link rel="next" href="../../api/">
       
       
         
       
       
-      <link rel="icon" href="images/favicon.ico">
+      <link rel="icon" href="../../images/favicon.ico">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
       
-        <title>Microservices Architecture: Labs - TUS-26-MA-Labs</title>
+        <title>10. Introduction to Spring Cloud Config - TUS-26-MA-Labs</title>
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
   
@@ -74,7 +76,7 @@
       
     
     
-    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -99,7 +101,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#microservices-architecture-labs" class="md-skip">
+        <a href="#lab-10-configuration-with-springboot-alone" class="md-skip">
           Skip to content
         </a>
       
@@ -115,9 +117,9 @@
 
 <header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="." title="TUS-26-MA-Labs" class="md-header__button md-logo" aria-label="TUS-26-MA-Labs" data-md-component="logo">
+    <a href="../.." title="TUS-26-MA-Labs" class="md-header__button md-logo" aria-label="TUS-26-MA-Labs" data-md-component="logo">
       
-  <img src="images/logo.png" alt="logo">
+  <img src="../../images/logo.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -134,7 +136,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Microservices Architecture: Labs
+              10. Introduction to Spring Cloud Config
             
           </span>
         </div>
@@ -237,13 +239,11 @@
   
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="." class="md-tabs__link">
+      <li class="md-tabs__item">
+        <a href="../.." class="md-tabs__link">
           
   
   
@@ -263,7 +263,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="labs1-7/" class="md-tabs__link">
+        <a href="../../labs1-7/" class="md-tabs__link">
           
   
   
@@ -283,7 +283,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="labs8-9/" class="md-tabs__link">
+        <a href="../../labs8-9/" class="md-tabs__link">
           
   
   
@@ -299,11 +299,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="labs10-19/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
           
   
   
@@ -323,7 +325,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="api/" class="md-tabs__link">
+        <a href="../../api/" class="md-tabs__link">
           
   
   
@@ -363,9 +365,9 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="." title="TUS-26-MA-Labs" class="md-nav__button md-logo" aria-label="TUS-26-MA-Labs" data-md-component="logo">
+    <a href="../.." title="TUS-26-MA-Labs" class="md-nav__button md-logo" aria-label="TUS-26-MA-Labs" data-md-component="logo">
       
-  <img src="images/logo.png" alt="logo">
+  <img src="../../images/logo.png" alt="logo">
 
     </a>
     TUS-26-MA-Labs
@@ -389,31 +391,26 @@
       
   
   
-    
   
   
-  
     
     
     
     
-      
-        
-        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
         
           
-          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="">
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
             
   
   
@@ -431,7 +428,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_1">
             <span class="md-nav__icon md-icon"></span>
             
@@ -446,37 +443,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Microservices Architecture: Labs
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="." class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
         
   
   
@@ -492,48 +462,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#details" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Details
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#labs" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Labs
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -552,20 +480,17 @@
       
       
         
-          
-          
-        
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_2" >
         
           
-          <label class="md-nav__link" for="__nav_1_2" id="__nav_1_2_label" tabindex="">
+          <label class="md-nav__link" for="__nav_1_2" id="__nav_1_2_label" tabindex="0">
             
   
   
@@ -724,7 +649,7 @@
   
   
     <li class="md-nav__item">
-      <a href="labs1-7/" class="md-nav__link">
+      <a href="../../labs1-7/" class="md-nav__link">
         
   
   
@@ -752,7 +677,7 @@
   
   
     <li class="md-nav__item">
-      <a href="labs1-7/lab1/" class="md-nav__link">
+      <a href="../../labs1-7/lab1/" class="md-nav__link">
         
   
   
@@ -780,7 +705,7 @@
   
   
     <li class="md-nav__item">
-      <a href="labs1-7/lab2/" class="md-nav__link">
+      <a href="../../labs1-7/lab2/" class="md-nav__link">
         
   
   
@@ -808,7 +733,7 @@
   
   
     <li class="md-nav__item">
-      <a href="labs1-7/lab3/" class="md-nav__link">
+      <a href="../../labs1-7/lab3/" class="md-nav__link">
         
   
   
@@ -836,7 +761,7 @@
   
   
     <li class="md-nav__item">
-      <a href="labs1-7/lab4/" class="md-nav__link">
+      <a href="../../labs1-7/lab4/" class="md-nav__link">
         
   
   
@@ -864,7 +789,7 @@
   
   
     <li class="md-nav__item">
-      <a href="labs1-7/lab5/" class="md-nav__link">
+      <a href="../../labs1-7/lab5/" class="md-nav__link">
         
   
   
@@ -892,7 +817,7 @@
   
   
     <li class="md-nav__item">
-      <a href="labs1-7/lab6/" class="md-nav__link">
+      <a href="../../labs1-7/lab6/" class="md-nav__link">
         
   
   
@@ -920,7 +845,7 @@
   
   
     <li class="md-nav__item">
-      <a href="labs1-7/lab7/" class="md-nav__link">
+      <a href="../../labs1-7/lab7/" class="md-nav__link">
         
   
   
@@ -1007,7 +932,7 @@
   
   
     <li class="md-nav__item">
-      <a href="labs8-9/" class="md-nav__link">
+      <a href="../../labs8-9/" class="md-nav__link">
         
   
   
@@ -1035,7 +960,7 @@
   
   
     <li class="md-nav__item">
-      <a href="labs8-9/lab8/" class="md-nav__link">
+      <a href="../../labs8-9/lab8/" class="md-nav__link">
         
   
   
@@ -1063,7 +988,7 @@
   
   
     <li class="md-nav__item">
-      <a href="labs8-9/lab9/" class="md-nav__link">
+      <a href="../../labs8-9/lab9/" class="md-nav__link">
         
   
   
@@ -1095,26 +1020,31 @@
       
   
   
+    
   
   
+  
     
     
     
     
+      
+        
+        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
         
           
-          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
             
   
   
@@ -1132,7 +1062,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1150,7 +1080,7 @@
   
   
     <li class="md-nav__item">
-      <a href="labs10-19/" class="md-nav__link">
+      <a href="../" class="md-nav__link">
         
   
   
@@ -1175,10 +1105,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="labs10-19/lab10/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10. Introduction to Spring Cloud Config
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -1194,6 +1151,48 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#screenshot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Screenshot
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lab10-configuration-with-springboot-alone" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab#10 Configuration with Springboot alone
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1265,7 +1264,7 @@
   
   
     <li class="md-nav__item">
-      <a href="api/" class="md-nav__link">
+      <a href="../../api/" class="md-nav__link">
         
   
   
@@ -1293,7 +1292,7 @@
   
   
     <li class="md-nav__item">
-      <a href="api/accounts/" class="md-nav__link">
+      <a href="../../api/accounts/" class="md-nav__link">
         
   
   
@@ -1321,7 +1320,7 @@
   
   
     <li class="md-nav__item">
-      <a href="api/loans/" class="md-nav__link">
+      <a href="../../api/loans/" class="md-nav__link">
         
   
   
@@ -1349,7 +1348,7 @@
   
   
     <li class="md-nav__item">
-      <a href="api/cards/" class="md-nav__link">
+      <a href="../../api/cards/" class="md-nav__link">
         
   
   
@@ -1404,10 +1403,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#details" class="md-nav__link">
+  <a href="#screenshot" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Details
+        Screenshot
       
     </span>
   </a>
@@ -1415,10 +1414,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#labs" class="md-nav__link">
+  <a href="#lab10-configuration-with-springboot-alone" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Labs
+        Lab#10 Configuration with Springboot alone
       
     </span>
   </a>
@@ -1451,36 +1450,45 @@
   
 
 
-<h1 id="microservices-architecture-labs">Microservices Architecture: Labs</h1>
-<h2 id="details">Details</h2>
-<p>MSc in Software Design with Cloud Native Computing<br />
-Technological University of the Shannon, 2026.</p>
-<p><strong>Student</strong>: Joe O'Regan<br />
-<strong>Student Number</strong>: A00258304  </p>
-<h2 id="labs">Labs</h2>
-<ul>
-<li><a data-preview="" href="labs1-7/">Labs 1-7 RESTful APIs</a><ul>
-<li><a data-preview="" href="labs1-7/lab1/">Lab#1 Getting started with Springboot – Helloworld Example</a></li>
-<li><a data-preview="" href="labs1-7/lab2/">Lab#2 Configuring H2 DB and YAML application.properties</a></li>
-<li><a data-preview="" href="labs1-7/lab3/">Lab#3 Building a Rest API to support the creation of a new account and customer details</a></li>
-<li><a data-preview="" href="labs1-7/lab4/">Lab#4 Exception Handling –check if customer already exists</a></li>
-<li><a data-preview="" href="labs1-7/lab5/">Lab#5 Implementing a READ API that fetches the details based on mobile number</a></li>
-<li><a data-preview="" href="labs1-7/lab6/">Lab#6 RESTfulAPI for Updating and Deleting customer accounts</a></li>
-<li><a data-preview="" href="labs1-7/lab7/">Lab#7 Exceptions, Data Validations and Audit Columns</a></li>
-</ul>
-</li>
-<li><a data-preview="" href="labs8-9/">Labs 8-9 RESTful APIs</a><ul>
-<li><a data-preview="" href="labs8-9/lab8/">Lab#8 Loans MicroService</a></li>
-<li><a data-preview="" href="labs8-9/lab9/">Lab#9 Cards MicroService</a></li>
-</ul>
-</li>
-<li><a href="api/">API</a><ul>
-<li><a href="api/accounts/">Accounts API</a></li>
-<li><a href="api/loans/">Loans API</a></li>
-<li><a href="api/cards/">Cards API</a></li>
-</ul>
-</li>
-</ul>
+<h1 id="lab-10-configuration-with-springboot-alone">Lab 10: Configuration with Springboot alone</h1>
+<h2 id="screenshot">Screenshot</h2>
+<p><img alt="Completed lab" src="screenshot.png" /></p>
+<pre><code>Figure 0: Completed lab Postman test
+</code></pre>
+<hr />
+<h2 id="lab10-configuration-with-springboot-alone">Lab#10 Configuration with Springboot alone</h2>
+<hr />
+<p>In this lab we will read configurations using Springboot with @Value annotation in the accounts microservice. We add in a build property in the .yml file.</p>
+<!-- Spring Boot uses a very particular order that is designed to allow sensible overriding of values. Properties are considered tin the following order (with values form lower items overriding earlier ones): 
+- Properties present inside files like application.properties
+- OS Environmental variables
+- Java System properties (System.getProperties())
+- JNDI attributes from java:comp/env
+- ServletContext init parameters
+- ServletConfig init parameters
+- Command line arguments
+ -->
+
+<p><img alt="Order of precedence" src="Picture1.png" /></p>
+<pre><code>Figure 1: Order of precedence
+</code></pre>
+<p><img alt="Add property to the application.yml" src="Picture2.png" /></p>
+<pre><code>Figure 2: Add property to the application.yml
+</code></pre>
+<p>Step 1: Add a property to the application.properties of the accounts microservice as shown above.</p>
+<p>Step #2 Build a REST API to read the property and return to user. In the AccountController using the @Value annotation</p>
+<p><img alt="Add property with @Value annotation in the AccountController" src="Picture3.png" /></p>
+<pre><code>Figure 3: Add property with @Value annotation in the AccountController
+</code></pre>
+<p><img alt="Add rest end point to return the property value" src="Picture4.png" /></p>
+<pre><code>Figure 4: Add rest end point to return the property value
+</code></pre>
+<p>Step #3 We also need to remove the @AllArgsConstructor and include a single argument constructor.</p>
+<p><img alt="Changing @AllArgsConstructor to single arg constructor" src="Picture5.png" /></p>
+<pre><code>Figure 5: Changing @AllArgsConstructor to single arg constructor
+</code></pre>
+<p>Step 4: Test using Postman</p>
+<p><img alt="Test using Postman" src="Picture6.png" /></p>
 
 
 
@@ -1515,15 +1523,31 @@ Technological University of the Shannon, 2026.</p>
       
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
+          
+          <a href="../" class="md-footer__link md-footer__link--prev" aria-label="Previous: Labs 10-19">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Labs 10-19
+              </div>
+            </div>
+          </a>
+        
         
           
-          <a href="labs1-7/" class="md-footer__link md-footer__link--next" aria-label="Next: Labs 1-7">
+          <a href="../../api/" class="md-footer__link md-footer__link--next" aria-label="Next: API Endpoints">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Labs 1-7
+                API Endpoints
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -1613,10 +1637,10 @@ Technological University of the Shannon, 2026.</p>
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "toc.follow", "navigation.footer", "navigation.instant.preview", "navigation.tracking", "navigation.path", "navigation.top"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "toc.follow", "navigation.footer", "navigation.instant.preview", "navigation.tracking", "navigation.path", "navigation.top"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
     
   </body>
