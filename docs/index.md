@@ -25,6 +25,7 @@ Technological University of the Shannon, 2026.
     - [Lab#10 Configuration with Springboot alone](labs10-19/lab10/index.md)
     - [Lab#11 Configuration with Environment interface](labs10-19/lab11/index.md)
     - [Lab#12 Configuration with @ConfigurationProperties](labs10-19/lab12/index.md)
+    - [Lab#13 Springboot Profiles](labs10-19/lab13/index.md)
 - [API](api/index.md)
     - [Accounts API](api/accounts.md)
     - [Loans API](api/loans.md)
