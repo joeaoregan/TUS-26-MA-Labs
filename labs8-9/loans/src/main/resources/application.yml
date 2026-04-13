@@ -1,6 +1,8 @@
 server:
   port: 8090
 spring:
+  profiles:
+    active: "qa"  # Profile to use
   datasource:
     url: jdbc:h2:mem:testdb
     driverClassName: org.h2.Driver
@@ -14,4 +16,30 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
-    
+build:
+  version: "3.1"
+# default profile (fall back)
+loans:
+  message: "Welcome to loans related local APIs"
+  contactDetails:
+    name: "Joe Bloggs - Loan Developer"
+    email: "joe@loans.ie"
+  onCallSupport:
+    - (086) 555-1234
+    - (087) 523-1345
+
+# qa profile
+--- 
+spring:
+  config:
+    activate:
+      on-profile: "qa"
+    import: "application_qa.yml"
+
+# prod profile 
+---
+spring:
+  config:
+    activate:
+      on-profile: "prod"
+    import: "application_prod.yml"

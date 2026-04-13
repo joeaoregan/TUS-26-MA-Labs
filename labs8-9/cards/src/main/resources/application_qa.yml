@@ -1,0 +1,10 @@
+build:
+  version: "2.3"
+cards:
+  message: "Welcome to card related QA APIs"
+  contactDetails:
+    name: "Jane Bloggs - Cards QA Associate"
+    email: "jane@cards.ie"
+  onCallSupport:
+    - (086) 555-1234
+    - (087) 523-1345

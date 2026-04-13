@@ -1,5 +1,8 @@
 package com.tus.loans.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tus.loans.constants.LoansConstants;
+import com.tus.loans.dto.LoansContactInfoDto;
 import com.tus.loans.dto.LoansDto;
 import com.tus.loans.dto.ResponseDto;
 import com.tus.loans.service.ILoansService;
@@ -24,11 +28,38 @@ import lombok.AllArgsConstructor;
 
 @RestController
 @RequestMapping(path = "/api/loans", produces = MediaType.APPLICATION_JSON_VALUE)
-@AllArgsConstructor
+//@AllArgsConstructor
 @Validated
 public class LoanController {
 
 	private ILoansService iLoansService;
+    private LoansContactInfoDto loansContactInfoDto;
+
+    public LoanController(ILoansService iLoansService, LoansContactInfoDto loansContactInfoDto) {
+        this.iLoansService = iLoansService;
+        this.loansContactInfoDto = loansContactInfoDto;
+    }
+
+    @Value("${build.version}")
+    private String buildVersion;
+
+    @Autowired
+    private Environment environment;
+
+    @GetMapping("/java-version")
+    public ResponseEntity<String> getJavaVersion() {
+        return ResponseEntity.status(HttpStatus.OK).body(environment.getProperty("JAVA_HOME"));
+    }
+
+    @GetMapping("/build-info")
+    public ResponseEntity<String> getBuildInfo() {
+        return ResponseEntity.status(HttpStatus.OK).body(buildVersion);
+    }
+
+    @GetMapping("/contact-info")
+    public ResponseEntity<LoansContactInfoDto> getContactInfo() {
+        return ResponseEntity.status(HttpStatus.OK).body(loansContactInfoDto);
+    }
 
 	@GetMapping("/sayHello")
 	public String sayHello() {

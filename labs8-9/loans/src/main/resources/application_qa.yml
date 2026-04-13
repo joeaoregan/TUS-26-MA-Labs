@@ -1,0 +1,10 @@
+build:
+  version: "3.3"
+loans:
+  message: "Welcome to TUS loans related QA APIs"
+  contactDetails:
+    name: "Jane Bloggs - Loans QA Lead"
+    email: "jane@loans.com"
+  onCallSupport:
+    - (123) 545-6565
+    - (123) 546-3467
