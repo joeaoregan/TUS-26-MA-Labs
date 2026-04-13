@@ -1,0 +1,10 @@
+build:
+  version: "1.2"
+cards:
+  message: "Welcome to TUS loans related prod APIs"
+  contactDetails:
+    name: "John Murphy - Loans Owner"
+    email: "john@loans.ie"
+  onCallSupport:
+    - (086) 656-8709
+    - (087) 342-0956
