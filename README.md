@@ -42,6 +42,7 @@
 #### Spring Cloud Config
 
 - [Lab#10 Configuration with Springboot alone](https://joeaoregan.github.io/TUS-26-MA-Labs/labs10-19/lab10/index.md)
+- [Lab#11 Configuration with Environment interface](https://joeaoregan.github.io/TUS-26-MA-Labs/labs10-19/lab11/index.md)
 
 #### API
 

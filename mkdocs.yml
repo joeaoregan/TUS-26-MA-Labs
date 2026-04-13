@@ -72,6 +72,7 @@ nav:
   - 10-19 Spring Cloud Config:
     - Labs 10-19: labs10-19/index.md
     - 10. Introduction to Spring Cloud Config: labs10-19/lab10/index.md
+    - 11. Configuration with Environment interface: labs10-19/lab11/index.md
   - API:
     - API Endpoints: api/index.md
     - Accounts API: api/accounts.md

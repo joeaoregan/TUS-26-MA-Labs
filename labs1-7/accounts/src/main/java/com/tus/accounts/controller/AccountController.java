@@ -1,6 +1,8 @@
 package com.tus.accounts.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -30,7 +32,7 @@ import jakarta.validation.constraints.Pattern;
 public class AccountController {
 
 	private IAccountsService iAccountsService;
-	
+
 	// Single arg constructor for dependency injection
 	public AccountController(IAccountsService iAccountsService) {
 		this.iAccountsService = iAccountsService;
@@ -38,6 +40,14 @@ public class AccountController {
 
 	@Value("${build.version}")
 	private String buildVersion;
+
+	@Autowired
+	private Environment environment;
+	
+	@GetMapping("/java-version")
+	public ResponseEntity<String> getJavaVersion() {
+		return ResponseEntity.status(HttpStatus.OK).body(environment.getProperty("JAVA_HOME"));
+	}
 
 	@GetMapping("/build-info")
 	public ResponseEntity<String> getBuildInfo() {

@@ -1,20 +1,17 @@
 # Lab 10: Configuration with Springboot alone
 
-## Screenshot
-
-![Completed lab](screenshot.png)
-
-    Figure 0: Completed lab Postman test
-
----
-
 ## Lab#10 Configuration with Springboot alone
 
 ---
 
 In this lab we will read configurations using Springboot with @Value annotation in the accounts microservice. We add in a build property in the .yml file.
- 
-<!-- Spring Boot uses a very particular order that is designed to allow sensible overriding of values. Properties are considered tin the following order (with values form lower items overriding earlier ones): 
+
+```markdown title="Order of precedence"
+Spring Boot uses a very particular order that is  
+designed to allow sensible overriding of values.  
+Properties are considered tin the following order  
+(with values form lower items overriding earlier ones): 
+
 - Properties present inside files like application.properties
 - OS Environmental variables
 - Java System properties (System.getProperties())
@@ -22,35 +19,82 @@ In this lab we will read configurations using Springboot with @Value annotation 
 - ServletContext init parameters
 - ServletConfig init parameters
 - Command line arguments
- -->
+```
 
-![Order of precedence](Picture1.png)
-
-	Figure 1: Order of precedence
-
-![Add property to the application.yml](Picture2.png)
-
-    Figure 2: Add property to the application.yml
+```yaml title="Add property to the application.yml"
+server:
+  port: 8081
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driverClassName: org.h2.Driver
+    username: sa
+    password: ''
+  h2:
+    console:
+      enabled: true
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+build:
+  version: "3.0"
+```
 
 Step 1: Add a property to the application.properties of the accounts microservice as shown above.
 
 Step #2 Build a REST API to read the property and return to user. In the AccountController using the @Value annotation
 
-![Add property with @Value annotation in the AccountController](Picture3.png)
- 
-    Figure 3: Add property with @Value annotation in the AccountController
+```java title="Add property with @Value annotation in the AccountController"
+@Validated
+public class AccountController {
 
-![Add rest end point to return the property value](Picture4.png)
- 
-    Figure 4: Add rest end point to return the property value
+	private IAccountsService iAccountsService;
+
+	@Value("${build.version}")
+	private String buildVersion;
+
+	@PostMapping("/account")
+	public ResponseEntity<ResponseDto> createAccount(@Valid @RequestBody CustomerDto customerDto) {
+		iAccountsService.createAccount(customerDto);
+		return ResponseEntity.status(HttpStatus.CREATED)
+				.body(new ResponseDto(AccountsConstants.STATUS_201, AccountsConstants.MESSAGE_201));
+	}
+```
+
+```java title="Add rest end point to return the property value"
+@GetMapping("/build-info")
+	public ResponseEntity<String> getBuildInfo() {
+		return ResponseEntity
+        .status(HttpStatus.OK)
+        .body(buildVersion);
+	}
+```
 
 Step #3 We also need to remove the @AllArgsConstructor and include a single argument constructor.
 
-![Changing @AllArgsConstructor to single arg constructor](Picture5.png)
+```java title="Changing @AllArgsConstructor to single arg constructor"
+@RestController
+@RequestMapping(path = "/api", produces = MediaType.APPLICATION_JSON_VALUE)
+//@AllArgsConstructor
+@Validated
+public class AccountController {
 
-    Figure 5: Changing @AllArgsConstructor to single arg constructor
+	private IAccountsService iAccountsService;
+
+	public AccountController(IAccountsService iAccountsService) {
+		this.iAccountsService = iAccountsService;
+	}
+
+	@Value("${build.version}")
+	private String buildVersion;
+```
 
 Step 4: Test using Postman
 
-![Test using Postman](Picture6.png)
- 
+## Screenshot
+
+![Completed lab](screenshot.png)
+
+    Figure 1: Test using Postman
