@@ -1,8 +1,10 @@
+build:
+  version: "1.1"
 accounts:
-  message: "Welcome to accounts related LOCAL APIs"
+  message: "Welcome to accounts related prod APIs"
   contactDetails:
-    name: "Joe Bloggs - Developer"
-    email: "joe@tus.ie"
+    name: "John Bloggs - Prod Support"
+    email: "john@tus.ie"
   onCallSupport:
     - (086) 555-1234
     - (087) 523-1345
