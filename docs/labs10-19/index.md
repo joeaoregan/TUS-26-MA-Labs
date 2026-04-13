@@ -4,3 +4,4 @@
 
 10. [Configuration with Springboot alone](lab10/index.md)
 11. [Configuration with Environment interface](lab11/index.md)
+12. [Configuration with @ConfigurationProperties](lab12/index.md)

@@ -1,4 +1,4 @@
-# Lab 10: Configuration with Springboot alone
+# Lab 10
 
 ## Lab#10 Configuration with Springboot alone
 
