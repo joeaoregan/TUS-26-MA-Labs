@@ -14,7 +14,7 @@
         <link rel="prev" href="../">
       
       
-        <link rel="next" href="../../api/">
+        <link rel="next" href="../lab11/">
       
       
         
@@ -101,7 +101,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#lab-10-configuration-with-springboot-alone" class="md-skip">
+        <a href="#lab-10" class="md-skip">
           Skip to content
         </a>
       
@@ -1168,17 +1168,6 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#screenshot" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Screenshot
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#lab10-configuration-with-springboot-alone" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1189,10 +1178,105 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#screenshot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Screenshot
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lab11/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    11. Configuration with Environment interface
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lab12/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    12. Configuration with @ConfigurationProperties
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lab13/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    13. Springboot Probiles
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -1403,10 +1487,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#screenshot" class="md-nav__link">
+  <a href="#lab10-configuration-with-springboot-alone" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Screenshot
+        Lab#10 Configuration with Springboot alone
       
     </span>
   </a>
@@ -1414,10 +1498,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#lab10-configuration-with-springboot-alone" class="md-nav__link">
+  <a href="#screenshot" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Lab#10 Configuration with Springboot alone
+        Screenshot
       
     </span>
   </a>
@@ -1450,45 +1534,87 @@
   
 
 
-<h1 id="lab-10-configuration-with-springboot-alone">Lab 10: Configuration with Springboot alone</h1>
-<h2 id="screenshot">Screenshot</h2>
-<p><img alt="Completed lab" src="screenshot.png" /></p>
-<pre><code>Figure 0: Completed lab Postman test
-</code></pre>
-<hr />
+<h1 id="lab-10">Lab 10</h1>
 <h2 id="lab10-configuration-with-springboot-alone">Lab#10 Configuration with Springboot alone</h2>
 <hr />
 <p>In this lab we will read configurations using Springboot with @Value annotation in the accounts microservice. We add in a build property in the .yml file.</p>
-<!-- Spring Boot uses a very particular order that is designed to allow sensible overriding of values. Properties are considered tin the following order (with values form lower items overriding earlier ones): 
-- Properties present inside files like application.properties
-- OS Environmental variables
-- Java System properties (System.getProperties())
-- JNDI attributes from java:comp/env
-- ServletContext init parameters
-- ServletConfig init parameters
-- Command line arguments
- -->
+<div class="highlight"><span class="filename">Order of precedence</span><pre><span></span><code>Spring Boot uses a very particular order that is  
+designed to allow sensible overriding of values.  
+Properties are considered tin the following order  
+(with values form lower items overriding earlier ones): 
 
-<p><img alt="Order of precedence" src="Picture1.png" /></p>
-<pre><code>Figure 1: Order of precedence
-</code></pre>
-<p><img alt="Add property to the application.yml" src="Picture2.png" /></p>
-<pre><code>Figure 2: Add property to the application.yml
-</code></pre>
+<span class="k">-</span><span class="w"> </span>Properties present inside files like application.properties
+<span class="k">-</span><span class="w"> </span>OS Environmental variables
+<span class="k">-</span><span class="w"> </span>Java System properties (System.getProperties())
+<span class="k">-</span><span class="w"> </span>JNDI attributes from java:comp/env
+<span class="k">-</span><span class="w"> </span>ServletContext init parameters
+<span class="k">-</span><span class="w"> </span>ServletConfig init parameters
+<span class="k">-</span><span class="w"> </span>Command line arguments
+</code></pre></div>
+<div class="highlight"><span class="filename">Add property to the application.yml</span><pre><span></span><code><span class="nt">server</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8081</span>
+<span class="nt">spring</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">datasource</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">jdbc:h2:mem:testdb</span>
+<span class="w">    </span><span class="nt">driverClassName</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">org.h2.Driver</span>
+<span class="w">    </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sa</span>
+<span class="w">    </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;&#39;</span>
+<span class="w">  </span><span class="nt">h2</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">console</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">jpa</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">database-platform</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">org.hibernate.dialect.H2Dialect</span>
+<span class="w">    </span><span class="nt">hibernate</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">ddl-auto</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">update</span>
+<span class="w">    </span><span class="nt">show-sql</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="nt">build</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;3.0&quot;</span>
+</code></pre></div>
 <p>Step 1: Add a property to the application.properties of the accounts microservice as shown above.</p>
 <p>Step #2 Build a REST API to read the property and return to user. In the AccountController using the @Value annotation</p>
-<p><img alt="Add property with @Value annotation in the AccountController" src="Picture3.png" /></p>
-<pre><code>Figure 3: Add property with @Value annotation in the AccountController
-</code></pre>
-<p><img alt="Add rest end point to return the property value" src="Picture4.png" /></p>
-<pre><code>Figure 4: Add rest end point to return the property value
-</code></pre>
+<div class="highlight"><span class="filename">Add property with @Value annotation in the AccountController</span><pre><span></span><code><span class="nd">@Validated</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">AccountController</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">IAccountsService</span><span class="w"> </span><span class="n">iAccountsService</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nd">@Value</span><span class="p">(</span><span class="s">&quot;${build.version}&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">buildVersion</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nd">@PostMapping</span><span class="p">(</span><span class="s">&quot;/account&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="o">&lt;</span><span class="n">ResponseDto</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">createAccount</span><span class="p">(</span><span class="nd">@Valid</span><span class="w"> </span><span class="nd">@RequestBody</span><span class="w"> </span><span class="n">CustomerDto</span><span class="w"> </span><span class="n">customerDto</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">iAccountsService</span><span class="p">.</span><span class="na">createAccount</span><span class="p">(</span><span class="n">customerDto</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="p">.</span><span class="na">status</span><span class="p">(</span><span class="n">HttpStatus</span><span class="p">.</span><span class="na">CREATED</span><span class="p">)</span>
+<span class="w">                </span><span class="p">.</span><span class="na">body</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">ResponseDto</span><span class="p">(</span><span class="n">AccountsConstants</span><span class="p">.</span><span class="na">STATUS_201</span><span class="p">,</span><span class="w"> </span><span class="n">AccountsConstants</span><span class="p">.</span><span class="na">MESSAGE_201</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><span class="filename">Add rest end point to return the property value</span><pre><span></span><code><span class="nd">@GetMapping</span><span class="p">(</span><span class="s">&quot;/build-info&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getBuildInfo</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">ResponseEntity</span>
+<span class="w">        </span><span class="p">.</span><span class="na">status</span><span class="p">(</span><span class="n">HttpStatus</span><span class="p">.</span><span class="na">OK</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="na">body</span><span class="p">(</span><span class="n">buildVersion</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+</code></pre></div>
 <p>Step #3 We also need to remove the @AllArgsConstructor and include a single argument constructor.</p>
-<p><img alt="Changing @AllArgsConstructor to single arg constructor" src="Picture5.png" /></p>
-<pre><code>Figure 5: Changing @AllArgsConstructor to single arg constructor
-</code></pre>
+<div class="highlight"><span class="filename">Changing @AllArgsConstructor to single arg constructor</span><pre><span></span><code><span class="nd">@RestController</span>
+<span class="nd">@RequestMapping</span><span class="p">(</span><span class="n">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/api&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">produces</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MediaType</span><span class="p">.</span><span class="na">APPLICATION_JSON_VALUE</span><span class="p">)</span>
+<span class="c1">//@AllArgsConstructor</span>
+<span class="nd">@Validated</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">AccountController</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">IAccountsService</span><span class="w"> </span><span class="n">iAccountsService</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">AccountController</span><span class="p">(</span><span class="n">IAccountsService</span><span class="w"> </span><span class="n">iAccountsService</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">iAccountsService</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">iAccountsService</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Value</span><span class="p">(</span><span class="s">&quot;${build.version}&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">buildVersion</span><span class="p">;</span>
+</code></pre></div>
 <p>Step 4: Test using Postman</p>
-<p><img alt="Test using Postman" src="Picture6.png" /></p>
+<h2 id="screenshot">Screenshot</h2>
+<p><img alt="Completed lab" src="screenshot.png" /></p>
+<pre><code>Figure 1: Test using Postman
+</code></pre>
 
 
 
@@ -1541,13 +1667,13 @@
         
         
           
-          <a href="../../api/" class="md-footer__link md-footer__link--next" aria-label="Next: API Endpoints">
+          <a href="../lab11/" class="md-footer__link md-footer__link--next" aria-label="Next: 11. Configuration with Environment interface">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                API Endpoints
+                11. Configuration with Environment interface
               </div>
             </div>
             <div class="md-footer__button md-icon">
