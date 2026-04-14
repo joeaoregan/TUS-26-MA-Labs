@@ -6,11 +6,50 @@ In this lab we will continue from the previous lab and configure the application
 
 ### 1. Rename application.properties as application.yml  and update with following properties (file provided)
  
-![application.yml](1.png)
+```yaml title="application.yml" linenums="1"
+server:
+  port: 8080
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driverClassName: org.h2.Driver
+    username: sa
+    password: ''
+  h2:
+    console:
+      enabled: true
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto:update
+    show-sql: true
+```
 
 ### 2. Create a file called scheme.sql (provided) in the resources folder with the following data.
  
-![scheme.sql](2.png)
+```sql title="scheme.sql" linenums="1"
+CREATE TABLE IF NOT EXISTS `customer` (
+  `customer_id` int AUTO_INCREMENT  PRIMARY KEY,
+  `name` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `mobile_number` varchar(20) NOT NULL,
+  `created_at` date NOT NULL,
+  `created_by` varchar(20) NOT NULL,
+  `updated_at` date DEFAULT NULL,
+    `updated_by` varchar(20) DEFAULT NULL
+);
+
+CREATE TABLE IF NOT EXISTS `accounts` (
+  `customer_id` int NOT NULL,
+   `account_number` int AUTO_INCREMENT  PRIMARY KEY,
+  `account_type` varchar(100) NOT NULL,
+  `branch_address` varchar(200) NOT NULL,
+  `created_at` date NOT NULL,
+   `created_by` varchar(20) NOT NULL,
+   `updated_at` date DEFAULT NULL,
+    `updated_by` varchar(20) DEFAULT NULL
+);
+```
 
 ### 3. Restart the server. It will start on port 8080 based on yml file.
 ### 4. Go to the h2-console in the browser. You should see the two tables have bee created.
@@ -31,9 +70,42 @@ Now we will write Spring Data JPA entities & repositories to interact with DB ta
  
 ![Repository Interfacese](6.png)
 
-![Customer Repository](6b.png)
+```java title="CustomerRepository.java" linenums="1"
+package com.tus.accounts.repository;
 
-![Accounts Repository](6c.png)
+```java title"AccountsRepository.java" linenums="1"
+
+```
+
+import java.util.Optional;
+import com.tus.accounts.entity.Customer;
+
+@Repository
+public interface CustomerRepository extends JpaRepository<Customer, Long> {
+
+	Optional<Customer> findByMobileNumber(String mobileNumber);
+}
+```
+
+```java title="AccountsRepository.java" linenums="1"
+package com.tus.accounts.repository;
+
+import java.util.Optional;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.tus.accounts.entity.Accounts;
+
+public interface AccountsRepository extends JpaRepository<Accounts, Long> {
+
+	Optional<Accounts> findByCustomerId(Long customerId);
+
+	@Transactional
+	@Modifying
+	void deleteByCustomerId(Long customerId);
+}
+```
  
 We will use the Data Transfer Object pattern to transfer data – not the entity classes themselves.
 
@@ -41,12 +113,62 @@ We will use the Data Transfer Object pattern to transfer data – not the entity
  
 ![DTOs](7.png) 
 
-![Accounts DTO](7b.png) 
+```java title="AccountsDto.java" linenums="1"
+package com.tus.accounts.dto;
+import lombok.Data;
 
-![Customer DTO](7c.png) 
+@Data
+public class AccountsDto {
+	private Long accountNumber;	
+	private String accountType;	
+	private String branchAddress;
+}
+```
+
+```java title="CustomerDto.java" linenums="1"
+package com.tus.accounts.dto;
+import lombok.Data;
+
+@Data
+public class CustomerDto {
+	private String name;
+	private String email;
+	private String mobileNumber;
+}
+```
  
 ### 8. Also add a ResponseDto and an ErrorResponseDto class
- 
-![Customer DTO](8.png) 
 
-![Error DTO](8b.png) 
+```java title="ResponseDto" linenums="1"
+package com.tus.accounts.dto;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
+@Data
+@AllArgsConstructor
+public class ResponseDto {
+	private String statusCode;
+	private String statusMsg;
+}
+```
+
+```java title="ErrorResponseDto" linenums="1"
+package com.tus.accounts.dto;
+
+import java.time.LocalDateTime;
+
+import org.springframework.http.HttpStatus;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
+@Data
+@AllArgsConstructor
+public class ErrorResponseDto {
+	private String apiPath;
+	private HttpStatus errorCode;
+	private String errorMessage;
+	private LocalDateTime errortime;
+}
+```
