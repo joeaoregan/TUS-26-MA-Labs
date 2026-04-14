@@ -73,12 +73,12 @@ Now we will write Spring Data JPA entities & repositories to interact with DB ta
 ```java title="CustomerRepository.java" linenums="1"
 package com.tus.accounts.repository;
 
-```java title"AccountsRepository.java" linenums="1"
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-```
+import com.tus.accounts.entity.Customer;
 
 import java.util.Optional;
-import com.tus.accounts.entity.Customer;
 
 @Repository
 public interface CustomerRepository extends JpaRepository<Customer, Long> {
