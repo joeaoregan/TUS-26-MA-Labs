@@ -20,7 +20,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import com.tus.accounts.dto.ErrorResponseDto;
 
 @ControllerAdvice
-public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
+public class GlobalExceptionHandler extends ResponseEntityExceptionHandler { // Lab 7
 	@ExceptionHandler(Exception.class)
 	public ResponseEntity<ErrorResponseDto> handleGlobalException(Exception exception, WebRequest webRequest) {
 		ErrorResponseDto errorResponseDTO = new ErrorResponseDto(webRequest.getDescription(false),
@@ -45,7 +45,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 	}
 
 	@Override
-	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
+	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, // Lab 7
 			HttpHeaders headers, HttpStatusCode status, WebRequest request) {
 		Map<String, String> validationErrors = new HashMap<>();
 		List<ObjectError> validationErrorList = ex.getBindingResult().getAllErrors();
