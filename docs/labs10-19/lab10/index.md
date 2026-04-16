@@ -22,7 +22,7 @@ In this lab we will read configurations using Springboot with @Value annotation 
 ```markdown title="Order of precedence"
 Spring Boot uses a very particular order that is  
 designed to allow sensible overriding of values.  
-Properties are considered tin the following order  
+Properties are considered in the following order  
 (with values form lower items overriding earlier ones): 
 
 - Properties present inside files like application.properties

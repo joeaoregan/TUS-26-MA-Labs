@@ -77,6 +77,7 @@ nav:
     - 13. Springboot Probiles: labs10-19/lab13/index.md
     - 14. Activating Springboot Profiles: labs10-19/lab14/index.md
     - 15. Getting started with SpringCloud Config: labs10-19/lab15/index.md
+    - 16. Modifying the microservices to use the SpringCloud Config server: labs10-19/lab16/index.md
   - API:
     - API Endpoints: api/index.md
     - Accounts API: api/accounts.md

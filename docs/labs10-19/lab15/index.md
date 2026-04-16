@@ -1,18 +1,46 @@
 # Lab 15
 
+## Steps and Files
+
+1. [Config Server](#1-config-server)
+2. [@EnableConfigServer](#2-enableconfigserver)
+    - ConfigserverApplication.java
+3. [application.yml](#3-applicationyml)
+    - application.yml
+4. [YAML Config Files](#4-yaml-config-files)
+    - [Accounts YAML](#accounts-yaml)
+        - accounts.yml
+        - accounts-qa.yml
+        - accounts-prod.yml
+    - [Cards YAML](#cards-yaml)
+        - cards.yml
+        - cards-prod.yml
+        - cards-qa.yml
+    - [Loans YAML](#loans-yaml)
+        - loans.yml
+        - loans-qa.yml
+        - loans-prod.yml
+5. [Test](#5-test)
+
+---
+
 ## Lab#15 Getting started with SpringCloud Config
 
 Some parameters can be read with Springboot alone. However for anymore than trivial cases a Spring Cloud Config server is required. Using Spring Cloud Config, parameters can be read from the classpath, the file system or a git repo.
 
 In this lab we will be reading configurations from classpath location.
 
-### Step#1  Create a new project with artefact name “configserver”. Add configserver and actuator as dependencies.
+### 1. Config Server
+
+Step#1  Create a new project with artefact name “configserver”. Add configserver and actuator as dependencies.
  
 ![New Project](screenshot1.png)
 
     Figure 1. New Project
 
-### Step#2 Add the @EnableConfigServer annotation to the Application class.
+### 2. @EnableConfigServer
+
+Step#2 Add the @EnableConfigServer annotation to the Application class.
 
 ```java title="ConfigserverApplication.java" linenums="1"
 package com.tus.configserver;
@@ -32,7 +60,9 @@ public class ConfigserverApplication {
 }
 ```
 
-### Step#3 Update the application.properties for the configserver.
+### 3. application.yml
+
+Step#3 Update the application.properties for the configserver.
 
 ```yaml title="application.yaml" linenums="1"
 spring:
@@ -52,7 +82,9 @@ server:
 
 ---
 
-### Step#4 Add .yml files for all the microservices to the configserver, named as shown in a folder called config.
+### 4. YAML Config Files
+
+Step#4 Add .yml files for all the microservices to the configserver, named as shown in a folder called config.
 
 #### Accounts YAML
 
@@ -181,7 +213,9 @@ These .yml files only contain the profile specific attributes.
 
 ---
 
-### Step#5 Run the server and test. 
+### 5. Test
+
+Step#5 Run the server and test. 
 
 **Note**: the default values are also returned
  
@@ -220,15 +254,3 @@ These .yml files only contain the profile specific attributes.
 ![GET /loans/prod](screenshot6.png)
 
     Figure 6. GET http://localhost:8071/loans/prod
-
-
- 
-
- 
-
-
- 
-
-
-
-
