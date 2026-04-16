@@ -1,6 +1,6 @@
 build:
   version: "3.2"
-accounts:
+loans:
   message: "Welcome to loans related local APIs"
   contactDetails:
     name: "Anna Bloggs - Loans Developer"

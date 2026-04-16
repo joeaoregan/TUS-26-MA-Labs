@@ -24,10 +24,10 @@ import com.tus.loans.service.ILoansService;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
-import lombok.AllArgsConstructor;
+//import lombok.AllArgsConstructor;
 
 @RestController
-@RequestMapping(path = "/api/loans", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(path = "/api", produces = MediaType.APPLICATION_JSON_VALUE)
 //@AllArgsConstructor
 @Validated
 public class LoanController {

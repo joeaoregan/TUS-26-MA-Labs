@@ -1,8 +1,10 @@
 server:
   port: 9000
 spring:
+  application:
+    name: "cards"  
   profiles:
-    active: "qa"  # Profile to use
+    active: "prod"
   datasource:
     url: jdbc:h2:mem:testdb
     driverClassName: org.h2.Driver
@@ -16,30 +18,8 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
-build:
-  version: "2.1"
-# default profile (fall back)
-cards:
-  message: "Welcome to cards related local APIs"
-  contactDetails:
-    name: "Joe Bloggs - Cards Developer"
-    email: "joe@cards.ie"
-  onCallSupport:
-    - (086) 555-1234
-    - (087) 523-1345
-
-# qa profile
---- 
-spring:
   config:
-    activate:
-      on-profile: "qa"
-    import: "application_qa.yml"
-
-# prod profile 
----
-spring:
-  config:
-    activate:
-      on-profile: "prod"
-    import: "application_prod.yml"
+   import: "configserver:http://localhost:8071/" # config server port 8071
+  cloud:
+    compatibility-verifier:
+      enabled: false # disable version check

@@ -27,7 +27,7 @@ import jakarta.validation.constraints.Pattern; // Lab 7
 import org.springframework.validation.annotation.Validated;
 
 @RestController
-@RequestMapping(path = "/api/accounts", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(path = "/api", produces = MediaType.APPLICATION_JSON_VALUE)
 //@AllArgsConstructor
 @Validated
 public class AccountController {

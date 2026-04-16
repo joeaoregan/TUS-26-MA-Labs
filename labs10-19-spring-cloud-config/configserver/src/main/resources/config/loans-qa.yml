@@ -1,6 +1,6 @@
 build:
   version: "2.2"
-cards:
+loans:
   message: "Welcome to TUS loans related QA APIs"
   contactDetails:
     name: "John Murphy - Loans Owner"

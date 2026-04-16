@@ -8,3 +8,4 @@
 13. [Springboot Profiles](lab13/index.md)
 14. [Activating Springboot Profiles](lab14/index.md)
 15. [Getting started with SpringCloud Config](lab15/index.md)
+16. [Modifying the microservices to use the SpringCloud Config server](lab16/index.md)

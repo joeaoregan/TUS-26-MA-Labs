@@ -1,6 +1,6 @@
 build:
   version: "3.1"
-accounts:
+cards:
   message: "Welcome to cards related local APIs"
   contactDetails:
     name: "Joe Bloggs - Cards Developer"
