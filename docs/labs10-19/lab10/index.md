@@ -1,5 +1,18 @@
 # Lab 10
 
+## Steps and Files
+
+1. [application.yml Build Version](#1-applicationyml-build-version)  
+    - application.yml  
+2. [@Value Annotation](#2-value-annotation)  
+    - controller/AccountController.java  
+3. [@AllArgsConstructor](#3-allargsconstructor)  
+    - controller/AccountController.java  
+4. [Test](#4-test)
+    - Test using Postman
+
+---
+
 ## Lab#10 Configuration with Springboot alone
 
 ---
@@ -20,6 +33,8 @@ Properties are considered tin the following order
 - ServletConfig init parameters
 - Command line arguments
 ```
+
+### 1. application.yml Build Version
 
 ```yaml title="Add property to the application.yml"
 server:
@@ -43,6 +58,8 @@ build:
 ```
 
 Step 1: Add a property to the application.properties of the accounts microservice as shown above.
+
+### 2. @Value Annotation
 
 Step #2 Build a REST API to read the property and return to user. In the AccountController using the @Value annotation
 
@@ -72,6 +89,8 @@ public class AccountController {
 	}
 ```
 
+### 3. @AllArgsConstructor
+
 Step #3 We also need to remove the @AllArgsConstructor and include a single argument constructor.
 
 ```java title="Changing @AllArgsConstructor to single arg constructor"
@@ -91,9 +110,9 @@ public class AccountController {
 	private String buildVersion;
 ```
 
-Step 4: Test using Postman
+### 4. Test
 
-## Screenshot
+Step 4: Test using Postman
 
 ![Completed lab](screenshot.png)
 
