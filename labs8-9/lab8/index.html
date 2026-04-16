@@ -1025,6 +1025,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#steps-and-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Steps and Files
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#lab8-loans-microservice" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1349,6 +1360,62 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../labs10-19/lab15/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    15. Getting started with SpringCloud Config
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../labs10-19/lab16/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    16. Modifying the microservices to use the SpringCloud Config server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1554,6 +1621,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#steps-and-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Steps and Files
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#lab8-loans-microservice" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1641,56 +1719,156 @@
 
 
 <h1 id="restful-api-lab-8">RESTful API Lab 8</h1>
+<h2 id="steps-and-files">Steps and Files</h2>
+<p>Given:  </p>
+<ul>
+<li>schema.sql  </li>
+<li>constants/LoanConstants.java  </li>
+<li>service/ILoansService.java  </li>
+<li>service/impl/LoansServiceImpl.java  </li>
+<li>mapper/LoansMapper.java  </li>
+</ul>
+<hr />
+<ol>
+<li><a data-preview="" href="#creating-a-loan">Creating a Loan</a><ul>
+<li>service/impl/LoansServiceImpl.java</li>
+</ul>
+</li>
+<li><a data-preview="" href="#fetch-loan-details">Fetch loan details</a></li>
+<li><a data-preview="" href="#update-loan-details">Update Loan details</a><ul>
+<li>dto/LoansDto.java</li>
+</ul>
+</li>
+<li><a data-preview="" href="#delete-mapping">DELETE Mapping</a></li>
+</ol>
+<hr />
 <h2 id="lab8-loans-microservice">Lab#8 Loans MicroService</h2>
 <hr />
 <p>In this lab we will create a loans microservice, similar to the accounts service.</p>
-<p><img alt="Project Layout" src="1.png" /><br />
-<strong>Figure 1: Project Layout</strong>  </p>
+<p><img alt="Project Layout" src="1.png" /></p>
+<pre><code>Figure 1: Project Layout
+</code></pre>
 <p>Schema.sql, LoansConstants, ILoansService and LoansServiceImpl and LoansMapper files are given. Use port 8090 in the .yml file.</p>
 <hr />
 <h3 id="creating-a-loan">Creating a Loan</h3>
 <p>First create a customer as before using the accounts microservice.</p>
-<p><img alt="Create a customer" src="2.png" /> <br />
-<strong>Fig. 2 Create a customer</strong>  </p>
+<p><img alt="Create a customer" src="screenshot1.png" />   </p>
+<pre><code>Fig. 2 Create a customer
+</code></pre>
 <p>Now using the same mobile number create a loan. The mobile number supplied must be 10 digits long. A loan cannot already exist for the customer with given mobile number.</p>
-<p><img alt="Create a loan - Mobile number too short" src="3.png" /><br />
-<strong>Fig. 3 Create a loan - Mobile number too short</strong></p>
-<p><img alt="Create a loan -  Loan already exists for customer" src="4.png" /><br />
-<strong>Fig. 4 Create a loan -  Loan already exists for customer</strong></p>
-<p><img alt="Loan created success" src="5.png" /><br />
-<strong>Fig. 5 Loan created success.</strong></p>
-<p><img alt="Creating a loan – code in LoansServiceImpl" src="6.png" /><br />
-<strong>Fig. 6 Creating a loan – code in LoansServiceImpl</strong></p>
+<p><img alt="Create a loan - Mobile number too short" src="screenshot2.png" />  </p>
+<pre><code>Fig. 3 Create a loan - Mobile number too short
+</code></pre>
+<p><img alt="Create a loan -  Loan already exists for customer" src="screenshot4.png" />  </p>
+<pre><code>Fig. 4 Create a loan -  Loan already exists for customer
+</code></pre>
+<p><img alt="Loan created success" src="screenshot3.png" />  </p>
+<pre><code>Fig. 5 Loan created success.
+</code></pre>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Creating a loan – code in LoansServiceImpl</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">private</span><span class="w"> </span><span class="n">Loans</span><span class="w"> </span><span class="nf">createNewLoan</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">mobileNumber</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">Loans</span><span class="w"> </span><span class="n">newLoan</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Loans</span><span class="p">();</span>
+<span class="w">    </span><span class="kt">long</span><span class="w"> </span><span class="n">randomLoanNumber</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100000000000L</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Random</span><span class="p">().</span><span class="na">nextInt</span><span class="p">(</span><span class="mi">900000000</span><span class="p">);</span>
+<span class="w">    </span><span class="n">newLoan</span><span class="p">.</span><span class="na">setLoanNumber</span><span class="p">(</span><span class="n">Long</span><span class="p">.</span><span class="na">toString</span><span class="p">(</span><span class="n">randomLoanNumber</span><span class="p">));</span>
+<span class="w">    </span><span class="n">newLoan</span><span class="p">.</span><span class="na">setMobileNumber</span><span class="p">(</span><span class="n">mobileNumber</span><span class="p">);</span>
+<span class="w">    </span><span class="n">newLoan</span><span class="p">.</span><span class="na">setLoanType</span><span class="p">(</span><span class="n">LoansConstants</span><span class="p">.</span><span class="na">HOME_LOAN</span><span class="p">);</span>
+<span class="w">    </span><span class="n">newLoan</span><span class="p">.</span><span class="na">setTotalLoan</span><span class="p">(</span><span class="n">LoansConstants</span><span class="p">.</span><span class="na">NEW_LOAN_LIMIT</span><span class="p">);</span>
+<span class="w">    </span><span class="n">newLoan</span><span class="p">.</span><span class="na">setAmountPaid</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="w">    </span><span class="n">newLoan</span><span class="p">.</span><span class="na">setOutstandingAmount</span><span class="p">(</span><span class="n">LoansConstants</span><span class="p">.</span><span class="na">NEW_LOAN_LIMIT</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">newLoan</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
 <p>The loan is create using default values as shown and the number is generated as shown</p>
 <hr />
 <h3 id="fetch-loan-details">Fetch loan details</h3>
-<p><img alt="Fetching loan details - success" src="7.png" /><br />
-<strong>Fig. 7 Fetching loan details - success</strong></p>
-<p><img alt="Fetching loan - mobile number not 10 digits" src="8.png" /><br />
-<strong>Fig. 8 Fetching loan - mobile number not 10 digits</strong></p>
-<p><img alt="Fetching loan – no loan for given mobile number" src="9.png" /><br />
-<strong>Fig. 9 Fetching loan – no loan for given mobile number</strong></p>
+<p><img alt="Fetching loan details - success" src="screenshot5.png" />  </p>
+<pre><code>Fig. 6 Fetching loan details - success
+</code></pre>
+<p><img alt="Fetching loan - mobile number not 10 digits" src="screenshot6.png" />  </p>
+<pre><code>Fig. 7 Fetching loan - mobile number not 10 digits
+</code></pre>
+<p><img alt="Fetching loan – no loan for given mobile number" src="screenshot7.png" />  </p>
+<pre><code>Fig. 8 Fetching loan – no loan for given mobile number
+</code></pre>
 <hr />
 <h3 id="update-loan-details">Update Loan details</h3>
-<p><img alt="Updating loan –loan details updated successfully" src="10.png" /><br />
-<strong>Fig. 10 Updating loan –loan details updated successfully</strong></p>
-<p><img alt="Fetch updated values –loan details updated" src="11.png" /><br />
-<strong>Fig. 11 Fetch updated values –loan details updated</strong></p>
-<p><img alt="Updating loan –validation errors in data" src="12.png" /><br />
-<strong>Fig. 12 Updating loan –validation errors in data</strong></p>
+<p><img alt="Updating loan –loan details updated successfully" src="screenshot8.png" />  </p>
+<pre><code>Fig. 9 Updating loan –loan details updated successfully
+</code></pre>
+<p><img alt="Fetch updated values – loan details updated" src="screenshot9.png" />  </p>
+<pre><code>Fig. 10 Fetch updated values – loan details updated
+</code></pre>
+<p><img alt="Updating loan –validation errors in data" src="screenshot10.png" />  </p>
+<pre><code>Fig. 11 Updating loan –validation errors in data
+</code></pre>
 <p>See LoansDto for error example</p>
-<p><img alt="Handling errors in LoansDto" src="13.png" /><br />
-<strong>Fig. 13 Handling errors in LoansDto</strong></p>
-<p><img alt="Update loan - Mobile number not 10 digits" src="14.png" /><br />
-<strong>Fig. 14 Update loan - Mobile number not 10 digits</strong></p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Handling errors in LoansDto - LoansDto.java</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@Data</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">LoansDto</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@NotEmpty</span><span class="p">(</span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;MobileNumber cannot be null or empty&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nd">@Pattern</span><span class="p">(</span><span class="n">regexp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;(^$|[0-9]{10})&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Mobile Number must be 10 digits&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">mobileNumber</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nd">@NotEmpty</span><span class="p">(</span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;LoanNumber cannot be null or empty&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nd">@Pattern</span><span class="p">(</span><span class="n">regexp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;(^$|[0-9]{12})&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;LoanNumber must be 12 digits&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">loanNumber</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nd">@NotEmpty</span><span class="p">(</span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;LaonType cannot be null or empty&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">loanType</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nd">@Positive</span><span class="p">(</span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Total loan amount should be greater than zero&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Integer</span><span class="w"> </span><span class="n">totalLoan</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nd">@PositiveOrZero</span><span class="p">(</span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Total loan amount paid should be equal or greater than zero&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Integer</span><span class="w"> </span><span class="n">amountPaid</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nd">@PositiveOrZero</span><span class="p">(</span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Total outstanding amount should be equal or greater than zero&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Integer</span><span class="w"> </span><span class="n">outstandingAmount</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p><img alt="Update loan - Mobile number not 10 digits" src="screenshot11.png" />  </p>
+<pre><code>Fig. 12 Update loan - Mobile number not 10 digits
+</code></pre>
 <hr />
 <h3 id="delete-mapping">DELETE Mapping</h3>
-<p><img alt="Deleting a loan" src="15.png" /><br />
-<strong>Fig. 15 Deleting a loan</strong></p>
-<p><img alt="Deleting a loan – mobile number too short" src="16.png" /><br />
-<strong>Fig. 16 Deleting a loan – mobile number too short</strong></p>
-<p><img alt="Deleting a loan – loan with mobile number not found" src="17.png" /><br />
-<strong>Fig. 17 Deleting a loan – loan with mobile number not found</strong></p>
+<p><img alt="Deleting a loan" src="screenshot12.png" />  </p>
+<pre><code>Fig. 13 Deleting a loan
+</code></pre>
+<p><img alt="Deleting a loan – mobile number too short" src="screenshot13.png" />  </p>
+<pre><code>Fig. 14 Deleting a loan – mobile number too short
+</code></pre>
+<p><img alt="Deleting a loan – loan with mobile number not found" src="screenshot14.png" />  </p>
+<pre><code>Fig. 15 Deleting a loan – loan with mobile number not found
+</code></pre>
 
 
 

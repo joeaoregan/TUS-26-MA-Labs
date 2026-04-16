@@ -1168,6 +1168,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#steps-and-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Steps and Files
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#lab10-configuration-with-springboot-alone" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1176,16 +1187,55 @@
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#screenshot" class="md-nav__link">
+    <nav class="md-nav" aria-label="Lab#10 Configuration with Springboot alone">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-applicationyml-build-version" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Screenshot
+        1. application.yml Build Version
       
     </span>
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-value-annotation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. @Value Annotation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-allargsconstructor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. @AllArgsConstructor
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Test
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1297,6 +1347,62 @@
     
   
     14. Activating Springboot Profiles
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lab15/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    15. Getting started with SpringCloud Config
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lab16/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    16. Modifying the microservices to use the SpringCloud Config server
   
 
     
@@ -1515,6 +1621,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#steps-and-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Steps and Files
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#lab10-configuration-with-springboot-alone" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1523,16 +1640,55 @@
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#screenshot" class="md-nav__link">
+    <nav class="md-nav" aria-label="Lab#10 Configuration with Springboot alone">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-applicationyml-build-version" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Screenshot
+        1. application.yml Build Version
       
     </span>
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-value-annotation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. @Value Annotation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-allargsconstructor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. @AllArgsConstructor
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Test
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1563,12 +1719,32 @@
 
 
 <h1 id="lab-10">Lab 10</h1>
+<h2 id="steps-and-files">Steps and Files</h2>
+<ol>
+<li><a href="#1-applicationyml-build-version">application.yml Build Version</a>  <ul>
+<li>application.yml  </li>
+</ul>
+</li>
+<li><a href="#2-value-annotation">@Value Annotation</a>  <ul>
+<li>controller/AccountController.java  </li>
+</ul>
+</li>
+<li><a href="#3-allargsconstructor">@AllArgsConstructor</a>  <ul>
+<li>controller/AccountController.java  </li>
+</ul>
+</li>
+<li><a href="#4-test">Test</a><ul>
+<li>Test using Postman</li>
+</ul>
+</li>
+</ol>
+<hr />
 <h2 id="lab10-configuration-with-springboot-alone">Lab#10 Configuration with Springboot alone</h2>
 <hr />
 <p>In this lab we will read configurations using Springboot with @Value annotation in the accounts microservice. We add in a build property in the .yml file.</p>
 <div class="highlight"><span class="filename">Order of precedence</span><pre><span></span><code>Spring Boot uses a very particular order that is  
 designed to allow sensible overriding of values.  
-Properties are considered tin the following order  
+Properties are considered in the following order  
 (with values form lower items overriding earlier ones): 
 
 <span class="k">-</span><span class="w"> </span>Properties present inside files like application.properties
@@ -1579,6 +1755,7 @@ Properties are considered tin the following order
 <span class="k">-</span><span class="w"> </span>ServletConfig init parameters
 <span class="k">-</span><span class="w"> </span>Command line arguments
 </code></pre></div>
+<h3 id="1-applicationyml-build-version">1. application.yml Build Version</h3>
 <div class="highlight"><span class="filename">Add property to the application.yml</span><pre><span></span><code><span class="nt">server</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8081</span>
 <span class="nt">spring</span><span class="p">:</span>
@@ -1599,6 +1776,7 @@ Properties are considered tin the following order
 <span class="w">  </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;3.0&quot;</span>
 </code></pre></div>
 <p>Step 1: Add a property to the application.properties of the accounts microservice as shown above.</p>
+<h3 id="2-value-annotation">2. @Value Annotation</h3>
 <p>Step #2 Build a REST API to read the property and return to user. In the AccountController using the @Value annotation</p>
 <div class="highlight"><span class="filename">Add property with @Value annotation in the AccountController</span><pre><span></span><code><span class="nd">@Validated</span>
 <span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">AccountController</span><span class="w"> </span><span class="p">{</span>
@@ -1622,6 +1800,7 @@ Properties are considered tin the following order
 <span class="w">        </span><span class="p">.</span><span class="na">body</span><span class="p">(</span><span class="n">buildVersion</span><span class="p">);</span>
 <span class="w">    </span><span class="p">}</span>
 </code></pre></div>
+<h3 id="3-allargsconstructor">3. @AllArgsConstructor</h3>
 <p>Step #3 We also need to remove the @AllArgsConstructor and include a single argument constructor.</p>
 <div class="highlight"><span class="filename">Changing @AllArgsConstructor to single arg constructor</span><pre><span></span><code><span class="nd">@RestController</span>
 <span class="nd">@RequestMapping</span><span class="p">(</span><span class="n">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/api&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">produces</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MediaType</span><span class="p">.</span><span class="na">APPLICATION_JSON_VALUE</span><span class="p">)</span>
@@ -1638,8 +1817,8 @@ Properties are considered tin the following order
 <span class="w">    </span><span class="nd">@Value</span><span class="p">(</span><span class="s">&quot;${build.version}&quot;</span><span class="p">)</span>
 <span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">buildVersion</span><span class="p">;</span>
 </code></pre></div>
+<h3 id="4-test">4. Test</h3>
 <p>Step 4: Test using Postman</p>
-<h2 id="screenshot">Screenshot</h2>
 <p><img alt="Completed lab" src="screenshot.png" /></p>
 <pre><code>Figure 1: Test using Postman
 </code></pre>
