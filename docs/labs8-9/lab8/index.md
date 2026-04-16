@@ -1,5 +1,26 @@
 # RESTful API Lab 8
 
+## Steps and Files
+
+Given:  
+
+- schema.sql  
+- constants/LoanConstants.java  
+- service/ILoansService.java  
+- service/impl/LoansServiceImpl.java  
+- mapper/LoansMapper.java  
+
+---
+
+1. [Creating a Loan](#creating-a-loan)
+    - service/impl/LoansServiceImpl.java
+2. [Fetch loan details](#fetch-loan-details)
+3. [Update Loan details](#update-loan-details)
+    - dto/LoansDto.java
+4. [DELETE Mapping](#delete-mapping)
+
+---
+
 ## Lab#8 Loans MicroService
 
 ---
