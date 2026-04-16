@@ -1,5 +1,32 @@
 # RESTful API Lab 6
 
+## Steps and Files Used
+
+### [Part 1 Update API](#part-1-update-api_1)
+[Step 1: updateAccount](#1-updateaccount)  
+- service/IAccountService.java   
+[Step 2: Implement updateAccount](#2-implement-updateaccount)  
+- service/impl/AccountServiceImpl.java  
+[Step 3: Controller PUT Endpoint](#3-controller-put)  
+- controller/AccountsController.java  
+[Step 4: Constants](#4-constants)  
+- constants/AccountsConstants.java  
+[Step 5: Test the API](#5-test-the-api)  
+- Test using Postman and H2 database
+
+### [Part 2 Adding the DELETE API](#part2-adding-the-delete-api)
+[Step 1: deleteAccount](#1-deleteaccount)  
+- service/IAccountsService.java  
+[Step 2: Implement deleteAccount](#2-implement-deleteaccount)  
+- service/impl/AccountServiceImpl.java  
+- repository/AccountsRepository.java  
+[Step 3: Controller Delete Endpoint](#3-controller-delete-endpoint)  
+- controller/AccountsController.java  
+[Step 4: Test the API](#4-test-the-api)  
+- Test using Postman and H2 database  
+
+---
+
 ## Lab#6 RESTfulAPI for Updating and Deleting customer accounts.
 ---
 In this lab we will complete the RESTful API CRUD actions by adding the Update and Delete parts. 
@@ -7,7 +34,9 @@ In this lab we will complete the RESTful API CRUD actions by adding the Update a
 ### Part 1 Update API
 **Note**:- All data can be updated except the accountNumber
 
-#### 1.	Update the service interface with the updateAccount method.
+#### 1.	updateAccount
+
+Update the service interface with the updateAccount method.
 
 ```java title="" linenums="1"
 package com.tus.accounts.service;
@@ -21,7 +50,9 @@ public interface IAccountsService {
 }
 ```
 
-#### 2.	Implement the updateAccount method. The ResourceNotFoundException is thrown if the account is not found or the customer is not found.
+#### 2.	Implement updateAccount
+
+Implement the updateAccount method. The ResourceNotFoundException is thrown if the account is not found or the customer is not found.
 
 ```java title="AccountsService.java updateAccount()" linenums="1"
 @Override
@@ -46,7 +77,9 @@ public interface IAccountsService {
     }
 ```
 
-#### 3.	Update the controller with the end point for updating. For now we are returning internal server error if something goes wrong. Check that the codes are in the AccountsConstants.
+#### 3.	Controller PUT
+
+Update the controller with the end point for updating. For now we are returning internal server error if something goes wrong. Check that the codes are in the AccountsConstants.
 
 ```java title="AccountsController.java updateAccountDetails()" linenums="1"
 @PutMapping("/accounts")
@@ -64,7 +97,9 @@ public ResponseEntity<ResponseDto> updateAccountDetails(@RequestBody CustomerDto
 }
 ```
 
-#### 4.	Add the constants if necessary.
+#### 4.	Constants
+
+Add the constants if necessary.
 
 ```java title="AccountsConstants.java" linenums="1"
 public final class AccountsConstants {
@@ -86,7 +121,9 @@ public final class AccountsConstants {
 }
 ```
 
-#### 5.	Test the API. First add a customer account. Then fetch the data based on the mobile number. Now use the PUT method and update some of the attributes. Check in the database that the values have been updated.
+#### 5.	Test the API
+
+Test the API. First add a customer account. Then fetch the data based on the mobile number. Now use the PUT method and update some of the attributes. Check in the database that the values have been updated.
 
 ![Test API Add Customer Account](screenshot1.png)
 
@@ -104,9 +141,13 @@ public final class AccountsConstants {
 
     Figure 4. Test API Check Database
 
+---
+
 ### Part#2 Adding the DELETE API
 
-#### 1.	Update the service interface with the deleteAccount method.
+#### 1.	deleteAccount
+
+Update the service interface with the deleteAccount method.
 
 ```java title="Update Service Interface: IAccountsService" linenums="5"
 public interface IAccountsService {
@@ -117,7 +158,9 @@ public interface IAccountsService {
 }
 ```
 
-#### 2.	Implement the deleteAccount method in the Service Implementation class. The ResourceNotFoundException is thrown if the customer is not found. The method deleteByCustomerId should be added to the AccountsRepository interface.
+#### 2.	Implement deleteAccount
+
+Implement the deleteAccount method in the Service Implementation class. The ResourceNotFoundException is thrown if the customer is not found. The method deleteByCustomerId should be added to the AccountsRepository interface.
 
 ```java title="Implement deleteAccount: AccountsService.java deleteAccount()" linenums="1"
 @Override
@@ -137,7 +180,9 @@ public boolean deleteAccount(String mobileNumber) {
 }
 ```
 
-#### 3.	Finally update the controller to add the delete endpoint. Again internal serer error is thrown for now if the customer or account is not found.
+#### 3.	Controller Delete Endpoint
+
+Finally update the controller to add the delete endpoint. Again internal serer error is thrown for now if the customer or account is not found.
 
 ```java title="Add Delete Endpoint: AccountsController.java deleteAccount()" linenums="1"
 @DeleteMapping()
@@ -155,7 +200,9 @@ public ResponseEntity<ResponseDto> deleteAccountDetails(@RequestParam String mob
 }
 ```
 
-#### 4.	Finally test the API. Add a customer. Fetch the details and check the database. Now use the DELETE method to delete the customer and their account. Check the database again and it should be empty.
+#### 4.	Test the API
+
+Finally test the API. Add a customer. Fetch the details and check the database. Now use the DELETE method to delete the customer and their account. Check the database again and it should be empty.
 
 ![Test API Add Customer](screenshot5.png)
 

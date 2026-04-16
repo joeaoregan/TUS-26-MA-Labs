@@ -1,6 +1,32 @@
 # RESTful API Lab 3
 
+## Files
+
+src/main/java/com/tus/accounts
+
+1. [AccountsConstants](#1-accountsconstants)  
+    - /constants/AccountConstants.java  
+2. [AccountController POST](#2-accountcontroller-post)  
+    - /controller/AccountController.java  
+3. [Service & ServiceImpl](#3-service-serviceimpl)  
+    - /service/IAccountsService.java  
+    - /service/impl/AccountsServiceImpl.java  
+4. [AccountsMapper & CustomerMapper](#4-accountsmapper-customermapper)  
+    - /mapper/AccountsMapper.java  
+    - /mapper/CustomerMapper.java  
+5. [AccountsServiceImpl createAccount](#5-accountsserviceimpl-createaccount)
+    - /service/IAccountsService.java  
+    - /service/impl/AccountsServiceImpl.java  
+6. [Controller - Call Service Layer](#6-controller-call-service-layer)
+    /AccountController.java  
+7. [H2 Console Table](#7-h2-console-table)
+8. [Postman](#8-postman)
+9. [H2 Console Data](#9-h2-console-data)
+
+---
+
 ## Lab#3 Building a Rest API to support the creation of a new account and customer details.
+
 In this lab we are creating the API that will allow the creation of a new account and customer.
 
 ---
@@ -10,11 +36,15 @@ Note: If you have problems with Lombok
 
 ---
 
-### 1.	Add class AccountsConstants provided to a new package com.tus.accounts.constants. This class will store error messages.
+### 1.	AccountsConstants
+
+Add class AccountsConstants provided to a new package com.tus.accounts.constants. This class will store error messages.
  
 ![Accounts Constant](1.png)
 
-### 2.	Update the AccountController class for the PostMapping as shown. You can add /accounts to the PostMapping path
+### 2.	AccountController POST
+
+Update the AccountController class for the PostMapping as shown. You can add /accounts to the PostMapping path
  
 ``` java title="AccountController.java"
 
@@ -30,7 +60,9 @@ public class AccountController {
     }
 ```
 
-### 3.	Add a packages service and serviceImpl. These will hold the interface for the Service layer and its implementation. Note: don’t need to use @Autowired in Springboot 3.
+### 3.	Service & ServiceImpl
+
+Add a packages service and serviceImpl. These will hold the interface for the Service layer and its implementation. Note: don’t need to use @Autowired in Springboot 3.
 
 ![Service](3a.png)
 
@@ -68,7 +100,9 @@ public class AccountsServiceImpl implements IAccountsService {
 }
 ```
 
-### 4.	We will now create a mapper class (code given) for AccountsMapper and CustomerMapper. This is to map data between the Entity classes and the DTO classes.
+### 4.	AccountsMapper & CustomerMapper
+
+We will now create a mapper class (code given) for AccountsMapper and CustomerMapper. This is to map data between the Entity classes and the DTO classes.
  
 ```java title="CustomerMapper.java" linenums="1"
 package com.tus.accounts.mapper;
@@ -116,7 +150,9 @@ public class AccountsMapper {
 }
 ```
 
-### 5.	Update the AccountsServiceImpl with the method for creating a new account base on a CustomerDto object.
+### 5.	AccountsServiceImpl createAccount
+
+Update the AccountsServiceImpl with the method for creating a new account base on a CustomerDto object.
  
 ```java title="AccountsServiceImpl.java" linenums="1"
 import lombok.AllArgsConstructor;
@@ -163,7 +199,9 @@ public class AccountsServiceImpl implements IAccountsService {
 }
 ```
 
-### 6.	Update the controller to call the service layer
+### 6.	Controller - Call Service Layer
+
+Update the controller to call the service layer
  
 ```java title=""" linenums="17"
 @RestController
@@ -184,11 +222,15 @@ public class AccountController {
 }
 ```
 
-### 7.	Run the project and check the h2-console. The tables should be created and empty.
+### 7.	H2 Console Table
+
+Run the project and check the h2-console. The tables should be created and empty.
  
 ![H2 Console](7.png)
 
-### 8.	Create a new customer from postman. You should get response code 201 and message as shown below.
+### 8.	Postman
+
+Create a new customer from postman. You should get response code 201 and message as shown below.
  
 ```json title="POST http://localhost:8080/api/accounts"
 {
@@ -200,7 +242,9 @@ public class AccountController {
 
 ![Postman Create New Customer](screenshot1.png)
 
-### 9.	Check that the data has been written to the database
+### 9.	H2 Console Data
+
+Check that the data has been written to the database
  
 ![Check Data in Database](9.png)
 

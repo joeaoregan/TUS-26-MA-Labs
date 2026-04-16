@@ -1,12 +1,34 @@
 # RESTful API Lab 5
 
+## Steps and Files Used
+
+1. [Check Customer Exists](#1-check-customer-exists)  
+    - repository/AccountsRepository.java  
+2. [ResourceNotFoundException](#2-resourcenotfoundexception)  
+    - exception/ResourceNotFoundException.java  
+3. [GlobalLogicExceptionHandler](#3-globallogicexceptionhandler)  
+    - exception/GlobalLogicExceptionHandler.java  
+4. [CustomerDto Account Info](#4-customerdto-account-info)  
+    - dto/CustomerDto.java  
+5. [Controller Read API](#5-controller-read-api)  
+    - controller/AccountsController.java  
+6. [fetchAccount()](#6-fetchaccount)  
+    - service/IAccountService.java  
+    - service/impl/AccountServiceImpl.java  
+7. [Test in Postman](#7-test-in-postman)  
+    - Test using Postman
+
+---
+
 ## Lab#5 Implementing a READ API that fetches the details based on mobile number.
 
 ---
 
 In this lab we are going to fetch the customer and account details based on the customers mobile number. We will find the customer object base on the mobile number. Then we will find the account based on the customer id. The account data is returned as part of the CustomerDto object. The case where a customer does not exist is handled with exceptions.
 
-### 1.	First we need to add a check to see if customer already exists. Add the method findByCustomerId in AccountsRepository interface.
+### 1. Check Customer Exists
+
+First we need to add a check to see if customer already exists. Add the method findByCustomerId in AccountsRepository interface.
 
 ```java title="AccountsRepository.java" linenums="1"
 @Repository
@@ -20,7 +42,9 @@ public interface AccountsRepository extends JpaRepository<Accounts, Long> {
 }
 ```
 
-### 2.	Add a new ResourceNotFoundException the com.tus.accounts.exception package.
+### 2.	ResourceNotFoundException
+
+Add a new ResourceNotFoundException the com.tus.accounts.exception package.
 
 ```java title="ResourceNotFoundException.java" linenums="1"
 package com.tus.accounts.exception;
@@ -38,7 +62,10 @@ public class ResourceNotFoundException extends RuntimeException {
 }
 ```
 
-### 3.	Update GlobalLogicExceptionHandler to handle the exception and return an appropriate ErrorResponseDto.
+### 3.	GlobalLogicExceptionHandler
+
+
+Update GlobalLogicExceptionHandler to handle the exception and return an appropriate ErrorResponseDto.
 
 ```java title="GlobalLogicExceptionHandler.java" linenums="25"
 @ExceptionHandler(ResourceNotFoundException.class)
@@ -54,7 +81,9 @@ public ResponseEntity<ErrorResponseDto> handleResourceNotFoundExceptoin(Resource
 }
 ```
 
-### 4.	Update the CustomerDto to add a new field to keep the account information. We could create a new Dto for the combined Customer and Account information but will leave like this for now.
+### 4.	CustomerDto Account Info
+
+Update the CustomerDto to add a new field to keep the account information. We could create a new Dto for the combined Customer and Account information but will leave like this for now.
 
 ```java title="CustomerDto.java" linenums="1"
 package com.tus.accounts.dto;
@@ -74,7 +103,9 @@ public class CustomerDto {
 }
 ```
 
-### 5.	Add a new method to the controller class for the read API.
+### 5.	Controller Read API
+
+Add a new method to the controller class for the read API.
 
 ```java title="AccountsController.java fetchAccountDetails()" linenums="1"
 @GetMapping("/account")
@@ -85,7 +116,9 @@ public ResponseEntity<CustomerDto> fetchAccountDetails(
 }
 ```
  
-### 6.	Implement the fetchAccount method by adding to the Service Interface and the implementation class. This uses Lambda expressions to throw the exception.
+### 6.	fetchAccount
+
+Implement the fetchAccount method by adding to the Service Interface and the implementation class. This uses Lambda expressions to throw the exception.
 
 ```java title="IAccountService.java" linenums="3"
 import com.tus.accounts.dto.CustomerDto;
@@ -110,7 +143,9 @@ public interface IAccountsService {
     }
 ```
 
-### 7.	Test the Application. Add a customer and then fetch the details as shown. Then use a different phone number and check that the 404 response with appropriate error message is found. 
+### 7.	Test in Postman
+
+Test the Application. Add a customer and then fetch the details as shown. Then use a different phone number and check that the 404 response with appropriate error message is found. 
 
 ![Test customer found](screenshot1.png)
 

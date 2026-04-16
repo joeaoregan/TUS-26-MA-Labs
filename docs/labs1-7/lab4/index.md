@@ -1,12 +1,28 @@
 # RESTful API Lab 4
 
+## Steps and Files
+
+1. [CustomerAlreadyExistsException](#1-customeralreadyexistsexception)
+    - exception/CustomerAlreadyExistsException.java  
+2. [CustomerRepository findByMobileNumber](#2-customerrepository-findbymobilenumber) 
+    - repository/CustomerRepository.java  
+3. [IAccountsService CustomerAlreadyExistsException](#3-iaccountsservice-customeralreadyexistsexception)  
+    - service/AccountsService.java  
+4. [GlobalExceptionHandler](#4-globalexceptionhandler)  
+    - exception/GlobalExceptionHandler.java  
+5. [Test the application](#5-test-the-application)
+
+---
+
 ## Lab#4 Exception Handling –check if customer already exists
 
 ---
 
 The customers mobile phone number must be unique. In this lab we will check if a customer with the given phone number already exists and we will reject the request accordingly.
 
-### 1.	Add a package com.tus.accounts.exception with a class CustomerAlreadyExistsException
+### 1.	CustomerAlreadyExistsException
+
+Add a package com.tus.accounts.exception with a class CustomerAlreadyExistsException
 
 ![Exception package](1a.png)
 
@@ -26,7 +42,9 @@ public class CustomerAlreadyExistsException extends RuntimeException {
 }
 ```
 
-### 2.	In the CustomerRepository interface add a query to find a Customer based on the mobile number. (This may be in your file already).
+### 2.	CustomerRepository findByMobileNumber
+
+In the CustomerRepository interface add a query to find a Customer based on the mobile number. (This may be in your file already).
 
 ```java title="CustomerRepository.java" linenums="1"
 package com.tus.accounts.repository;
@@ -42,7 +60,9 @@ public interface CustomerRepository extends JpaRepository<Customer, Long> {
 }
 ```
 
-### 3.	Now in the Service class add code that will throw the CustomerAlreadyExistsException.
+### 3.	IAccountsService CustomerAlreadyExistsException
+
+Now in the Service class add code that will throw the CustomerAlreadyExistsException.
 
 ```java title="" linenums="1"
 public void createAccount(CustomerDto customerDto) {
@@ -63,7 +83,9 @@ public void createAccount(CustomerDto customerDto) {
 
 ```
 
-### 4.	Add a class in the exception package called GlobalExceptionHandler. This will handle exceptions in one location rather than duplicating the handlng. It is annotated with @ControllerAdvice and will handle the exception when thrown by the controller.
+### 4.	GlobalExceptionHandler
+
+Add a class in the exception package called GlobalExceptionHandler. This will handle exceptions in one location rather than duplicating the handlng. It is annotated with @ControllerAdvice and will handle the exception when thrown by the controller.
 
 ```java title="GlobalExceptionHandler.java" linenums="1"
 package com.tus.accounts.exception;
@@ -90,7 +112,9 @@ public class GlobalExceptionHandler {
 }
 ```
 
-### 5.	Test the application. Add a customer. Customer is created successfully. Then add a customer with the same mobile number again. The request is rejected with error message as shown.
+### 5.	Test the application
+
+Add a customer. Customer is created successfully. Then add a customer with the same mobile number again. The request is rejected with error message as shown.
 
 ![Test Application 201 Created](screenshot1.png)
 

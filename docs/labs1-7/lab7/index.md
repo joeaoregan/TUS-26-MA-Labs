@@ -1,5 +1,40 @@
 # RESTful API Lab 7
 
+## Steps and Files
+
+### [Part#1 GlobalExceptionHandler](#part-1-globalexceptionhandler)
+[1. Handle All Exceptions](#handle-all-exceptions)  
+- GlobalExceptionHandler  
+- AccountController  
+[2. Test Using the Exception](#test-using-the-exception)  
+### [Part#2 Validating the input data](#part2-validating-the-input-data_1)
+[1. Dependencies](#dependencies)  
+- pom.xml  
+[2. CustomerDto validations](#customerdto-validations)  
+- dto/CustomerDto.java  
+[3. AccountsDto validations](#accountsdto-validations)  
+- dto/AccountsDto.java   
+[4. @Validated](#validated)  
+- controller/AccountController.java  
+[5. @Valid](#valid)  
+- controller/AccountsController.java  
+[6. @Pattern](#pattern)  
+- controller/AccountController.java  
+[7. GlobalExceptionHandler extends ResponseEntityExceptionHandler](#globalexceptionhandler-extends-responseentityexceptionhandler)  
+- exception/GlobalExceptionHandler.java   
+[8. GlobalExceptionHandler handleMethodArgumentNotValid](#globalexceptionhandler-handlemethodargumentnotvalid)  
+- exception/GlobalExceptionHandler.java  
+[9. Test email and mobile number](#test-email-and-mobile-number)  
+### [Part#3 Completing the audit metadata](#part3-completing-the-audit-metadata_1)
+[1. BaseEntity Annotation](#baseentity-annotation)  
+[2. AuditAwareImpl](#auditawareimpl)  
+[3. BaseEntity Annotations](#baseentity-annotations)  
+[4. JpaAuditing Annotation](#jpaauditing-annotation)  
+[5. Delete Manually Created Fields](#delete-manually-created-fields)  
+[6. Test in Postman](#test-in-postman)  
+
+---
+
 ## Lab#7 Exceptions , Data Validations and Audit Columns
 
 --- 
@@ -7,6 +42,8 @@
 In this lab we will complete the RESTful API CRUD actions by adding the Update and Delete parts. 
 
 ### Part 1 GlobalExceptionHandler
+
+#### Handle All Exceptions
 
 Currently we are only handling two exceptions here. We add a new method that handles all types of exceptions. (e,g runtime expections). To test this exception, delete the @AllArgsConstructor from the AccountController class.With only the default constructor,autowiring will not happen and the the AccountsService will be null.
 
@@ -32,16 +69,23 @@ public class AccountController {
     private IAccountsService iAccountsService;
 ```
 
+#### Test Using the Exception
+
 Test using the exception.
 
 ![Test Exception in Postman](screenshot1.png)
 
     Figure 1. Test Exception in Postman.  
 
+---
 
-Put the @AllArgsConstructor back in.
+**Note**:- Put the @AllArgsConstructor back in.
+
+---
 
 ### Part#2 Validating the input data
+
+#### Dependencies
 
 1.	We need to validate the data we are receiving from the user. Make sure the relevant dependency is in the pom.xml .
 
@@ -51,6 +95,8 @@ Put the @AllArgsConstructor back in.
     <artifactId>spring-boot-starter-validation</artifactId>
 </dependency>
 ```
+
+#### CustomerDto validations
 
 2.	Now go to the Dto classes – Customer Dto and add validations
 
@@ -83,6 +129,8 @@ public class CustomerDto {
 }
 ```
 
+#### AccountsDto validations
+
 3.	Similarly add validations in the AccountsDto
 
 ```java title="Accounts DTO add validations: AccountsDto.java" linenums="1"
@@ -109,6 +157,8 @@ public class AccountsDto {
 }
 ```
 
+#### @Validated
+
 This data is received in the AccountController class. Add the @Validated annotation.
 
 ```java title="@Validated Annotation: AccountsController.java" linenums="22"
@@ -123,9 +173,11 @@ public class AccountController {
     private IAccountsService iAccountsService;
 ```
 
+#### @Valid
+
 Add the @Valid annotation for the POST and PUT mappings
 
-```java "@Validated Annotation for POST: AccountsController.java"
+```java title="@Valid Annotation for POST: AccountsController.java"
 import jakarta.validation.Valid;
 
 @RestController
@@ -141,12 +193,14 @@ public class AccountController {
         iAccountsService.createAccount(customerDto);
 ```
 
-```java "@Validated Annotation for PUT: AccountsController.java"
+```java title="@Valid Annotation for PUT: AccountsController.java"
 @PutMapping("/accounts")
 public ResponseEntity<ResponseDto> updateAccountDetails(@Valid @RequestBody CustomerDto customerDto) {
     boolean isUpdated = iAccountsService.updateAccount(customerDto);
     if (isUpdated) {
 ```
+
+#### @Pattern
 
 For the GET mapping we can validation the mobilenumber using the @Pattern
 @Pattern(regexp = "(^$|[0-9]{10})", message = "Mobile number must be 10 digits")
@@ -169,6 +223,8 @@ public ResponseEntity<ResponseDto> deleteAccountDetails(@RequestParam
     if (isDeleted) {
 ```
 
+#### GlobalExceptionHandler extends ResponseEntityExceptionHandler
+
 Now in the GlobalExceptionHandler we need to update the class so that is extends the ResponseEntityExceptionHandler and add a method handleMethodArgumentNotValid so that it knows how to return the error to the client.
 
 ```java title="GlobalExceptionHandler extends ResponseEntityExceptionHandler"
@@ -182,6 +238,8 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 	public ResponseEntity<ErrorResponseDto> handleGlobalException(Exception exception, WebRequest webRequest) {
 ```
 
+#### GlobalExceptionHandler handleMethodArgumentNotValid
+
 Add the method handleMethodArgumentNotValid method. This will give process all validations. The map will hold all the validation errors that occurred in the input data.
 
 ```java title="Import FieldError"
@@ -191,7 +249,7 @@ import org.springframework.validation.FieldError;
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 ```
 
-```java title="GlobalExceptionHanlder handleMethodArgumentNotValid()"
+```java title="GlobalExceptionHandler handleMethodArgumentNotValid()"
 @Override
 protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
         HttpHeaders headers, HttpStatusCode status, WebRequest request) {
@@ -207,6 +265,8 @@ protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotV
     return new ResponseEntity<>(validationErrors, HttpStatus.BAD_REQUEST);
 }
 ```
+
+#### Test email and mobile number
 
 To test, go to Postman, remove @ from email, put mobile number as 9 or less digits and make name one character.
 
@@ -224,7 +284,11 @@ Test the validation on the GET mapping
 
     Figure 4. Test mobile number.
 
+---
+
 ### Part#3 Completing the audit metadata.
+
+#### BaseEntity Annotation
 
 These metadata columns can be updated automatically by Spring Data JPA
 The metadata columns are defined in the BaseEntity class. Add the annotations shown.
@@ -250,6 +314,8 @@ public class BaseEntity {
 }
 ```
 
+#### AuditAwareImpl
+
 To add the logic about the user, add a new package and class
 
 ![AudiAwareImpl](3_2.png)
@@ -274,6 +340,8 @@ public class AuditAwareImpl implements AuditorAware<String> {
 }
 ```
 
+#### BaseEntity Annotations
+
 Now in the BaseEntity, make sure the two annotations are there
 
 ```java title="MappedSuperClass EntityListeners annotations: BaseEnity.java"
@@ -287,6 +355,8 @@ public class BaseEntity {
     @CreatedDate
     @Column(updatable = false)
 ```
+
+#### JpaAuditing Annotation
 
 Also in the main class AccountsApplication add the annotation to enable JpaAuditing.
 
@@ -306,6 +376,8 @@ public class AccountsApplication {
     }
 }
 ```
+
+#### Delete Manually Created Fields
 
 Now delete the code where we were manually creating the fields.
 
@@ -378,6 +450,8 @@ public void createAccount(CustomerDto customerDto) {
     accountsRepository.save(createNewAccount(savedCustomer));
 }
 ```
+
+#### Test in Postman
 
 Go to Postman and test
 

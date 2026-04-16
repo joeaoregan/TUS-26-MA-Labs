@@ -1,10 +1,37 @@
 # RESTful API Lab 2
 
+## Steps and Files
+
+1. [application.yml](#1-applicationyml)  
+    - src/main/resources/application.yml
+2. [schema.sql](#2-schemasql) 
+    - src/main/resources/schema.sql
+3. [Restart the server](#3-restart-the-server)
+4. [H2 Console](#4-h2-console)
+5. [Entity Package](#5-entity-package)
+6. [Entity Classes](#6-entity-classes)
+    - /com/tus/accounts/entity/Accounts.java  
+    - /com/tus/accounts/entity/Customer.java  
+    - /com/tus/accounts/entity/BaseEntity.java  
+7. [Repository](#7-repository) 
+    - /com/tus/accounts/repository/AccountsRepository.java  
+    - /com/tus/accounts/repository/CustomerRepository.java  
+8. [DTOs Accounts & Customer](#8-dtos-accounts-customer) 
+    - /com/tus/accounts/dto/AccountsDto.java  
+    - /com/tus/accounts/dto/CustomerDto.java  
+9. [DTOs Response & Error](#9-dtos-response-error) 
+    - /com/tus/accounts/dto/ResponseDto.java  
+    - /com/tus/accounts/dto/ErrorResponseDto.java  
+
+---
+
 ## Lab#2 Configuring H2 DB and YAML application.properties
 
 In this lab we will continue from the previous lab and configure the application to use an in-memory H2 database.
 
-### 1. Rename application.properties as application.yml  and update with following properties (file provided)
+### 1. application.yml
+
+Rename application.properties as application.yml  and update with following properties (file provided)
  
 ```yaml title="application.yml" linenums="1"
 server:
@@ -25,9 +52,11 @@ spring:
     show-sql: true
 ```
 
-### 2. Create a file called scheme.sql (provided) in the resources folder with the following data.
+### 2. schema.sql
+
+Create a file called schema.sql (provided) in the resources folder with the following data.
  
-```sql title="scheme.sql" linenums="1"
+```sql title="schema.sql" linenums="1"
 CREATE TABLE IF NOT EXISTS `customer` (
   `customer_id` int AUTO_INCREMENT  PRIMARY KEY,
   `name` varchar(100) NOT NULL,
@@ -51,22 +80,33 @@ CREATE TABLE IF NOT EXISTS `accounts` (
 );
 ```
 
-### 3. Restart the server. It will start on port 8080 based on yml file.
-### 4. Go to the h2-console in the browser. You should see the two tables have bee created.
+### 3. Restart the server
+
+It will start on port 8080 based on yml file.
+
+### 4. H2 Console
+
+Go to the h2-console in the browser. You should see the two tables have bee created.
  
 ![H2 Console](4.png)
 
 Now we will write Spring Data JPA entities & repositories to interact with DB tables
 
-### 4. Create a new package for the entity classes as show below.
+### 5. Entity Package
+
+Create a new package for the entity classes as show below.
  
 ![New package](4b.png)
 
-### 5. Add the classes BaseEntity, Accounts and Customers (given) and examine the code.
+### 6. Entity Classes
+
+Add the classes BaseEntity, Accounts and Customers (given) and examine the code.
  
 ![Add Classes](5.png)
 
-### 6. Now Add the Repository interfaces
+### 7. Repository
+
+Now Add the Repository interfaces
  
 ![Repository Interfacese](6.png)
 
@@ -109,7 +149,9 @@ public interface AccountsRepository extends JpaRepository<Accounts, Long> {
  
 We will use the Data Transfer Object pattern to transfer data – not the entity classes themselves.
 
-### 7. Create a new package with class AccountsDto and CustomerDto. These classes uses Lombok (You may need to turn on annotations in your IDE or install a Lombok jar)
+### 8. DTOs Accounts & Customer
+
+Create a new package with class AccountsDto and CustomerDto. These classes uses Lombok (You may need to turn on annotations in your IDE or install a Lombok jar)
  
 ![DTOs](7.png) 
 
@@ -137,7 +179,9 @@ public class CustomerDto {
 }
 ```
  
-### 8. Also add a ResponseDto and an ErrorResponseDto class
+### 9. DTOs Response & Error
+
+Also add a ResponseDto and an ErrorResponseDto class
 
 ```java title="ResponseDto" linenums="1"
 package com.tus.accounts.dto;
