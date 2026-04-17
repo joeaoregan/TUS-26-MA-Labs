@@ -1583,13 +1583,74 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
+  <a href="#steps-and-files" class="md-nav__link">
     <span class="md-ellipsis">
       
-        
+        Steps and Files
       
     </span>
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lab23-de-registration-from-eureka-and-heartbeats" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab#23 #De-registration from Eureka and heartbeats
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Lab#23 #De-registration from Eureka and heartbeats">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-actuator-shutdown-endpoint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Actuator Shutdown Endpoint
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1863,13 +1924,74 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
+  <a href="#steps-and-files" class="md-nav__link">
     <span class="md-ellipsis">
       
-        
+        Steps and Files
       
     </span>
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lab23-de-registration-from-eureka-and-heartbeats" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lab#23 #De-registration from Eureka and heartbeats
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Lab#23 #De-registration from Eureka and heartbeats">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-actuator-shutdown-endpoint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Actuator Shutdown Endpoint
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1900,7 +2022,27 @@
 
 
 <h1 id="lab-23">Lab 23</h1>
-<h2 id="_1"></h2>
+<h2 id="steps-and-files">Steps and Files</h2>
+<ol>
+<li><a href="">Actuator Shutdown Endpoint</a></li>
+<li><a href=""></a></li>
+<li><a href=""></a></li>
+<li><a href=""></a></li>
+</ol>
+<hr />
+<h2 id="lab23-de-registration-from-eureka-and-heartbeats">Lab#23 #De-registration from Eureka and heartbeats</h2>
+<p>In this lab we will look at deregistering services when they shut down.</p>
+<h3 id="1-actuator-shutdown-endpoint">1. Actuator Shutdown Endpoint</h3>
+<p>Step#1 We have already enabled the actuator shutdown endpoint. First try to envoke the endpoint on the accounts microservice. You get an error to say that the method is not supported. It must be invoked with a POST method.</p>
+<p><img alt="Actuator Shutdown can only be invoked with POST method" src="screenshot1.png" /></p>
+<pre><code>Figure 1. Actuator Shutdown can only be invoked with POST method
+</code></pre>
+<h3 id="2">2.</h3>
+<p>Step#2 Now envoke the endpoint with a POST method from Postman for all microservices</p>
+<h3 id="3">3.</h3>
+<p>Step#3 Check the eureka dashboard. All services will have de-registered themselves on shutdown. </p>
+<h3 id="4">4.</h3>
+<p>Step#4 Restart the services again. Now stop the eureka server. You will error messages from the services indicating that they cannot send the heartbeat (every 30 seconds) to eureka.</p>
 
 
 
