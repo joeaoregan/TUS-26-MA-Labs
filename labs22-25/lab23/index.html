@@ -1617,10 +1617,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2" class="md-nav__link">
+  <a href="#2-envoke-actuatorshutdown-endpoint-with-post-method" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.
+        2. Envoke /actuator/shutdown Endpoint with POST Method
       
     </span>
   </a>
@@ -1628,10 +1628,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#3" class="md-nav__link">
+  <a href="#3-services-de-registered" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.
+        3. Services De-Registered
       
     </span>
   </a>
@@ -1639,10 +1639,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#4" class="md-nav__link">
+  <a href="#4-errors-when-eureka-server-stops" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.
+        4. Errors when Eureka Server Stops
       
     </span>
   </a>
@@ -1958,10 +1958,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2" class="md-nav__link">
+  <a href="#2-envoke-actuatorshutdown-endpoint-with-post-method" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.
+        2. Envoke /actuator/shutdown Endpoint with POST Method
       
     </span>
   </a>
@@ -1969,10 +1969,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#3" class="md-nav__link">
+  <a href="#3-services-de-registered" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.
+        3. Services De-Registered
       
     </span>
   </a>
@@ -1980,10 +1980,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#4" class="md-nav__link">
+  <a href="#4-errors-when-eureka-server-stops" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.
+        4. Errors when Eureka Server Stops
       
     </span>
   </a>
@@ -2025,9 +2025,9 @@
 <h2 id="steps-and-files">Steps and Files</h2>
 <ol>
 <li><a href="">Actuator Shutdown Endpoint</a></li>
-<li><a href=""></a></li>
-<li><a href=""></a></li>
-<li><a href=""></a></li>
+<li><a href="">Envoke /actuator/shutdown Endpoint with POST Method</a></li>
+<li><a href="">Services De-Registered</a></li>
+<li><a href="">Errors when Eureka Server Stops</a></li>
 </ol>
 <hr />
 <h2 id="lab23-de-registration-from-eureka-and-heartbeats">Lab#23 #De-registration from Eureka and heartbeats</h2>
@@ -2037,12 +2037,21 @@
 <p><img alt="Actuator Shutdown can only be invoked with POST method" src="screenshot1.png" /></p>
 <pre><code>Figure 1. Actuator Shutdown can only be invoked with POST method
 </code></pre>
-<h3 id="2">2.</h3>
+<h3 id="2-envoke-actuatorshutdown-endpoint-with-post-method">2. Envoke /actuator/shutdown Endpoint with POST Method</h3>
 <p>Step#2 Now envoke the endpoint with a POST method from Postman for all microservices</p>
-<h3 id="3">3.</h3>
+<p><img alt="Postman POST actuator/shutdown" src="screenshot2.png" /></p>
+<pre><code>Figure 2. Postman POST actuator/shutdown
+</code></pre>
+<h3 id="3-services-de-registered">3. Services De-Registered</h3>
 <p>Step#3 Check the eureka dashboard. All services will have de-registered themselves on shutdown. </p>
-<h3 id="4">4.</h3>
+<p><img alt="Eureka Dashboard All Services De-Registered" src="screenshot3.png" /></p>
+<pre><code>Figure 3. Eureka Dashboard All Services De-Registered
+</code></pre>
+<h3 id="4-errors-when-eureka-server-stops">4. Errors when Eureka Server Stops</h3>
 <p>Step#4 Restart the services again. Now stop the eureka server. You will error messages from the services indicating that they cannot send the heartbeat (every 30 seconds) to eureka.</p>
+<p><img alt="Errors when Eureka Server Stops" src="screenshot4.png" /></p>
+<pre><code>Figure 4. Errors when Eureka Server Stops
+</code></pre>
 
 
 
