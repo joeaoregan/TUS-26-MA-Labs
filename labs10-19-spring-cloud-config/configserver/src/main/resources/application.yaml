@@ -12,7 +12,8 @@ spring:
           # search-locations: "file:///C://git//config"
         git:
           uri: "https://github.com/joeaoregan/TUS-26-MA-CA2-Config.git" # repo url
-          search-paths: "lab18/config" # specify repo folder to look in 
+          # search-paths: "lab18/config" # specify repo folder to look in 
+          search-paths: "lab22/config" # Eureka server config
           username: joeaoregan
           password: ${GIT_PASSWORD}
           default-label: main
