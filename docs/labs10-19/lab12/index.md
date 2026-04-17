@@ -1,8 +1,25 @@
 # Lab 12
 
+## Steps and Files
+
+1. [Contact Details Properties](#1-contact-details-properties)
+    - application.yml
+2. [DTO Records Pojo](#2-dto-records-pojo)
+    - AccountsContactInfoDto.java
+3. [Add @EnableConfigurationProperties Annotation](#3-add-enableconfigurationproperties-annotation)
+    - AccountsApplication.java
+4. [Add Constructor Injection](#4-add-constructor-injection)
+    - AccountsController.java
+5. [Test](#5-test)
+    - Postman GET /contact-info
+
+---
+
 ## Lab#12 Configuration with @ConfigurationProperties
 
 This method is useful when a number of properties need to be read.
+
+### 1. Contact Details Properties
 
 Step#1 Add the following properties to the application.yml file in the accounts microservice. This could represent contact details for example a support engineer.
 
@@ -21,6 +38,8 @@ accounts:
     - (086) 555-1234
     - (087) 523-1345
 ```
+
+### 2. DTO Records Pojo
  
 Step#2 Add a dto POJO using Records.
 
@@ -35,6 +54,8 @@ public record AccountsContactInfoDto(String message, Map<String, String> contact
 
 }
 ```
+
+### 3. Add @EnableConfigurationProperties Annotation
 
 Step#3 In the main class add the annotation
 
@@ -58,6 +79,8 @@ public class AccountsApplication {
 }
 ```
 
+### 4. Add Constructor Injection
+
 Step#4 Update the REST API to return the contact info.
 
 ```java title="AccountsController.java - add missing constructor injection"
@@ -77,6 +100,12 @@ Step#4 Update the REST API to return the contact info.
 	}
 ```
 
+### 5. Test
+
 Step #5 Test using Postman
 
-![]()
+GET: `http://localhost:8081/api/contact-info`
+
+![GET /contact-info](screenshot1.png)
+
+    Figure 1. GET /contact-info
