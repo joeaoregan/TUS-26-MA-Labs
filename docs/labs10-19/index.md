@@ -10,3 +10,4 @@
 15) [Getting started with SpringCloud Config](lab15/index.md)
 16) [Modifying the microservices to use the SpringCloud Config server](lab16/index.md)
 17) [Reading the data from the file system](lab17/index.md)
+18) [Reading configurations from a github repo and encryption](lab18/index.md)

@@ -43,12 +43,13 @@
 
 - [Lab#10 Configuration with Springboot alone](https://joeaoregan.github.io/TUS-26-MA-Labs/labs10-19/lab10/index.md)
 - [Lab#11 Configuration with Environment interface](https://joeaoregan.github.io/TUS-26-MA-Labs/labs10-19/lab11/index.md)
-- [Lab#12 Configuration with @ConfigurationProperties](https://joeaoregan.github.io/TUS-26-MA-Labs/lab12/index.md)
-- [Lab#13 Springboot Profiles](https://joeaoregan.github.io/TUS-26-MA-Labs/lab13/index.md)
-- [Lab#14 Activating Springboot Profiles](https://joeaoregan.github.io/TUS-26-MA-Labs/lab14/index.md)
-- [Lab#15 Getting started with SpringCloud Config](https://joeaoregan.github.io/TUS-26-MA-Labs/lab15/index.md)
-- [Lab#16 Modifying the microservices to use the SpringCloud Config server](https://joeaoregan.github.io/TUS-26-MA-Labs/lab16/index.md)
-- [Lab#17 Reading the data from the file system](http://joeaoregan.github.io/TUS-26-MA-Labs/lab17/index.md)
+- [Lab#12 Configuration with @ConfigurationProperties](https://joeaoregan.github.io/TUS-26-MA-Labs/labs10-19/lab12/index.md)
+- [Lab#13 Springboot Profiles](https://joeaoregan.github.io/TUS-26-MA-Labs/labs10-19/lab13/index.md)
+- [Lab#14 Activating Springboot Profiles](https://joeaoregan.github.io/TUS-26-MA-Labs/labs10-19/lab14/index.md)
+- [Lab#15 Getting started with SpringCloud Config](https://joeaoregan.github.io/TUS-26-MA-Labs/labs10-19/lab15/index.md)
+- [Lab#16 Modifying the microservices to use the SpringCloud Config server](https://joeaoregan.github.io/TUS-26-MA-Labs/labs10-19/lab16/index.md)
+- [Lab#17 Reading the data from the file system](http://joeaoregan.github.io/TUS-26-MA-Labs/labs10-19/lab17/index.md)
+- [Lab#18 Reading configurations from a github repo and encryption](http://joeaoregan.github.io/TUS-26-MA-Labs/labs10-19/lab18/index.md)
 
 #### API
 

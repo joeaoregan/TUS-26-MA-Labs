@@ -5,3 +5,5 @@ venv/
 site/
 mkdocs.md
 .github/
+
+.env
