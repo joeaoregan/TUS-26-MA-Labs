@@ -159,6 +159,10 @@ Postman: GET `http://localhost:8081/api/contact-info`
  
 Step#7 Starting with a different profile. Change the Run As Configuration. Restart the accounts microservice.
 
+```bash title="Program arguments"
+--spring.profiles.active=qa
+```
+
 ![Run As Configuration: QA](screenshot4.png)
 
     Figure 4. Run As Configuration: QA

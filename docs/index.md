@@ -29,6 +29,7 @@ Technological University of the Shannon, 2026.
     - [Lab#14 Activating Springboot Profiles](labs10-19/lab14/index.md)
     - [Lab#15 Getting started with SpringCloud Config](labs10-19/lab15/index.md)
     - [Lab#16 Modifying the microservices to use the SpringCloud Config server](labs10-19/lab16/index.md)
+    - [Lab#17 Reading the data from the file system](labs10-19/lab17/index.md)
 - [API](api/index.md)
     - [Accounts API](api/accounts.md)
     - [Loans API](api/loans.md)
