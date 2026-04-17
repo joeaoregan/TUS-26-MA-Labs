@@ -1199,7 +1199,7 @@
   <span class="md-ellipsis">
     
   
-    13. Springboot Probiles
+    13. Springboot Profiles
   
 
     
@@ -1407,6 +1407,39 @@
     <span class="md-ellipsis">
       
         5. Config Server Details
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-start-config-server-and-accounts-microservice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Start Config Server and Accounts Microservice
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-start-with-a-different-profile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Start with a Different Profile
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-change-other-microservices" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Change Other Microservices
       
     </span>
   </a>
@@ -1709,6 +1742,39 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#6-start-config-server-and-accounts-microservice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Start Config Server and Accounts Microservice
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-start-with-a-different-profile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Start with a Different Profile
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-change-other-microservices" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Change Other Microservices
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1764,24 +1830,208 @@
 <li>application.yml</li>
 </ul>
 </li>
+<li><a href="">Start Config Server and Accounts Microservice</a>()</li>
+<li><a href="">Start with a Different Profile</a></li>
+<li><a href="">Change Other Microservices</a></li>
 </ol>
 <hr />
 <h2 id="lab16-modifying-the-microservices-to-use-the-springcloud-config-server">Lab#16 Modifying the microservices to use the SpringCloud Config server</h2>
 <p>In this lab we will be modify the accounts microservice to read from the values from the configserver.</p>
 <h3 id="1-delete-yaml">1. Delete YAML</h3>
 <p>Step#1 In the accounts microservice, delete the application_prod.yml and the application_qa.yml files. </p>
+<p><img alt="Delete YAML" src="screenshot1.png" /></p>
+<pre><code>Figure 1. Delete application_prod.yml and application_qa.yml files.
+</code></pre>
 <h3 id="2-delete-properties">2. Delete Properties</h3>
 <p>Step#2 Also delete everything to do with properties from the application.yml leaving only as shown below.</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">application.yml delete properties</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">server</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8080</span>
+<span class="nt">spring</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">datasource</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">jdbc:h2:mem:testdb</span>
+<span class="w">    </span><span class="nt">driverClassName</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">org.h2.Driver</span>
+<span class="w">    </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sa</span>
+<span class="w">    </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;&#39;</span>
+<span class="w">  </span><span class="nt">h2</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">console</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">jpa</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">database-platform</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">org.hibernate.dialect.H2Dialect</span>
+<span class="w">    </span><span class="nt">hibernate</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">ddl-auto</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">update</span>
+<span class="w">    </span><span class="nt">show-sql</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</code></pre></div></td></tr></table></div>
 <h3 id="3-add-application-name-and-active-profile-properties">3. Add Application Name and Active Profile Properties</h3>
 <p>Step#3 Add properties for application name and active profile</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">application.yml add application name and active profile</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">server</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8080</span>
+<span class="nt">spring</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">application</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;accounts&quot;</span>
+<span class="w">  </span><span class="nt">profiles</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">active</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;prod&quot;</span>
+<span class="w">  </span><span class="nt">datasource</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">jdbc:h2:mem:testdb</span>
+<span class="w">    </span><span class="nt">driverClassName</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">org.h2.Driver</span>
+<span class="w">    </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sa</span>
+<span class="w">    </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;&#39;</span>
+</code></pre></div></td></tr></table></div>
 <h3 id="4-spring-cloud-client-dependency">4. Spring Cloud Client Dependency</h3>
 <p>Step#4 Add the spring cloud client dependency in the pom file for accounts microservice</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">pom.xml add spring cloud client dependency</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;properties&gt;</span>
+<span class="w">        </span><span class="nt">&lt;java.version&gt;</span>17<span class="nt">&lt;/java.version&gt;</span>
+<span class="w">        </span><span class="nt">&lt;spring-cloud.version&gt;</span>2022.0.5<span class="nt">&lt;/spring-cloud.version&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/properties&gt;</span>
+<span class="w">    </span><span class="nt">&lt;dependencies&gt;</span>
+<span class="w">        </span><span class="nt">&lt;dependency&gt;</span>
+<span class="w">            </span><span class="nt">&lt;groupId&gt;</span>org.springframework.cloud<span class="nt">&lt;/groupId&gt;</span>
+<span class="w">            </span><span class="nt">&lt;artifactId&gt;</span>spring-cloud-starter-config<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/dependency&gt;</span>
+</code></pre></div></td></tr></table></div>
 <p>This can be copied from config server</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">pom.xml add spring cloud client dependency</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">        </span><span class="nt">&lt;/dependency&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/dependencies&gt;</span>
+<span class="w">    </span><span class="nt">&lt;dependencyManagement&gt;</span>
+<span class="w">        </span><span class="nt">&lt;dependencies&gt;</span>
+<span class="w">            </span><span class="nt">&lt;dependency&gt;</span>
+<span class="w">                </span><span class="nt">&lt;groupId&gt;</span>org.springframework.cloud<span class="nt">&lt;/groupId&gt;</span>
+<span class="w">                </span><span class="nt">&lt;artifactId&gt;</span>spring-cloud-dependencies<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">                </span><span class="nt">&lt;version&gt;</span>${spring-cloud.version}<span class="nt">&lt;/version&gt;</span>
+<span class="w">                </span><span class="nt">&lt;type&gt;</span>pom<span class="nt">&lt;/type&gt;</span>
+<span class="w">                </span><span class="nt">&lt;scope&gt;</span>import<span class="nt">&lt;/scope&gt;</span>
+<span class="w">            </span><span class="nt">&lt;/dependency&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/dependencies&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/dependencyManagement&gt;</span>
+
+<span class="w">    </span><span class="nt">&lt;build&gt;</span>
+<span class="w">        </span><span class="nt">&lt;plugins&gt;</span>
+</code></pre></div></td></tr></table></div>
 <h3 id="5-config-server-details">5. Config Server Details</h3>
 <p>Step#5 Now also add details of the config server to the application.yml (child of spring)</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">application.yml add config server details</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">server</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8081</span>
+<span class="nt">spring</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">cloud</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">compatibility-verifier</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w"> </span><span class="c1"># disable version check</span>
+<span class="w">  </span><span class="nt">application</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;accounts&quot;</span>
+<span class="w">  </span><span class="nt">profiles</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">active</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;prod&quot;</span>
+<span class="w">  </span><span class="nt">datasource</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">jdbc:h2:mem:testdb</span>
+<span class="w">    </span><span class="nt">driverClassName</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">org.h2.Driver</span>
+<span class="w">    </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sa</span>
+<span class="w">    </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;&#39;</span>
+<span class="w">  </span><span class="nt">h2</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">console</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">jpa</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">database-platform</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">org.hibernate.dialect.H2Dialect</span>
+<span class="w">    </span><span class="nt">hibernate</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">ddl-auto</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">update</span>
+<span class="w">    </span><span class="nt">show-sql</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">config</span><span class="p">:</span>
+<span class="w">   </span><span class="nt">import</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;configserver:http://localhost:8071/&quot;</span><span class="w"> </span><span class="c1"># config server port 8071</span>
+</code></pre></div></td></tr></table></div>
+<h3 id="6-start-config-server-and-accounts-microservice">6. Start Config Server and Accounts Microservice</h3>
 <p>Step#6 Start the config server and the accounts microservice. Test using Postman.</p>
+<p>Postman: GET <code>http://localhost:8081/api/contact-info</code></p>
+<p><img alt="Test Using Postman config-info" src="screenshot2.png" /></p>
+<pre><code>Figure 2. Test /config-info endpoint using Postman.
+</code></pre>
+<p><img alt="Test Using Postman build-info" src="screenshot3.png" /></p>
+<pre><code>Figure 3. Test /build-info endpoint using Postman.
+</code></pre>
+<h3 id="7-start-with-a-different-profile">7. Start with a Different Profile</h3>
 <p>Step#7 Starting with a different profile. Change the Run As Configuration. Restart the accounts microservice.</p>
-<p>Step#7 Make similar changes in the cards and loans microservices.</p>
+<p><img alt="Run As Configuration: QA" src="screenshot4.png" /></p>
+<pre><code>Figure 4. Run As Configuration: QA
+</code></pre>
+<p><img alt="Postman GET /contact-info" src="screenshot5.png" /></p>
+<pre><code>Figure 5. Postman GET /contact-info
+</code></pre>
+<h3 id="8-change-other-microservices">8. Change Other Microservices</h3>
+<p>Step#8 Make similar changes in the cards and loans microservices.</p>
+<p><img alt="GET cards /contact-info" src="screenshot6.png" /></p>
+<pre><code>Figure 6. GET loans /contact-info
+</code></pre>
+<p><img alt="GET loans /contact-info" src="screenshot7.png" /></p>
+<pre><code>Figure 7. GET cards /contact-info
+</code></pre>
 
 
 

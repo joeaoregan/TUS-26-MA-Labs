@@ -1196,6 +1196,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#steps-and-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Steps and Files
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#lab11-configuration-with-environment-interface" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1203,6 +1214,45 @@
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Lab#11 Configuration with Environment interface">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-environment-variable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Environment variable
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-getjavaversion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. getJavaVersion()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Test
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1257,7 +1307,7 @@
   <span class="md-ellipsis">
     
   
-    13. Springboot Probiles
+    13. Springboot Profiles
   
 
     
@@ -1560,6 +1610,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#steps-and-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Steps and Files
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#lab11-configuration-with-environment-interface" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1567,6 +1628,45 @@
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Lab#11 Configuration with Environment interface">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-environment-variable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Environment variable
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-getjavaversion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. getJavaVersion()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Test
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1597,9 +1697,17 @@
 
 
 <h1 id="lab-11">Lab 11</h1>
+<h2 id="steps-and-files">Steps and Files</h2>
+<ol>
+<li><a href="#1-environment-variable">Environment variable</a></li>
+<li><a href="#2-getjavaversion">getJavaVersion()</a></li>
+<li><a href="#3-test">Test</a></li>
+</ol>
+<hr />
 <h2 id="lab11-configuration-with-environment-interface">Lab#11 Configuration with Environment interface</h2>
 <hr />
 <p>In this lab we will read configurations with Environment interface in the accounts microservice e.g. JAVA_HOME</p>
+<h3 id="1-environment-variable">1. Environment variable</h3>
 <p>Step #1 Add an Environment variable to AccountController class</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">AccountController.java</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">21</span>
 <span class="normal">22</span>
@@ -1649,13 +1757,15 @@
 <span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">iAccountsService</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">iAccountsService</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
+<h3 id="2-getjavaversion">2. getJavaVersion()</h3>
 <p>Step #2 Build a REST API to read the property and return to user. In the AccountController</p>
 <div class="highlight"><span class="filename">getJavaVersion()</span><pre><span></span><code><span class="w">    </span><span class="nd">@GetMapping</span><span class="p">(</span><span class="s">&quot;/java-version&quot;</span><span class="p">)</span>
 <span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getJavaVersion</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="p">.</span><span class="na">status</span><span class="p">(</span><span class="n">HttpStatus</span><span class="p">.</span><span class="na">OK</span><span class="p">).</span><span class="na">body</span><span class="p">(</span><span class="n">environment</span><span class="p">.</span><span class="na">getProperty</span><span class="p">(</span><span class="s">&quot;JAVA_HOME&quot;</span><span class="p">));</span>
 <span class="w">    </span><span class="p">}</span>
 </code></pre></div>
-<p>Step #2 Test using Postman</p>
+<h3 id="3-test">3. Test</h3>
+<p>Step #3 Test using Postman</p>
 <p><img alt="Postman" src="screenshot.png" /></p>
 
 

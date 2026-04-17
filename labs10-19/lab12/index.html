@@ -1224,6 +1224,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#steps-and-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Steps and Files
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#lab12-configuration-with-configurationproperties" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1231,6 +1242,67 @@
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Lab#12 Configuration with @ConfigurationProperties">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-contact-details-properties" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Contact Details Properties
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-dto-records-pojo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. DTO Records Pojo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-add-enableconfigurationproperties-annotation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Add @EnableConfigurationProperties Annotation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-add-constructor-injection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Add Constructor Injection
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Test
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1257,7 +1329,7 @@
   <span class="md-ellipsis">
     
   
-    13. Springboot Probiles
+    13. Springboot Profiles
   
 
     
@@ -1560,6 +1632,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#steps-and-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Steps and Files
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#lab12-configuration-with-configurationproperties" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1567,6 +1650,67 @@
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Lab#12 Configuration with @ConfigurationProperties">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-contact-details-properties" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Contact Details Properties
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-dto-records-pojo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. DTO Records Pojo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-add-enableconfigurationproperties-annotation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Add @EnableConfigurationProperties Annotation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-add-constructor-injection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Add Constructor Injection
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Test
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1597,8 +1741,33 @@
 
 
 <h1 id="lab-12">Lab 12</h1>
+<h2 id="steps-and-files">Steps and Files</h2>
+<ol>
+<li><a href="#1-contact-details-properties">Contact Details Properties</a><ul>
+<li>application.yml</li>
+</ul>
+</li>
+<li><a href="#2-dto-records-pojo">DTO Records Pojo</a><ul>
+<li>AccountsContactInfoDto.java</li>
+</ul>
+</li>
+<li><a href="#3-add-enableconfigurationproperties-annotation">Add @EnableConfigurationProperties Annotation</a><ul>
+<li>AccountsApplication.java</li>
+</ul>
+</li>
+<li><a href="#4-add-constructor-injection">Add Constructor Injection</a><ul>
+<li>AccountsController.java</li>
+</ul>
+</li>
+<li><a href="#5-test">Test</a><ul>
+<li>Postman GET /contact-info</li>
+</ul>
+</li>
+</ol>
+<hr />
 <h2 id="lab12-configuration-with-configurationproperties">Lab#12 Configuration with @ConfigurationProperties</h2>
 <p>This method is useful when a number of properties need to be read.</p>
+<h3 id="1-contact-details-properties">1. Contact Details Properties</h3>
 <p>Step#1 Add the following properties to the application.yml file in the accounts microservice. This could represent contact details for example a support engineer.</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">application.yml</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">14</span>
 <span class="normal">15</span>
@@ -1626,6 +1795,7 @@
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(086) 555-1234</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(087) 523-1345</span>
 </code></pre></div></td></tr></table></div>
+<h3 id="2-dto-records-pojo">2. DTO Records Pojo</h3>
 <p>Step#2 Add a dto POJO using Records.</p>
 <div class="highlight"><span class="filename">AccountsContactInfoDto() record</span><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.tus.accounts.dto</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">java.util.List</span><span class="p">;</span>
@@ -1637,6 +1807,7 @@
 
 <span class="p">}</span>
 </code></pre></div>
+<h3 id="3-add-enableconfigurationproperties-annotation">3. Add @EnableConfigurationProperties Annotation</h3>
 <p>Step#3 In the main class add the annotation</p>
 <div class="highlight"><span class="filename">AccountsApplication.java</span><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.tus.accounts</span><span class="p">;</span>
 
@@ -1656,6 +1827,7 @@
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
+<h3 id="4-add-constructor-injection">4. Add Constructor Injection</h3>
 <p>Step#4 Update the REST API to return the contact info.</p>
 <div class="highlight"><span class="filename">AccountsController.java - add missing constructor injection</span><pre><span></span><code><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">AccountsContactInfoDto</span><span class="w"> </span><span class="n">accountsContactInfoDto</span><span class="p">;</span>
 
@@ -1670,8 +1842,12 @@
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="p">.</span><span class="na">status</span><span class="p">(</span><span class="n">HttpStatus</span><span class="p">.</span><span class="na">OK</span><span class="p">).</span><span class="na">body</span><span class="p">(</span><span class="n">accountsContactInfoDto</span><span class="p">);</span>
 <span class="w">    </span><span class="p">}</span>
 </code></pre></div>
+<h3 id="5-test">5. Test</h3>
 <p>Step #5 Test using Postman</p>
-<p><img alt="" src="" /></p>
+<p>GET: <code>http://localhost:8081/api/contact-info</code></p>
+<p><img alt="GET /contact-info" src="screenshot1.png" /></p>
+<pre><code>Figure 1. GET /contact-info
+</code></pre>
 
 
 
@@ -1724,13 +1900,13 @@
         
         
           
-          <a href="../lab13/" class="md-footer__link md-footer__link--next" aria-label="Next: 13. Springboot Probiles">
+          <a href="../lab13/" class="md-footer__link md-footer__link--next" aria-label="Next: 13. Springboot Profiles">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                13. Springboot Probiles
+                13. Springboot Profiles
               </div>
             </div>
             <div class="md-footer__button md-icon">
