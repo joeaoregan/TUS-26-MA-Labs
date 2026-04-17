@@ -1,7 +1,32 @@
 # Lab 14
 
+## Steps and Files
+
+1. [Run Configuration](#1-run-configuration)
+2. [Profile Switching](#2-profile-switching)
+    - application_prod.yml
+3. [IDE Environment Variables](#3-ide-environment-variables)
+4. [Cards](#cards)
+    - CardsApplication.java
+    - CardController.java
+    - CardsContactInfoDto.java
+    - application.yml
+    - application_prod.yml
+    - application_qa.yml
+5. [Loans](#loans)
+    - LoansApplication.java
+    - LoanController.java
+    - LoansContactInfoDto.java
+    - application.yml
+    - application_prod.yml
+    - application_qa.yml
+
+---
+
 ## Lab#14 Activating Springboot Profiles
 Springboot profiles are useful for different environments e.g dev, qa, prod. The profile can be selected at startup
+
+### 1. Run Configuration
 
 Step# 1 To do this from IDE, Right-Click on AccountsApplication and select Run As > Run Configurations
 
@@ -12,6 +37,8 @@ Add in the arguments tab `--spring.profiles.active=prod --build.version=1.1` and
 ![Run with Arguments](screenshot1.png)
 
     Figure 1. Pass arguments at run-time
+
+### 2. Profile Switching
 
 Step #2 Test that the application has started with the production profile
  
@@ -33,7 +60,8 @@ accounts:
 ![Get /build-info](screenshot3.png)
 
     Figure 3. GET localhost:9000/api/cards/build-info
- 
+
+### 3. IDE Environment Variables 
 
 Or using environment variables from IDE
  
@@ -51,9 +79,9 @@ Now implement similar changes in the loans and cards microservice
 
 ---
 
-## Cards
+### Cards
 
-### Java
+#### Java
 
 ```java title="CardsApplication.java" linenums="10"
 @SpringBootApplication
@@ -105,7 +133,7 @@ public record CardsContactInfoDto(
 }"
 ```
 
-### YAML
+#### YAML
 
 ```yaml title="application.yml (line 22 must match CardsContactInfoDto line 8)" linenums="1"
 server:
@@ -181,7 +209,7 @@ cards:
     - (087) 523-1345
 ```
 
-### Postman
+#### Postman
 
 ![GET /cards/build-info](cards1.png)
 
@@ -194,9 +222,9 @@ cards:
 
 ---
 
-## Loans
+### Loans
 
-### Java
+#### Java
 
 ```java title="LoansApplication.java" linenums="10"
 @SpringBootApplication
@@ -247,7 +275,7 @@ public record LoansContactInfoDto(String message, Map<String, String> contactDet
 
 ```
 
-### YAML
+#### YAML
 
 ```yaml title="application.yml (line 22 must match LoansContactInfoDto line 8)" linenums="1"
 server:
@@ -323,7 +351,7 @@ loans:
     - (123) 546-3467
 ```
 
-### Postman
+#### Postman
 
 ![GET /loans/build-info](loans1.png)
 
