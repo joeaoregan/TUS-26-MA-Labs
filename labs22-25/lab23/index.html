@@ -2034,11 +2034,15 @@
 <p>In this lab we will look at deregistering services when they shut down.</p>
 <h3 id="1-actuator-shutdown-endpoint">1. Actuator Shutdown Endpoint</h3>
 <p>Step#1 We have already enabled the actuator shutdown endpoint. First try to envoke the endpoint on the accounts microservice. You get an error to say that the method is not supported. It must be invoked with a POST method.</p>
+<div class="highlight"><span class="filename">Browser (GET) /actuator/shutdown ?</span><pre><span></span><code><span class="m">192</span>.168.56.1:8081/actuator/shutdown
+</code></pre></div>
 <p><img alt="Actuator Shutdown can only be invoked with POST method" src="screenshot1.png" /></p>
 <pre><code>Figure 1. Actuator Shutdown can only be invoked with POST method
 </code></pre>
 <h3 id="2-envoke-actuatorshutdown-endpoint-with-post-method">2. Envoke /actuator/shutdown Endpoint with POST Method</h3>
 <p>Step#2 Now envoke the endpoint with a POST method from Postman for all microservices</p>
+<div class="highlight"><span class="filename">POST /actuator/shutdown</span><pre><span></span><code>localhost:8081/actuator/shutdown
+</code></pre></div>
 <p><img alt="Postman POST actuator/shutdown" src="screenshot2.png" /></p>
 <pre><code>Figure 2. Postman POST actuator/shutdown
 </code></pre>
