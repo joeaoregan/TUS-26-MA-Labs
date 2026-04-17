@@ -132,7 +132,7 @@ accounts:
 ```yaml title="cards.yml" linenums="1"
 build:
   version: "3.1"
-accounts:
+cards:
   message: "Welcome to cards related local APIs"
   contactDetails:
     name: "Joe Bloggs - Cards Developer"
@@ -173,7 +173,7 @@ cards:
 ```yaml title="loans.yml" linenums="1"
 build:
   version: "3.2"
-accounts:
+loans:
   message: "Welcome to loans related local APIs"
   contactDetails:
     name: "Anna Bloggs - Loans Developer"
@@ -186,7 +186,7 @@ accounts:
 ```yaml title="loans-qa.yml" linenums="1"
 build:
   version: "2.2"
-cards:
+loans:
   message: "Welcome to TUS loans related QA APIs"
   contactDetails:
     name: "John Murphy - Loans Owner"
@@ -199,7 +199,7 @@ cards:
 ```yaml title="loans-prod.yml" linenums="1"
 build:
   version: "1.2"
-cards:
+loans:
   message: "Welcome to TUS loans related prod APIs"
   contactDetails:
     name: "John Murphy - Loans Owner"
