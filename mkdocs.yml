@@ -81,6 +81,12 @@ nav:
     - 17. Reading the data from the file system: labs10-19/lab17/index.md
     - 18. Reading configurations from a github repo and encryption: labs10-19/lab18/index.md
     - 19. Refresh configurations at runtime using actuator path: labs10-19/lab19/index.md
+  - 22-25 Eureka Discovery Server:
+    - Labs 22-25: labs22-25/index.md
+    - 22. Service discovery with Eureka: labs22-25/lab22/index.md
+    - 23. De-registration from Eureka and heartbeats: labs22-25/lab23/index.md
+    - 24. Feign Client code changes to invoke other microservices: labs22-25/lab24/index.md
+    - 25. Load Balancing Demonstration: labs22-25/lab25/index.md
   - API:
     - API Endpoints: api/index.md
     - Accounts API: api/accounts.md

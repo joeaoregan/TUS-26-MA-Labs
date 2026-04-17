@@ -52,6 +52,13 @@
 - [Lab#18 Reading configurations from a github repo and encryption](http://joeaoregan.github.io/TUS-26-MA-Labs/labs10-19/lab18/index.md)
 - [Lab#19 Refresh configurations at runtime using actuator path](http://joeaoregan.github.io/TUS-26-MA-Labs/labs10-19/lab19/index.md)
 
+#### Eureka Discovery Service
+
+- [Lab#22 Service Discovery with Eureka](https://joeaoregan.github.io/TUS-26-MA-Labs/labs22-25/lab22/index.md)
+- [Lab#23 De-Registration from Eureka and Heartbeats](https://joeaoregan.github.io/TUS-26-MA-Labs/labs22-25/lab23/index.md)
+- [Lab#24 Feign Client code changes to invoke other microservices](https://joeaoregan.github.io/TUS-26-MA-Labs/labs22-25/lab24/index.md)
+- [Lab#25 Load Balancing Demonstration](https://joeaoregan.github.io/TUS-26-MA-Labs/labs22-25/lab25/index.md)
+
 #### API
 
 - [API Overview](https://joeaoregan.github.io/TUS-26-MA-Labs/api/)
