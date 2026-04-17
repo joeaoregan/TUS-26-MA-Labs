@@ -35,14 +35,14 @@ public class AccountController {
 	private IAccountsService iAccountsService;
 	private AccountsContactInfoDto accountsContactInfoDto;
 
-	// Inject AccountsContactInfoDto using constructor injection
+	// Lab 10 - Inject AccountsContactInfoDto using constructor injection
 	public AccountController(IAccountsService iAccountsService, AccountsContactInfoDto accountsContactInfoDto) {
 		this.iAccountsService = iAccountsService;
 		this.accountsContactInfoDto = accountsContactInfoDto;
 	}
 
-	@Value("${build.version}")
-	private String buildVersion;
+	@Value("${build.version}") // Lab 10
+	private String buildVersion; // Lab 10
 
 	@Autowired
 	private Environment environment;
@@ -52,7 +52,7 @@ public class AccountController {
 		return ResponseEntity.status(HttpStatus.OK).body(environment.getProperty("JAVA_HOME"));
 	}
 
-	@GetMapping("/build-info")
+	@GetMapping("/build-info") // Lab 10
 	public ResponseEntity<String> getBuildInfo() {
 		return ResponseEntity.status(HttpStatus.OK).body(buildVersion);
 	}

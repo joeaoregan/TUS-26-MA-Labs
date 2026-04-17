@@ -1,9 +1,20 @@
 # Lab 11
 
+## Steps and Files
+
+1. [Environment variable](#1-environment-variable)
+2. [getJavaVersion()](#2-getjavaversion)
+3. [Test](#3-test)
+
+---
+
 ## Lab#11 Configuration with Environment interface
+
 ----
 
 In this lab we will read configurations with Environment interface in the accounts microservice e.g. JAVA_HOME
+
+### 1. Environment variable
 
 Step #1 Add an Environment variable to AccountController class
 
@@ -34,6 +45,8 @@ public class AccountController {
 	}
 ```
 
+### 2. getJavaVersion()
+
 Step #2 Build a REST API to read the property and return to user. In the AccountController
 
 ```java title="getJavaVersion()"
@@ -43,6 +56,8 @@ Step #2 Build a REST API to read the property and return to user. In the Account
 	}
 ```
 
-Step #2 Test using Postman
+### 3. Test
+
+Step #3 Test using Postman
 
 ![Postman](screenshot.png)
