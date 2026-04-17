@@ -1,10 +1,33 @@
 # Lab 13
 
+## Steps and Files
+
+1. [Add YAML Profile Files](#1-add-yaml-profile-files)
+    - application_qa.yml
+    - application_prod.yml
+2. [application.yml spring.config](#2-applicationyml-springconfig)
+    - application.yml
+3. [Run App](#3-run-app)
+4. [Profile Switching](#4-profile-switching)
+    - application.yml
+5. [Final application.yml](#5-final-applicationyml)
+    - application.yml
+
+---
+
 ## Lab#13 Springboot Profiles
 
 Springboot profiles are useful for different environments e.g dev, qa, prod  
+
+### 1. Add YAML Profile Files
+
 Step #1 Add two more .yml files named as shown in the accounts microservice. Files are given.
- 
+
+![Add YAML Files](screenshot1.png)
+
+    Figure 1: Add YAML Files
+
+### 2. application.yml spring.config
 
 Step#2 Update the application.yml in the accounts microservice with the following spring.config properties.
 
@@ -25,12 +48,15 @@ accounts:
   message: "Welcome to accounts related local APIs"
 ```
 
+### 3. Run App
+
 Step#3 Run the application. You will see default profile is used by checking contact-info.
 
-![Default Profile](screenshot1.png)
+![Default Profile](screenshot2.png)
 
-    Figure 1: Default Profile
+    Figure 2: Default Profile
 
+### 4. Profile Switching
  
 Step#4 Update the application.yml to change the active profile to qa. Check the contact info again in Postman. Now you will see the information is read from the application_qa.yml
  
@@ -48,11 +74,13 @@ accounts:
   message: "Welcome to accounts related local APIs"
 ```
 
-![QA Profile](screenshot2.png)
+![QA Profile](screenshot3.png)
  
-    Figure 2: QA Profile
+    Figure 3: QA Profile
 
 ---
+
+### 5. Final application.yml
 
 Final application.yml, with profile switching
 
