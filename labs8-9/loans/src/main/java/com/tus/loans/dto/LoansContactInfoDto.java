@@ -5,7 +5,15 @@ import java.util.Map;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-@ConfigurationProperties(prefix = "loans") // must match yaml
-public record LoansContactInfoDto(String message, Map<String, String> contactDetails, List<String> onCallSupport) {
+import lombok.Getter;
+import lombok.Setter;
 
+@ConfigurationProperties(prefix = "loans") // must match YAML
+@Setter
+@Getter
+public class LoansContactInfoDto {
+
+    private String message;
+    private Map<String, String> contactDetails;
+    private List<String> onCallSupport;
 }

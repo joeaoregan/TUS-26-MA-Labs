@@ -31,6 +31,7 @@ Technological University of the Shannon, 2026.
     - [Lab#16 Modifying the microservices to use the SpringCloud Config server](labs10-19/lab16/index.md)
     - [Lab#17 Reading the data from the file system](labs10-19/lab17/index.md)
     - [Lab#18 Reading configurations from a github repo and encryption](labs10-19/lab18/index.md)
+    - [Lab#19 Refresh configurations at runtime using actuator path](labs10-19/lab19/index.md)
 - [API](api/index.md)
     - [Accounts API](api/accounts.md)
     - [Loans API](api/loans.md)
