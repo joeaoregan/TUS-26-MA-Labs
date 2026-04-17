@@ -23,3 +23,8 @@ spring:
   cloud:
     compatibility-verifier:
       enabled: false # disable version check
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*" # Lab 19
