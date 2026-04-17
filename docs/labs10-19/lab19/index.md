@@ -201,3 +201,11 @@ Step#8 We can now go to Postman and invoke the actuator refresh API. Then check 
 ![New Accounts Contact Details Values](screenshot5.png)
 
     Figure 5. New Accounts Contact Details Values
+
+![New Loans Contact Details Values](screenshot9.png)
+
+    Figure 6. New Loans Contact Details Values
+
+![New Cards Contact Details Values](screenshot8.png)
+
+    Figure 7. New Cards Contact Details Values
