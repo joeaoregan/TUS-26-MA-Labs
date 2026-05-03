@@ -1,7 +1,5 @@
 package com.tus.accounts.entity;
 
-import org.hibernate.annotations.GenericGenerator;
-
 import jakarta.persistence.*;
 import lombok.*;
 
