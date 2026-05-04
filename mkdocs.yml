@@ -87,6 +87,11 @@ nav:
     - 23. De-registration from Eureka and heartbeats: labs22-25/lab23/index.md
     - 24. Feign Client code changes to invoke other microservices: labs22-25/lab24/index.md
     - 25. Load Balancing Demonstration: labs22-25/lab25/index.md
+  - 26-28 Spring Cloud Gateway:
+    - Labs 26-28: labs26-28/index.md
+    - 26. Building a Gateway with Spring Cloud: labs26-28/lab26/index.md
+    - 27. Making changes inside the gateway server: labs26-28/lab27/index.md
+    - 28. Cross cutting concerns - tracing and logging: labs26-28/lab28/index.md
   - API:
     - API Endpoints: api/index.md
     - Accounts API: api/accounts.md
