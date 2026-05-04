@@ -1639,10 +1639,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
+  <a href="#lab25-load-balancing-demonstration" class="md-nav__link">
     <span class="md-ellipsis">
       
-        
+        Lab#25 Load Balancing Demonstration.
       
     </span>
   </a>
@@ -1863,10 +1863,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
+  <a href="#lab25-load-balancing-demonstration" class="md-nav__link">
     <span class="md-ellipsis">
       
-        
+        Lab#25 Load Balancing Demonstration.
       
     </span>
   </a>
@@ -1900,7 +1900,24 @@
 
 
 <h1 id="lab-25">Lab 25</h1>
-<h2 id="_1"></h2>
+<h2 id="lab25-load-balancing-demonstration">Lab#25 Load Balancing Demonstration.</h2>
+<p>In this lab we will create two instances of loans microservices and demonstrate that the accounts (via ribbon) calls each instance in a round robin fashion.</p>
+<hr />
+<p>Step#1 Start all the services except loans (config, eureka, accounts and cards)</p>
+<p>Step#2 Create two run or launch configurations for the loans microservice with different port numbers and different build.version. Make sure to call them different names.</p>
+<p><img alt="Loans launch configuration 1" src="pic1.png" /></p>
+<pre><code>Figure 1. Loans launch configuration 1
+</code></pre>
+<p><img alt="Loans launch configuration 2" src="pic2.png" /></p>
+<pre><code>Figure 2. Loans launch configuration 2
+</code></pre>
+<p>Step#3 Add one line of code in the loans controller to print the build.version</p>
+<p><img alt="Print Build Version" src="pic3.png" /></p>
+<pre><code>Figure 3. Print Build Version
+</code></pre>
+<p>Step#4 Run the loans service with both configurations. Both instances of the service will be registered with Eureka.</p>
+<p>Step#4 Call the customers api in the accounts service a number of times.</p>
+<p>Step#5 Check the console for the loans instances. You will see that both instances of the loans service are being called in turn.</p>
 
 
 
