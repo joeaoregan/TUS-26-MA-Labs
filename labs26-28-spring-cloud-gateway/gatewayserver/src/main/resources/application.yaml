@@ -1,3 +1,37 @@
 spring:
   application:
     name: gatewayserver
+  config:
+    import: "optional:configserver:http://localhost:8071" # Lab 22
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*" # Lab 19
+  endpoint:
+    gateway:
+      enabled: true # Lab 22
+  info:
+    env:
+      enabled: true
+eureka:
+  instance:
+    preferIpAddress: true
+  client:
+    fetchRegistry: true
+    registerWithEureka: true
+    serviceUrl:
+      defaultZone: http://localhost:8070/eureka
+info:
+  app:
+    name: "gatewayserver"
+    description: "Bank Application Gateway Server"
+    version: "1.0.0"
+
+server:
+  port: 8072
