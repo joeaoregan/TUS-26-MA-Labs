@@ -92,7 +92,15 @@ nav:
     - 26. Building a Gateway with Spring Cloud: labs26-28/lab26/index.md
     - 27. Making changes inside the gateway server: labs26-28/lab27/index.md
     - 28. Cross cutting concerns - tracing and logging: labs26-28/lab28/index.md
-  - API:
+  - 29-34 Resilience:
+    - Labs 29-34: labs29-34/index.md
+    - 29. Circuit Breaker Pattern: labs29-34/lab29/index.md
+    - 30. Circuit Breaker With Fallback: labs29-34/lab30/index.md
+    - 31. Circuit Breaker With Feign client: labs29-34/lab31/index.md
+    - 32. Http timeouts: labs29-34/lab32/index.md
+    - 33. Implementing the re-try pattern in the gateway.: labs29-34/lab33/index.md
+    - 34. Redis rate limiter in the gateway and in accounts service: labs29-34/lab34/index.md
+  - API: 
     - API Endpoints: api/index.md
     - Accounts API: api/accounts.md
     - Loans API: api/loans.md
