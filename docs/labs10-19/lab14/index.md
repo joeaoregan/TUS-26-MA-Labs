@@ -30,7 +30,7 @@ Springboot profiles are useful for different environments e.g dev, qa, prod. The
 
 Step# 1 To do this from IDE, Right-Click on AccountsApplication and select Run As > Run Configurations
 
-`R.C > Run As > Run Configuration > Argurments Tab`
+`R.C > Run As > Run Configuration > Arguments Tab`
 
 Add in the arguments tab `--spring.profiles.active=prod --build.version=1.1` and Run
 
