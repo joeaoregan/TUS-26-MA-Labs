@@ -2301,12 +2301,462 @@
 <h1 id="lab28-cross-cutting-concerns-tracing-and-logging">Lab#28 Cross cutting concerns – tracing and logging</h1>
 <p>In this lab we will add custom filters in the gateway to generate a correlation id
 Step#1 Create a new package with classes as shown (code given).</p>
+<p><img alt="Custom Filters" src="pic1.png" /></p>
+<pre><code>Figure 1. Customer Filters
+</code></pre>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">FilterUtility.java</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.tus.gatewayserver.filters</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.List</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.http.HttpHeaders</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.stereotype.Component</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.server.ServerWebExchange</span><span class="p">;</span>
+
+<span class="nd">@Component</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">FilterUtility</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">CORRELATION_ID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;tusbank-correlation-id&quot;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">getCorrelationId</span><span class="p">(</span><span class="n">HttpHeaders</span><span class="w"> </span><span class="n">requestHeaders</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">requestHeaders</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">CORRELATION_ID</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">header</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">requestHeaders</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">CORRELATION_ID</span><span class="p">);</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">header</span><span class="p">.</span><span class="na">stream</span><span class="p">().</span><span class="na">findFirst</span><span class="p">().</span><span class="na">get</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">ServerWebExchange</span><span class="w"> </span><span class="nf">setCorrelationId</span><span class="p">(</span><span class="n">ServerWebExchange</span><span class="w"> </span><span class="n">exchange</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">correlationId</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">setRequestHeader</span><span class="p">(</span><span class="n">exchange</span><span class="p">,</span><span class="w"> </span><span class="n">CORRELATION_ID</span><span class="p">,</span><span class="w"> </span><span class="n">correlationId</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">ServerWebExchange</span><span class="w"> </span><span class="nf">setRequestHeader</span><span class="p">(</span><span class="n">ServerWebExchange</span><span class="w"> </span><span class="n">exchange</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">exchange</span><span class="p">.</span><span class="na">mutate</span><span class="p">().</span><span class="na">request</span><span class="p">(</span><span class="n">exchange</span><span class="p">.</span><span class="na">getRequest</span><span class="p">().</span><span class="na">mutate</span><span class="p">().</span><span class="na">header</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="p">).</span><span class="na">build</span><span class="p">()).</span><span class="na">build</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">RequestTraceFilter.java</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.tus.gatewayserver.filters</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.slf4j.Logger</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.slf4j.LoggerFactory</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.cloud.gateway.filter.GlobalFilter</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.cloud.gateway.filter.GatewayFilterChain</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.core.annotation.Order</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.stereotype.Component</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.server.ServerWebExchange</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">reactor.core.publisher.Mono</span><span class="p">;</span>
+
+<span class="nd">@Order</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="nd">@Component</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">RequestTraceFilter</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">GlobalFilter</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Logger</span><span class="w"> </span><span class="n">logger</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LoggerFactory</span><span class="p">.</span><span class="na">getLogger</span><span class="p">(</span><span class="n">RequestTraceFilter</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+
+<span class="w">    </span><span class="nd">@Autowired</span>
+<span class="w">    </span><span class="n">FilterUtility</span><span class="w"> </span><span class="n">filterUtility</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Mono</span><span class="o">&lt;</span><span class="n">Void</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">filter</span><span class="p">(</span><span class="n">ServerWebExchange</span><span class="w"> </span><span class="n">exchange</span><span class="p">,</span><span class="w"> </span><span class="n">GatewayFilterChain</span><span class="w"> </span><span class="n">chain</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">correlationId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">filterUtility</span><span class="p">.</span><span class="na">getCorrelationId</span><span class="p">(</span><span class="n">exchange</span><span class="p">.</span><span class="na">getRequest</span><span class="p">().</span><span class="na">getHeaders</span><span class="p">());</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">correlationId</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">logger</span><span class="p">.</span><span class="na">debug</span><span class="p">(</span><span class="s">&quot;Tusbank-correlation-id found in the incoming request: {}. &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">correlationId</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">correlationId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">generateCorrelationId</span><span class="p">();</span>
+<span class="w">            </span><span class="n">logger</span><span class="p">.</span><span class="na">debug</span><span class="p">(</span><span class="s">&quot;Tusbank-correlation-id generated: {}.&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">correlationId</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="n">exchange</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">filterUtility</span><span class="p">.</span><span class="na">setCorrelationId</span><span class="p">(</span><span class="n">exchange</span><span class="p">,</span><span class="w"> </span><span class="n">correlationId</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">chain</span><span class="p">.</span><span class="na">filter</span><span class="p">(</span><span class="n">exchange</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">generateCorrelationId</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">java</span><span class="p">.</span><span class="na">util</span><span class="p">.</span><span class="na">UUID</span><span class="p">.</span><span class="na">randomUUID</span><span class="p">().</span><span class="na">toString</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">ResponseTraceFilter.java</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.tus.gatewayserver.filters</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.slf4j.Logger</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.slf4j.LoggerFactory</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.cloud.gateway.filter.GlobalFilter</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.context.annotation.Configuration</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">reactor.core.publisher.Mono</span><span class="p">;</span>
+
+<span class="nd">@Configuration</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ResponseTraceFilter</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Logger</span><span class="w"> </span><span class="n">logger</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LoggerFactory</span><span class="p">.</span><span class="na">getLogger</span><span class="p">(</span><span class="n">ResponseTraceFilter</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+
+<span class="w">    </span><span class="nd">@Autowired</span>
+<span class="w">    </span><span class="n">FilterUtility</span><span class="w"> </span><span class="n">filterUtility</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nd">@org.springframework.context.annotation.Bean</span>
+<span class="w">    </span><span class="n">GlobalFilter</span><span class="w"> </span><span class="nf">postGlobalFilter</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="n">exchange</span><span class="p">,</span><span class="w"> </span><span class="n">chain</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">chain</span><span class="p">.</span><span class="na">filter</span><span class="p">(</span><span class="n">exchange</span><span class="p">).</span><span class="na">then</span><span class="p">(</span><span class="n">Mono</span><span class="p">.</span><span class="na">fromRunnable</span><span class="p">(()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">String</span><span class="w"> </span><span class="n">correlationId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">filterUtility</span><span class="p">.</span><span class="na">getCorrelationId</span><span class="p">(</span><span class="n">exchange</span><span class="p">.</span><span class="na">getRequest</span><span class="p">().</span><span class="na">getHeaders</span><span class="p">());</span>
+<span class="w">                </span><span class="n">logger</span><span class="p">.</span><span class="na">debug</span><span class="p">(</span><span class="s">&quot;Updated the tusbank-correlation-id in the response headers: {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">correlationId</span><span class="p">);</span>
+<span class="w">                </span><span class="n">exchange</span><span class="p">.</span><span class="na">getResponse</span><span class="p">().</span><span class="na">getHeaders</span><span class="p">().</span><span class="na">add</span><span class="p">(</span><span class="n">FilterUtility</span><span class="p">.</span><span class="na">CORRELATION_ID</span><span class="p">,</span><span class="w"> </span><span class="n">correlationId</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}));</span>
+<span class="w">        </span><span class="p">};</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
 <p>Step#2 Update the .yml file for the gateway with the logging information to allow all logger statements of type DEBUG to be logged.</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Gateway Server: application.yml</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">server</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8072</span>
+
+<span class="nt">logging</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">level</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">com</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">tus</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">gatewayserver</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DEBUG</span>
+</code></pre></div></td></tr></table></div>
 <p>Step#3 We need to make changes inside the individual microservices (accounts, loans, cards) because the gateway is going to send a new request header with the correlationid value which the services need to receive the request header that the gateway is going to forward with the request. We can use the customercontroller (fetchCustomerDetails) to show this since it in turn invokes the cards and loans.</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Accounts: CustomerController.java</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.tus.accounts.controller</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.slf4j.Logger</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.slf4j.LoggerFactory</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.http.MediaType</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.http.ResponseEntity</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.validation.annotation.Validated</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.GetMapping</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.RequestHeader</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.RequestMapping</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.RequestParam</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.RestController</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.tus.accounts.dto.CustomerDetailsDto</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.tus.accounts.service.ICustomersService</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.validation.constraints.Pattern</span><span class="p">;</span>
+
+<span class="nd">@RestController</span>
+<span class="nd">@RequestMapping</span><span class="p">(</span><span class="n">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/api&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">produces</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MediaType</span><span class="p">.</span><span class="na">APPLICATION_JSON_VALUE</span><span class="p">)</span>
+<span class="nd">@Validated</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">CustomerController</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Logger</span><span class="w"> </span><span class="n">logger</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LoggerFactory</span><span class="p">.</span><span class="na">getLogger</span><span class="p">(</span><span class="n">CustomerController</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">ICustomersService</span><span class="w"> </span><span class="n">iCustomerService</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">CustomerController</span><span class="p">(</span><span class="n">ICustomersService</span><span class="w"> </span><span class="n">iCustomerService</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">iCustomerService</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">iCustomerService</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@GetMapping</span><span class="p">(</span><span class="s">&quot;/customers&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="o">&lt;</span><span class="n">CustomerDetailsDto</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">fetchCustomerDetails</span><span class="p">(</span>
+<span class="w">            </span><span class="nd">@RequestHeader</span><span class="p">(</span><span class="s">&quot;tusbank-correlation-id&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">correlationId</span><span class="p">,</span><span class="w"> </span>
+<span class="w">            </span><span class="nd">@RequestParam</span><span class="w"> </span><span class="nd">@Pattern</span><span class="p">(</span><span class="n">regexp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;(^$|[0-9]{10})&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Mobile Number must be 10 digits&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">mobileNumber</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">logger</span><span class="p">.</span><span class="na">debug</span><span class="p">(</span><span class="s">&quot;TusBank-correlation-id: found:{}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">correlationId</span><span class="p">);</span>
+<span class="w">        </span><span class="n">CustomerDetailsDto</span><span class="w"> </span><span class="n">customerDetailsDto</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">iCustomerService</span><span class="p">.</span><span class="na">fetchCustomerDetails</span><span class="p">(</span><span class="n">mobileNumber</span><span class="p">,</span><span class="w"> </span><span class="n">correlationId</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="p">.</span><span class="na">ok</span><span class="p">(</span><span class="n">customerDetailsDto</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Accounts: ICustomersService.java</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.tus.accounts.service</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.tus.accounts.dto.CustomerDetailsDto</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">ICustomersService</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="n">CustomerDetailsDto</span><span class="w"> </span><span class="nf">fetchCustomerDetails</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">mobileNumber</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">correlationId</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Accounts: ICustomerServiceImpl.java</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">CustomerDetailsDto</span><span class="w"> </span><span class="nf">fetchCustomerDetails</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">mobileNumber</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">correlationId</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Customer</span><span class="w"> </span><span class="n">customer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">customerRepository</span><span class="p">.</span><span class="na">findByMobileNumber</span><span class="p">(</span><span class="n">mobileNumber</span><span class="p">)</span>
+<span class="w">                </span><span class="p">.</span><span class="na">orElseThrow</span><span class="p">(()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ResourceNotFoundException</span><span class="p">(</span><span class="s">&quot;Customer&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;mobileNumber&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">mobileNumber</span><span class="p">));</span>
+<span class="w">        </span><span class="n">Accounts</span><span class="w"> </span><span class="n">accounts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">accountsRepository</span><span class="p">.</span><span class="na">findByCustomerId</span><span class="p">(</span><span class="n">customer</span><span class="p">.</span><span class="na">getCustomerId</span><span class="p">()).</span><span class="na">orElseThrow</span><span class="p">(</span>
+<span class="w">                </span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ResourceNotFoundException</span><span class="p">(</span><span class="s">&quot;Account&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;customerId&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">customer</span><span class="p">.</span><span class="na">getCustomerId</span><span class="p">().</span><span class="na">toString</span><span class="p">()));</span>
+
+<span class="w">        </span><span class="n">CustomerDetailsDto</span><span class="w"> </span><span class="n">customerDetailsDto</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CustomerMapper</span><span class="p">.</span><span class="na">mapToCustomerDetailsDto</span><span class="p">(</span><span class="n">customer</span><span class="p">,</span>
+<span class="w">                </span><span class="k">new</span><span class="w"> </span><span class="n">CustomerDetailsDto</span><span class="p">());</span>
+<span class="w">        </span><span class="n">customerDetailsDto</span><span class="p">.</span><span class="na">setAccountsDto</span><span class="p">(</span><span class="n">AccountsMapper</span><span class="p">.</span><span class="na">mapToAccountsDto</span><span class="p">(</span><span class="n">accounts</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">AccountsDto</span><span class="p">()));</span>
+
+<span class="w">        </span><span class="n">ResponseEntity</span><span class="o">&lt;</span><span class="n">LoansDto</span><span class="o">&gt;</span><span class="w"> </span><span class="n">loansDtoResponseEntity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">loansFeignClient</span><span class="p">.</span><span class="na">fetchLoanDetails</span><span class="p">(</span><span class="n">correlationId</span><span class="p">,</span><span class="w"> </span><span class="n">mobileNumber</span><span class="p">);</span>
+<span class="w">        </span><span class="n">customerDetailsDto</span><span class="p">.</span><span class="na">setLoansDto</span><span class="p">(</span><span class="n">loansDtoResponseEntity</span><span class="p">.</span><span class="na">getBody</span><span class="p">());</span>
+
+<span class="w">        </span><span class="n">ResponseEntity</span><span class="o">&lt;</span><span class="n">CardsDto</span><span class="o">&gt;</span><span class="w"> </span><span class="n">cardsDtoResponseEntity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cardsFeignClient</span><span class="p">.</span><span class="na">fetchCardDetails</span><span class="p">(</span><span class="n">correlationId</span><span class="p">,</span><span class="w"> </span><span class="n">mobileNumber</span><span class="p">);</span>
+<span class="w">        </span><span class="n">customerDetailsDto</span><span class="p">.</span><span class="na">setCardsDto</span><span class="p">(</span><span class="n">cardsDtoResponseEntity</span><span class="p">.</span><span class="na">getBody</span><span class="p">());</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">customerDetailsDto</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Accounts: CardsFeignClient.java</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@FeignClient</span><span class="p">(</span><span class="s">&quot;cards&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">CardsFeignClient</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@GetMapping</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="s">&quot;/api/cards&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">consumes</span><span class="o">=</span><span class="s">&quot;application/json&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="o">&lt;</span><span class="n">CardsDto</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">fetchCardDetails</span><span class="p">(</span><span class="nd">@RequestHeader</span><span class="p">(</span><span class="s">&quot;tusbank-correlation-id&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">correlationId</span><span class="p">,</span>
+<span class="w">            </span><span class="nd">@RequestParam</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">mobileNumber</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Accounts: LoansFeignClient.java</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@FeignClient</span><span class="p">(</span><span class="s">&quot;loans&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">LoansFeignClient</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@GetMapping</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/api/loans&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">consumes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;application/json&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="o">&lt;</span><span class="n">LoansDto</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">fetchLoanDetails</span><span class="p">(</span><span class="nd">@RequestHeader</span><span class="p">(</span><span class="s">&quot;tusbank-correlation-id&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">correlationId</span><span class="p">,</span>
+<span class="w">            </span><span class="nd">@RequestParam</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">mobileNumber</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Loans: LoansController.java</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@Validated</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">LoansController</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">ILoansService</span><span class="w"> </span><span class="n">iLoansService</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Logger</span><span class="w"> </span><span class="n">logger</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LoggerFactory</span><span class="p">.</span><span class="na">getLogger</span><span class="p">(</span><span class="n">LoansController</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Loans: LoansController.java</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">83</span>
+<span class="normal">84</span>
+<span class="normal">85</span>
+<span class="normal">86</span>
+<span class="normal">87</span>
+<span class="normal">88</span>
+<span class="normal">89</span>
+<span class="normal">90</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">    </span><span class="nd">@GetMapping</span><span class="p">()</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="o">&lt;</span><span class="n">LoansDto</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">fetchLoanDetails</span><span class="p">(</span><span class="nd">@RequestHeader</span><span class="p">(</span><span class="s">&quot;tusbank-correlation-id&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">correlationId</span><span class="p">,</span>
+<span class="w">            </span><span class="nd">@RequestParam</span><span class="w"> </span><span class="nd">@Pattern</span><span class="p">(</span><span class="n">regexp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;(^$|[0-9]{10})&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Mobile number must be 10 digits&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">mobileNumber</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">LoansDto</span><span class="w"> </span><span class="n">loansDto</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">iLoansService</span><span class="p">.</span><span class="na">fetchLoan</span><span class="p">(</span><span class="n">mobileNumber</span><span class="p">);</span>
+<span class="w">        </span><span class="n">logger</span><span class="p">.</span><span class="na">debug</span><span class="p">(</span><span class="s">&quot;TusBank-correlation-id: found:{}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">correlationId</span><span class="p">);</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Build Version: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">buildVersion</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="p">.</span><span class="na">status</span><span class="p">(</span><span class="n">HttpStatus</span><span class="p">.</span><span class="na">OK</span><span class="p">).</span><span class="na">body</span><span class="p">(</span><span class="n">loansDto</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Cards: CardsController.java</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@Validated</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">CardsController</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">ICardsService</span><span class="w"> </span><span class="n">iCardsService</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Logger</span><span class="w"> </span><span class="n">logger</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LoggerFactory</span><span class="p">.</span><span class="na">getLogger</span><span class="p">(</span><span class="n">CardsController</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Cards: CardsController.java</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">82</span>
+<span class="normal">83</span>
+<span class="normal">84</span>
+<span class="normal">85</span>
+<span class="normal">86</span>
+<span class="normal">87</span>
+<span class="normal">88</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">    </span><span class="nd">@GetMapping</span><span class="p">()</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="o">&lt;</span><span class="n">CardsDto</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">fetchCardDetails</span><span class="p">(</span><span class="nd">@RequestHeader</span><span class="p">(</span><span class="s">&quot;tusbank-correlation-id&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">correlationId</span><span class="p">,</span>
+<span class="w">            </span><span class="nd">@RequestParam</span><span class="w"> </span><span class="nd">@Pattern</span><span class="p">(</span><span class="n">regexp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;(^$|[0-9]{10})&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Mobile number must be 10 digits&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">mobileNumber</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">logger</span><span class="p">.</span><span class="na">debug</span><span class="p">(</span><span class="s">&quot;TusBank-correlation-id: found:{}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">correlationId</span><span class="p">);</span>
+<span class="w">        </span><span class="n">CardsDto</span><span class="w"> </span><span class="n">loansDto</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">iCardsService</span><span class="p">.</span><span class="na">fetchCard</span><span class="p">(</span><span class="n">mobileNumber</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="p">.</span><span class="na">status</span><span class="p">(</span><span class="n">HttpStatus</span><span class="p">.</span><span class="na">OK</span><span class="p">).</span><span class="na">body</span><span class="p">(</span><span class="n">loansDto</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
 <p>Step#4 enable logging in the accounts, loans and cards</p>
+<div class="highlight"><span class="filename">Accounts: application.yml linenums=</span><pre><span></span><code><span class="nt">logging</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">level</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">com</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">tus</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">accounts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DEBUG</span>
+</code></pre></div>
 <p>Restart all the services followed by restarting the gateway.</p>
+<p><img alt="Eureka Server" src="pic2.png" /></p>
+<pre><code>Figure 2. Eureka Server
+</code></pre>
 <p>Clear the console for cars, accounts and loans as well as the gateway.</p>
 <p>Invoke the fetchCustomerDetails request from the Gateway.</p>
+<p><img alt="Response" src="pic3.png" /></p>
+<pre><code>Figure 3. Response
+</code></pre>
+<p><img alt="Response Header tusbank-correlation-id" src="pic4.png" /></p>
+<pre><code>Figure 4. Response Header contains generated tusbank-correlation-id
+</code></pre>
+<p><img alt="Gateway Server tusbank-correlation-id" src="pic5.png" /></p>
+<pre><code>Figure 5. Gateway Server tusbank-correlation-id
+</code></pre>
+<p><img alt="Accounts tusbank-correlation-id" src="pic6.png" /></p>
+<pre><code>Figure 6. Accounts tusbank-correlation-id
+</code></pre>
+<p><img alt="Cards tusbank-correlation-id" src="pic7.png" /></p>
+<pre><code>Figure 7. Cards tusbank-correlation-id
+</code></pre>
+<p><img alt="Loans tusbank-correlation-id" src="pic8.png" /></p>
+<pre><code>Figure 8. Loans tusbank-correlation-id
+</code></pre>
 
 
 
