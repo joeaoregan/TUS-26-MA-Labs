@@ -50,3 +50,9 @@ info:
     name: "cards"
     description: "Bank Cards Application"
     version: "1.1.0"
+
+logging:
+  level:
+    com:
+      tus:
+        cards: DEBUG

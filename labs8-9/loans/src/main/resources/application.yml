@@ -50,3 +50,9 @@ info:
     name: "loans"
     description: "Bank Loans Application"
     version: "1.2.0"
+
+logging:
+  level:
+    com:
+      tus:
+        loans: DEBUG

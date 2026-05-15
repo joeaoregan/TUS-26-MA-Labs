@@ -39,3 +39,9 @@ info:
 
 server:
   port: 8072
+  
+logging:
+  level:
+    com:
+      tus:
+        gatewayserver: DEBUG
