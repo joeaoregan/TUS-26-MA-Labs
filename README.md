@@ -59,6 +59,12 @@
 - [Lab#24 Feign Client code changes to invoke other microservices](https://joeaoregan.github.io/TUS-26-MA-Labs/labs22-25/lab24/index.md)
 - [Lab#25 Load Balancing Demonstration](https://joeaoregan.github.io/TUS-26-MA-Labs/labs22-25/lab25/index.md)
 
+#### Spring Cloud Gateway
+
+- [Lab#26 Building a Gateway with Spring Cloud](https://joeaoregan.github.io/TUS-26-MA-Labs/labs26-28/lab26/index.md)
+- [Lab#27 Making changes inside the gateway server](https://joeaoregan.github.io/TUS-26-MA-Labs/labs26-28/lab27/index.md)
+- [Lab#28 Cross cutting concerns – tracing and logging](https://joeaoregan.github.io/TUS-26-MA-Labs/labs26-28/lab28/index.md)
+
 #### API
 
 - [API Overview](https://joeaoregan.github.io/TUS-26-MA-Labs/api/)
