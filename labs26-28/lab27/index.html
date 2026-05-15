@@ -2301,18 +2301,58 @@
 <h1 id="lab27-making-changes-inside-the-gateway-server">Lab#27 Making changes inside the gateway server.</h1>
 <p>In this lab we will make some changes inside the gateway. The first one is to accept lowercase letters in the url for the service name. We will also add some custom routing.
 Step#1 Update the application.yml for the gateway to add the property shown and restart the gatewayserver. This means that the gateway will accept service names in lowercase.</p>
+<p><img alt="lowercase service id" src="pic1.png" /></p>
+<pre><code>Figure 1: Accept lowercase letters in the url for the service name
+</code></pre>
 <p>Step#2 Test using Postman</p>
-<p>Step#3 To demonstrate custom routing we will include “tusbank” in the url received by the gateway and map it to the appropriate url. See examples below.
-http://localhost:8072/tusbank/accounts/api/account  -&gt;http://localhost:8072/accounts/api/account
+<p><img alt="Postman Test" src="pic2.png" /></p>
+<pre><code>Figure 2: Test lowercase letters, e.g. /loans/api/loans, Using Postman
+</code></pre>
+<p>Step#3 To demonstrate custom routing we will include “tusbank” in the url received by the gateway and map it to the appropriate url. See examples below.</p>
+<div class="highlight"><pre><span></span><code>http://localhost:8072/tusbank/accounts/api/account  -&gt;http://localhost:8072/accounts/api/account
 http://localhost:8072/tusbank/loans/api/loans. -&gt; http://localhost:8072/loans/api/loans.
-http://localhost:8072/tusbank/cards/api/cards. -&gt; http://localhost:8072/cards/api/cards</p>
+http://localhost:8072/tusbank/cards/api/cards. -&gt; http://localhost:8072/cards/api/cards
+</code></pre></div>
 <p>Create a Bean inside the main application class in the gatewayserver – given. This defines the routing location configurations. This invokes a filter to re-write paths. </p>
+<p><img alt="Bean" src="pic3.png" /></p>
+<pre><code>Figure 3: Bean defines the routing location configurations
+</code></pre>
 <p>Step 4: Test the API so that the new url is invoked.</p>
+<p><img alt="tusbank/accounts" src="pic4.png" /></p>
+<pre><code>Figure 4: tusbank/accounts
+</code></pre>
 <p>Step 5: Check the actuator endpoints and routes. You will see that all routes from the default configuration are available and can still be called. </p>
+<p><img alt="actuator" src="pic5.png" /></p>
+<pre><code>Figure 5: actuator
+</code></pre>
+<p><img alt="actuator gateway routes" src="pic6.png" /></p>
+<pre><code>Figure 6: actuator gateway routes
+</code></pre>
 <p>Both the default and the custom routes are available.</p>
+<p><img alt="accounts route" src="pic7.png" /></p>
+<pre><code>Figure 7: /accounts route
+</code></pre>
+<p><img alt="tusbank loans route" src="pic8.png" /></p>
+<pre><code>Figure 8: /tusbank/loans route
+</code></pre>
 <p>Step 6: To disable all the default routes and avoid confusion, update the application.yml to set gateway.discovery.locator.enabled to false. Now we only have the 3 scenarios remaining and default behaviour is disabled.</p>
+<p><img alt="Disable Default Routes" src="pic9.png" /></p>
+<pre><code>Figure 9: Disable all the default routes
+</code></pre>
+<p><img alt="Actuator Gateway Routes" src="pic10.png" /></p>
+<pre><code>Figure 10: Actuator Gateway Routes
+</code></pre>
+<p><img alt="Status 404" src="pic11.png" /></p>
+<pre><code>Figure 11: Status 404
+</code></pre>
 <p>Default behaviour disabled – just using custom paths
 Step 7: In the bean we have also have the code or filter to add a header in the response. Check the response headers in Postman. </p>
+<p><img alt="Add Response Header" src="pic12.png" /></p>
+<pre><code>Figure 12: Add Response Header with Filter
+</code></pre>
+<p><img alt="X-Response-Time" src="pic13.png" /></p>
+<pre><code>Figure 13: X-Response-Time
+</code></pre>
 
 
 
