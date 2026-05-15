@@ -2301,12 +2301,32 @@
 <h1 id="lab27-making-changes-inside-the-gateway-server">Lab#27 Making changes inside the gateway server.</h1>
 <p>In this lab we will make some changes inside the gateway. The first one is to accept lowercase letters in the url for the service name. We will also add some custom routing.
 Step#1 Update the application.yml for the gateway to add the property shown and restart the gatewayserver. This means that the gateway will accept service names in lowercase.</p>
-<p><img alt="lowercase service id" src="pic1.png" /></p>
-<pre><code>Figure 1: Accept lowercase letters in the url for the service name
-</code></pre>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Gateway Server: application.yml</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gatewayserver</span>
+<span class="w"> </span><span class="w w-Error"> </span><span class="nt">config</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">import</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;optional:configserver:http://localhost:8071&quot;</span><span class="w"> </span><span class="c1"># Lab 22</span>
+<span class="w">  </span><span class="nt">cloud</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">gateway</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">server</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">webflux</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">discovery</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">locator</span><span class="p">:</span>
+<span class="w">              </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">              </span><span class="nt">lower-case-service-id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"> </span><span class="c1"># lab 27</span>
+</code></pre></div></td></tr></table></div>
 <p>Step#2 Test using Postman</p>
-<p><img alt="Postman Test" src="pic2.png" /></p>
-<pre><code>Figure 2: Test lowercase letters, e.g. /loans/api/loans, Using Postman
+<p>POST <code>localhost:8072/loans/api/loans?mobileNumber=0871234567</code></p>
+<p><img alt="Postman Test" src="pic1.png" /></p>
+<pre><code>Figure 1: Test lowercase letters, e.g. /loans/api/loans, Using Postman
 </code></pre>
 <p>Step#3 To demonstrate custom routing we will include “tusbank” in the url received by the gateway and map it to the appropriate url. See examples below.</p>
 <div class="highlight"><pre><span></span><code>http://localhost:8072/tusbank/accounts/api/account  -&gt;http://localhost:8072/accounts/api/account
@@ -2314,44 +2334,139 @@ http://localhost:8072/tusbank/loans/api/loans. -&gt; http://localhost:8072/loans
 http://localhost:8072/tusbank/cards/api/cards. -&gt; http://localhost:8072/cards/api/cards
 </code></pre></div>
 <p>Create a Bean inside the main application class in the gatewayserver – given. This defines the routing location configurations. This invokes a filter to re-write paths. </p>
-<p><img alt="Bean" src="pic3.png" /></p>
-<pre><code>Figure 3: Bean defines the routing location configurations
-</code></pre>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Gateway Server: GatewayserverApplication.java</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@SpringBootApplication</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">GatewayserverApplication</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">SpringApplication</span><span class="p">.</span><span class="na">run</span><span class="p">(</span><span class="n">GatewayserverApplication</span><span class="p">.</span><span class="na">class</span><span class="p">,</span><span class="w"> </span><span class="n">args</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Bean</span>
+<span class="w">    </span><span class="n">RouteLocator</span><span class="w"> </span><span class="nf">tusBankRouteconfig</span><span class="p">(</span><span class="n">RouteLocatorBuilder</span><span class="w"> </span><span class="n">routeLocatorBuilder</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// Lab 27</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">routeLocatorBuilder</span><span class="p">.</span><span class="na">routes</span><span class="p">()</span>
+<span class="w">                </span><span class="p">.</span><span class="na">route</span><span class="p">(</span><span class="n">p</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">p</span>
+<span class="w">                </span><span class="p">.</span><span class="na">path</span><span class="p">(</span><span class="s">&quot;/tusbank/accounts/**&quot;</span><span class="p">)</span>
+<span class="w">                </span><span class="p">.</span><span class="na">filters</span><span class="p">(</span><span class="n">f</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">f</span><span class="p">.</span><span class="na">rewritePath</span><span class="p">(</span><span class="s">&quot;/tusbank/accounts/(?&lt;segment&gt;.*)&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;/${segment}&quot;</span><span class="p">)</span>
+<span class="w">                </span><span class="p">.</span><span class="na">addResponseHeader</span><span class="p">(</span><span class="s">&quot;X-Response-Time&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">LocalDateTime</span><span class="p">.</span><span class="na">now</span><span class="p">().</span><span class="na">toString</span><span class="p">()))</span>
+<span class="w">                </span><span class="p">.</span><span class="na">uri</span><span class="p">(</span><span class="s">&quot;lb://ACCOUNTS&quot;</span><span class="p">))</span>
+<span class="w">                </span><span class="p">.</span><span class="na">route</span><span class="p">(</span><span class="n">p</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">p</span>
+<span class="w">                </span><span class="p">.</span><span class="na">path</span><span class="p">(</span><span class="s">&quot;/tusbank/loans/**&quot;</span><span class="p">)</span>
+<span class="w">                </span><span class="p">.</span><span class="na">filters</span><span class="p">(</span><span class="n">f</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">f</span><span class="p">.</span><span class="na">rewritePath</span><span class="p">(</span><span class="s">&quot;/tusbank/loans/(?&lt;segment&gt;.*)&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;/${segment}&quot;</span><span class="p">)</span>
+<span class="w">                </span><span class="p">.</span><span class="na">addResponseHeader</span><span class="p">(</span><span class="s">&quot;X-Response-Time&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">LocalDateTime</span><span class="p">.</span><span class="na">now</span><span class="p">().</span><span class="na">toString</span><span class="p">()))</span>
+<span class="w">                </span><span class="p">.</span><span class="na">uri</span><span class="p">(</span><span class="s">&quot;lb://LOANS&quot;</span><span class="p">))</span>
+<span class="w">                </span><span class="p">.</span><span class="na">route</span><span class="p">(</span><span class="n">p</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">p</span>
+<span class="w">                </span><span class="p">.</span><span class="na">path</span><span class="p">(</span><span class="s">&quot;/tusbank/cards/**&quot;</span><span class="p">)</span>
+<span class="w">                </span><span class="p">.</span><span class="na">filters</span><span class="p">(</span><span class="n">f</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">f</span><span class="p">.</span><span class="na">rewritePath</span><span class="p">(</span><span class="s">&quot;/tusbank/cards/(?&lt;segment&gt;.*)&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;/${segment}&quot;</span><span class="p">)</span>
+<span class="w">                </span><span class="p">.</span><span class="na">addResponseHeader</span><span class="p">(</span><span class="s">&quot;X-Response-Time&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">LocalDateTime</span><span class="p">.</span><span class="na">now</span><span class="p">().</span><span class="na">toString</span><span class="p">()))</span>
+<span class="w">                </span><span class="p">.</span><span class="na">uri</span><span class="p">(</span><span class="s">&quot;lb://CARDS&quot;</span><span class="p">)).</span><span class="na">build</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
 <p>Step 4: Test the API so that the new url is invoked.</p>
-<p><img alt="tusbank/accounts" src="pic4.png" /></p>
-<pre><code>Figure 4: tusbank/accounts
+<p>POST <code>localhost:8072/tusbank/accounts/api/accounts</code></p>
+<div class="highlight"><span class="filename">POST Account</span><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Joe O&#39;Regan&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;joe@student.tus.ie&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;mobileNumber&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0871234567&quot;</span><span class="w">    </span>
+<span class="p">}</span>
+</code></pre></div>
+<p><img alt="tusbank/accounts" src="pic2.png" /></p>
+<pre><code>Figure 2: tusbank/accounts
 </code></pre>
 <p>Step 5: Check the actuator endpoints and routes. You will see that all routes from the default configuration are available and can still be called. </p>
-<p><img alt="actuator" src="pic5.png" /></p>
-<pre><code>Figure 5: actuator
+<p><code>http://localhost:8072/actuator/</code></p>
+<p><img alt="actuator" src="pic3.png" /></p>
+<pre><code>Figure 3: actuator
 </code></pre>
-<p><img alt="actuator gateway routes" src="pic6.png" /></p>
-<pre><code>Figure 6: actuator gateway routes
+<p><code>http://localhost:8072/actuator/gateway/routes</code></p>
+<p><img alt="actuator gateway routes" src="pic4.png" /></p>
+<pre><code>Figure 4: actuator gateway routes
 </code></pre>
 <p>Both the default and the custom routes are available.</p>
-<p><img alt="accounts route" src="pic7.png" /></p>
-<pre><code>Figure 7: /accounts route
+<p>GET <code>localhost:8072/accounts/api/accounts?mobileNumber=1231234444</code></p>
+<p><img alt="accounts route" src="pic5.png" /></p>
+<pre><code>Figure 5: /accounts route
 </code></pre>
-<p><img alt="tusbank loans route" src="pic8.png" /></p>
-<pre><code>Figure 8: /tusbank/loans route
+<p>GET <code>localhost:8072/tusbank/loans/api/loans?mobileNumber=0871234567</code></p>
+<p><img alt="tusbank loans route" src="pic6.png" /></p>
+<pre><code>Figure 6: /tusbank/loans route
 </code></pre>
 <p>Step 6: To disable all the default routes and avoid confusion, update the application.yml to set gateway.discovery.locator.enabled to false. Now we only have the 3 scenarios remaining and default behaviour is disabled.</p>
-<p><img alt="Disable Default Routes" src="pic9.png" /></p>
-<pre><code>Figure 9: Disable all the default routes
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Gateway Server: application.yml</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gatewayserver</span>
+<span class="w"> </span><span class="w w-Error"> </span><span class="nt">config</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">import</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;optional:configserver:http://localhost:8071&quot;</span><span class="w"> </span><span class="c1"># Lab 22</span>
+<span class="w">  </span><span class="nt">cloud</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">gateway</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">server</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">webflux</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">discovery</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">locator</span><span class="p">:</span>
+<span class="w">              </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">              </span><span class="nt">lower-case-service-id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"> </span><span class="c1"># lab 27</span>
+</code></pre></div></td></tr></table></div>
+<p><code>http://localhost:8072/actuator/gateway/routes</code></p>
+<p><img alt="Actuator Gateway Routes" src="pic7.png" /></p>
+<pre><code>Figure 7: Actuator Gateway Routes
 </code></pre>
-<p><img alt="Actuator Gateway Routes" src="pic10.png" /></p>
-<pre><code>Figure 10: Actuator Gateway Routes
-</code></pre>
-<p><img alt="Status 404" src="pic11.png" /></p>
-<pre><code>Figure 11: Status 404
+<p>GET <code>localhost:8072/tusbank/accounts/api/accounts?mobileNumber=0871234567</code></p>
+<p><img alt="Status 404" src="pic8.png" /></p>
+<pre><code>Figure 8: Status 404
 </code></pre>
 <p>Default behaviour disabled – just using custom paths
 Step 7: In the bean we have also have the code or filter to add a header in the response. Check the response headers in Postman. </p>
-<p><img alt="Add Response Header" src="pic12.png" /></p>
-<pre><code>Figure 12: Add Response Header with Filter
-</code></pre>
-<p><img alt="X-Response-Time" src="pic13.png" /></p>
-<pre><code>Figure 13: X-Response-Time
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Gateway Server: GatewayserverApplication.java</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">    </span><span class="nd">@Bean</span>
+<span class="w">    </span><span class="n">RouteLocator</span><span class="w"> </span><span class="nf">tusBankRouteconfig</span><span class="p">(</span><span class="n">RouteLocatorBuilder</span><span class="w"> </span><span class="n">routeLocatorBuilder</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// Lab 27</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">routeLocatorBuilder</span><span class="p">.</span><span class="na">routes</span><span class="p">()</span>
+<span class="w">                </span><span class="p">.</span><span class="na">route</span><span class="p">(</span><span class="n">p</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="na">path</span><span class="p">(</span><span class="s">&quot;/tusbank/accounts/**&quot;</span><span class="p">)</span>
+<span class="w">                        </span><span class="p">.</span><span class="na">filters</span><span class="p">(</span><span class="n">f</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">f</span><span class="p">.</span><span class="na">rewritePath</span><span class="p">(</span><span class="s">&quot;/tusbank/accounts/(?&lt;segment&gt;.*)&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;/${segment}&quot;</span><span class="p">)</span>
+<span class="w">                                </span><span class="p">.</span><span class="na">addResponseHeader</span><span class="p">(</span><span class="s">&quot;X-Response-Time&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">LocalDateTime</span><span class="p">.</span><span class="na">now</span><span class="p">().</span><span class="na">toString</span><span class="p">()))</span><span class="w"> </span><span class="c1">// This</span>
+<span class="w">                        </span><span class="p">.</span><span class="na">uri</span><span class="p">(</span><span class="s">&quot;lb://ACCOUNTS&quot;</span><span class="p">))</span>
+</code></pre></div></td></tr></table></div>
+<p>GET <code>localhost:8072/tusbank/loans/api/loans?mobileNumber=0871234567</code></p>
+<p><img alt="X-Response-Time" src="pic9.png" /></p>
+<pre><code>Figure 9: X-Response-Time
 </code></pre>
 
 
