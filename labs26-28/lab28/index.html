@@ -2739,6 +2739,33 @@ Step#1 Create a new package with classes as shown (code given).</p>
 </code></pre>
 <p>Clear the console for cars, accounts and loans as well as the gateway.</p>
 <p>Invoke the fetchCustomerDetails request from the Gateway.</p>
+<pre><code>N.B. Make sure an account, loan and card exist with the same number
+</code></pre>
+<p>POST <code>localhost:8072/tusbank/accounts/api/accounts</code></p>
+<div class="highlight"><span class="filename">Sample Account</span><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Joe O&#39;Regan&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;joe@student.tus.ie&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;mobileNumber&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0871234567&quot;</span><span class="w">    </span>
+<span class="p">}</span>
+</code></pre></div>
+<p>POST <code>localhost:8072/tusbank/cards/api/cards?mobileNumber=0871234567</code></p>
+<div class="highlight"><span class="filename">Sample Card</span><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;mobileNumber&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0871234567&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;cardType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Credit Card&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;totalLimit&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">100000</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;amountUsed&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;availableAmount&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">100000</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>POST <code>localhost:8072/tusbank/loans/api/loans?mobileNumber=0871234567</code></p>
+<div class="highlight"><span class="filename">Sample Loan</span><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;mobileNumber&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0871234567&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;loanType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Home Loan&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;totalLoan&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">100000</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;amountPaid&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;outstandingAmount&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">100000</span>
+<span class="p">}</span>
+</code></pre></div>
 <p><img alt="Response" src="pic3.png" /></p>
 <pre><code>Figure 3. Response
 </code></pre>
