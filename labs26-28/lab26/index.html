@@ -2301,10 +2301,43 @@
 <h1 id="lab26-building-a-gateway-with-spring-cloud">Lab#26 Building a Gateway with Spring Cloud.</h1>
 <p>In this lab we will create a Gateway Server.</p>
 <p>Step#1 Use Spring Initializer to create a project with dependencies as shown</p>
+<p><img alt="Spring Initialiser" src="pic1.png" /></p>
+<pre><code>Figure 1. Spring Initialiser
+</code></pre>
+<p><img alt="gatewayserver in package explorer" src="pic2.png" /></p>
+<pre><code>Figure 2. Gateway Server in Package Explorer
+</code></pre>
 <p>Step#2 Update the application.yml (from application.properties)</p>
-<p>Step#3 Start the services in the following order: config, eureka, accounts/loans/cards and finally the gateway. Check Eureka.  </p>
+<p><img alt="application.yml" src="pic3.png" /></p>
+<pre><code>Figure 3. application.yml
+</code></pre>
+<p>Step#3 Start the services in the following order: config, eureka, accounts/loans/cards and finally the gateway. Check Eureka.</p>
+<p><img alt="Eureka dasboard" src="pic4.png" /></p>
+<pre><code>Figure 4. Eureka dashboard
+</code></pre>
 <p>Step#4 Check the endpoints using actuator and routes</p>
+<p><img alt="Check Endpoints with Actuator and routes" src="pic5.png" /></p>
+<pre><code>Figure 5. Check endpoints with Actuator and routes
+</code></pre>
+<p><img alt="Gateway Routes" src="pic6.png" /></p>
+<pre><code>Figure 6. Gateway Routes
+</code></pre>
 <p>Step#5 Send request to the accounts application via the Gateway. Note the service name is in uppercase letters. Even though the name is lowercase in the application.yml. </p>
+<p><img alt="Service name in Uppercase Letters" src="pic7.png" /></p>
+<pre><code>Figure 7. Service name in Uppercase Letters
+</code></pre>
+<p><img alt="service name lowercase in application.yml" src="pic8.png" /></p>
+<pre><code>Figure 8. Service name lowercase in application.yml
+</code></pre>
+<p><img alt="POST Account" src="pic9.png" /></p>
+<pre><code>Figure 9. POST Account
+</code></pre>
+<p><img alt="GET Account" src="pic10.png" /></p>
+<pre><code>Figure 10. GET Account
+</code></pre>
+<p><img alt="GET Loan" src="pic11.png" /></p>
+<pre><code>Figure 11. GET Loan
+</code></pre>
 
 
 
