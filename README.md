@@ -74,6 +74,11 @@
 - [Lab#33 Implementing the re-try pattern in the gateway](https://joeaoregan.github.io/TUS-26-MA-Labs/labs29-34/lab33/)
 - [Lab#34 Redis rate limiter in the gateway and in accounts service](https://joeaoregan.github.io/TUS-26-MA-Labs/labs29-34/lab34/)
 
+#### Security
+
+- [Lab#36 Setup AUTH server with KeyCloak](https://joeaoregan.github.io/TUS-26-MA-Labs/labs36-37/lab36/)
+- [Lab#37 Authorization Code grant type flow](https://joeaoregan.github.io/TUS-26-MA-Labs/labs36-37/lab37/)
+
 #### API
 
 - [API Overview](https://joeaoregan.github.io/TUS-26-MA-Labs/api/)

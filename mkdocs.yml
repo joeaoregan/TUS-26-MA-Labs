@@ -100,6 +100,10 @@ nav:
     - 32. Http timeouts: labs29-34/lab32/index.md
     - 33. Implementing the re-try pattern in the gateway.: labs29-34/lab33/index.md
     - 34. Redis rate limiter in the gateway and in accounts service: labs29-34/lab34/index.md
+  - 36-37 Security:
+    - Labs 36-37: labs36-37/index.md
+    - 36. Setup AUTH server with KeyCloak: labs36-37/lab36/index.md
+    - 37. Authorization Code grant type flow: labs36-37/lab37/index.md
   - API: 
     - API Endpoints: api/index.md
     - Accounts API: api/accounts.md
