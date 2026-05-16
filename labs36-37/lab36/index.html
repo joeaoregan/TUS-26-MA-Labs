@@ -2615,6 +2615,7 @@
 <pre><code>Figure 4. Keycloak Realm
 </code></pre>
 <p>Minimum Java version is 17.  </p>
+<hr />
 <h2 id="step2-register-client-details-with-keycloak-select-clients-option-and-create-client">Step#2 Register client details with KeyCloak. Select “Clients” option and “Create Client”</h2>
 <p><img alt="Create Client" src="pic5.png" /></p>
 <pre><code>Figure 5. Clients &gt; Create Client
@@ -2633,6 +2634,7 @@
 <p><img alt="Client Secret" src="pic9.png" /></p>
 <pre><code>Figure 9. Client Secret
 </code></pre>
+<hr />
 <h2 id="step3-getting-an-access-token-using-the-client-details-in-the-keycloak-click-on-the-realm-settings">Step#3 Getting an access token using the client details. In the keycloak, click on the realm settings</h2>
 <p><img alt="Realm Settings" src="pic10.png" /></p>
 <pre><code>Figure 10. Realm Settings
@@ -2641,7 +2643,7 @@
 <pre><code>Figure 11. OpenID Endpoint Configuration
 </code></pre>
 <p>Find the token endpoint</p>
-<p>openid-configuration: <localhost:8080/realms/master/.well-known/openid-configuration></p>
+<p>openid-configuration: <a href="http://localhost:8080/realms/master/.well-known/openid-configuration">http://localhost:8080/realms/master/.well-known/openid-configuration</a></p>
 <p><img alt="Token Endpoint" src="pic12.png" /></p>
 <pre><code>Figure 12. Token Endpoint
 </code></pre>
@@ -2656,146 +2658,338 @@
 <p><img alt="JWT Decoded" src="pic15.png" /></p>
 <pre><code>Figure 15. JWT Decoded
 </code></pre>
+<hr />
 <h2 id="step4-convert-our-gateway-server-to-a-resource-server-then-we-should-send-the-access-token-to-the-resource-server-first-three-new-dependencies-are-need-in-the-gatewayserver">Step#4 Convert our gateway server to a resource server. Then we should send the access token to the resource server. First three new dependencies are need in the gatewayserver.</h2>
-<p><img alt="dependency" src="pic16.png" /></p>
-<pre><code>Figure 16. dependency
-</code></pre>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Gateway: pom.xml</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">        </span><span class="nt">&lt;dependency&gt;</span>
+<span class="w">            </span><span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
+<span class="w">            </span><span class="nt">&lt;artifactId&gt;</span>spring-boot-starter-security<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/dependency&gt;</span>
+<span class="w">        </span><span class="nt">&lt;dependency&gt;</span>
+<span class="w">            </span><span class="nt">&lt;groupId&gt;</span>org.springframework.security<span class="nt">&lt;/groupId&gt;</span>
+<span class="w">            </span><span class="nt">&lt;artifactId&gt;</span>spring-security-oauth2-jose<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/dependency&gt;</span>
+<span class="w">        </span><span class="nt">&lt;dependency&gt;</span>
+<span class="w">            </span><span class="nt">&lt;groupId&gt;</span>org.springframework.security<span class="nt">&lt;/groupId&gt;</span>
+<span class="w">            </span><span class="nt">&lt;artifactId&gt;</span>spring-security-oauth2-resource-server<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/dependency&gt;</span>
+</code></pre></div></td></tr></table></div>
 <p>Add a new class in the gateway server</p>
-<p><img alt="SecurityConfig Class" src="pic17.png" /></p>
-<pre><code>Figure 17. SecurityConfig Class
+<p><img alt="SecurityConfig Class" src="pic16.png" /></p>
+<pre><code>Figure 16. SecurityConfig Class
 </code></pre>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SecurityConfig.java</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SecurityConfig.java</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.tus.gatewayserver.config</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.context.annotation.Bean</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.context.annotation.Configuration</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.http.HttpMethod</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.security.config.Customizer</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.security.config.web.server.ServerHttpSecurity</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.security.web.server.SecurityWebFilterChain</span><span class="p">;</span>
+
+<span class="nd">@Configuration</span>
+<span class="nd">@EnableWebFluxSecurity</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SecurityConfig</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@Bean</span>
+<span class="w">    </span><span class="n">SecurityWebFilterChain</span><span class="w"> </span><span class="nf">springSecurityFilterChain</span><span class="p">(</span><span class="n">ServerHttpSecurity</span><span class="w"> </span><span class="n">serverHttpSecurity</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">serverHttpSecurity</span><span class="p">.</span><span class="na">authorizeExchange</span><span class="p">(</span><span class="n">exchanges</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">exchanges</span><span class="p">.</span><span class="na">pathMatchers</span><span class="p">(</span><span class="n">HttpMethod</span><span class="p">.</span><span class="na">GET</span><span class="p">).</span><span class="na">permitAll</span><span class="p">()</span>
+<span class="w">            </span><span class="p">.</span><span class="na">pathMatchers</span><span class="p">(</span><span class="s">&quot;/tusbank/accounts/**&quot;</span><span class="p">).</span><span class="na">authenticated</span><span class="p">()</span>
+<span class="w">            </span><span class="p">.</span><span class="na">pathMatchers</span><span class="p">(</span><span class="s">&quot;/tusbank/cards/**&quot;</span><span class="p">).</span><span class="na">authenticated</span><span class="p">()</span>
+<span class="w">            </span><span class="p">.</span><span class="na">pathMatchers</span><span class="p">(</span><span class="s">&quot;/tusbank/loans/**&quot;</span><span class="p">).</span><span class="na">authenticated</span><span class="p">())</span>
+<span class="w">            </span><span class="p">.</span><span class="na">oauth2ResourceServer</span><span class="p">(</span><span class="n">oAuth2ResourceServerSpec</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">oAuth2ResourceServerSpec</span>
+<span class="w">                </span><span class="p">.</span><span class="na">jwt</span><span class="p">(</span><span class="n">Customizer</span><span class="p">.</span><span class="na">withDefaults</span><span class="p">()));</span>
+
+<span class="w">        </span><span class="n">serverHttpSecurity</span><span class="p">.</span><span class="na">csrf</span><span class="p">(</span><span class="n">csrfSpec</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">csrfSpec</span><span class="p">.</span><span class="na">disable</span><span class="p">());</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">serverHttpSecurity</span><span class="p">.</span><span class="na">build</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div></td></tr></table></div>
 <p>And in application.yml add the url for the KeyCloak server.</p>
-<p>```yml title="application.yml" linenums=""</p>
-<div class="highlight"><pre><span></span><code>Restart the gateway server. Now try a “GET” request and it should be successful. No security expected.
-
-![Postman Accounts Contact Info Endpoint](pic18.png)
-
-    Figure 18. Postman Accounts Contact Info Endpoint
-
-![Postman Cards Java Version Endpoint](pic19.png)
-
-    Figure 19. Postman Cards Java Version Endpoint
-
-![Postman Loans Build Info Endpoint](pic20.png)
-
-    Figure 20. Postman Loans Build Info Endpoint
-
-Now try a method other than GET – 401 – Unauthorized is returned.
-
-![Postman Post New Account](pic21.png)
-
-    Figure 21. Postman Post New Account
-
-To allow POST etc. ,we need to fetch the access token. The fetching of the token can be done as part of the Postman request. 
-
-We could copy in the token into the request header or use the feature of postman to get an access token as part of the request by setting authorization information in the Postman request..
-
-![Postman OAuth 2.0 Token](pic22.png)
-
-    Figure 22. Postman OAuth 2.0 Token
-
-Scroll down to “Configure New token”
-
-![Configure New Token](pic23.png)
-
-    Figure 23. Configure New Token
-
-![Get New Access Token](pic24.png)
-
-    Figure 24. Get New Access Token
-
-![Authentication Complete](pic25.png)
-
-    Figure 25. Authentication Complete
-
-![Use Token](pic26.png)
-
-    Figure 26. Use Token
-
-![Postman Post New Account](pic27.png)
-
-    Figure 27. Postman Post New Account
-
-![Postman Authorisation](pic28.png)
-
-    Figure 28. Postman Authorisation
-
-Adding authorization. Configure roles based authorization  
-Update the gateway SecurityConfig class 
-
-```java title=&quot;SecurityConfig&quot; linenums=&quot;&quot;
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">application.yml</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span></pre></div></td><td class="code"><div><pre><span></span><code>  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: &quot;http://localhost:8080/realms/master/protocol/openid-connect/certs&quot;
+</code></pre></div></td></tr></table></div>
+<p>Restart the gateway server. Now try a "GET" request and it should be successful. No security expected.</p>
+<p>GET <code>localhost:8072/tusbank/accounts/api/contact-info</code></p>
+<p><img alt="Postman Accounts Contact Info Endpoint" src="pic17.png" /></p>
+<pre><code>Figure 17. Postman Accounts Contact Info Endpoint
+</code></pre>
+<p>GET <code>localhost:8072/tusbank/cards/api/cards/java-version</code></p>
+<p><img alt="Postman Cards Java Version Endpoint" src="pic18.png" /></p>
+<pre><code>Figure 18. Postman Cards Java Version Endpoint
+</code></pre>
+<p>GET <code>localhost:8072/tusbank/loans/api/build-info</code></p>
+<p><img alt="Postman Loans Build Info Endpoint" src="pic19.png" /></p>
+<pre><code>Figure 19. Postman Loans Build Info Endpoint
+</code></pre>
+<p>Now try a method other than GET – 401 – Unauthorized is returned.</p>
+<p>POST <code>localhost:8072/tusbank/accounts/api/accounts</code></p>
+<div class="highlight"><span class="filename">Request body</span><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Joe Security&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;joe@gamil.com&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;mobileNumber&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5432154321&quot;</span>
+<span class="p">}</span>
 </code></pre></div>
+<p><img alt="Postman Post New Account" src="pic20.png" /></p>
+<pre><code>Figure 20. Postman Post New Account
+</code></pre>
+<p>To allow POST etc. ,we need to fetch the access token. The fetching of the token can be done as part of the Postman request. </p>
+<p>We could copy in the token into the request header or use the feature of postman to get an access token as part of the request by setting authorization information in the Postman request..</p>
+<p><img alt="Postman OAuth 2.0 Token" src="pic21.png" /></p>
+<pre><code>Figure 21. Postman OAuth 2.0 Token
+</code></pre>
+<p>Scroll down to “Configure New token”</p>
+<p><img alt="Configure New Token" src="pic22.png" /></p>
+<pre><code>Figure 22. Configure New Token
+</code></pre>
+<p><img alt="Get New Access Token" src="pic23.png" /></p>
+<pre><code>Figure 23. Get New Access Token
+</code></pre>
+<p><img alt="Authentication Complete" src="pic24.png" /></p>
+<pre><code>Figure 24. Authentication Complete
+</code></pre>
+<p><img alt="Use Token" src="pic25.png" /></p>
+<pre><code>Figure 25. Use Token
+</code></pre>
+<p><img alt="Postman Post New Account" src="pic26.png" /></p>
+<pre><code>Figure 26. Postman Post New Account
+</code></pre>
+<p><img alt="Postman Authorisation" src="pic27.png" /></p>
+<pre><code>Figure 27. Postman Authorisation
+</code></pre>
+<p>Adding authorization. Configure roles based authorization<br />
+Update the gateway SecurityConfig class </p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SecurityConfig</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@Configuration</span>
+<span class="nd">@EnableWebFluxSecurity</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SecurityConfig</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@Bean</span>
+<span class="w">    </span><span class="n">SecurityWebFilterChain</span><span class="w"> </span><span class="nf">springSecurityFilterChain</span><span class="p">(</span><span class="n">ServerHttpSecurity</span><span class="w"> </span><span class="n">serverHttpSecurity</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">serverHttpSecurity</span><span class="p">.</span><span class="na">authorizeExchange</span><span class="p">(</span><span class="n">exchanges</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">exchanges</span><span class="p">.</span><span class="na">pathMatchers</span><span class="p">(</span><span class="n">HttpMethod</span><span class="p">.</span><span class="na">GET</span><span class="p">).</span><span class="na">permitAll</span><span class="p">()</span>
+<span class="w">            </span><span class="p">.</span><span class="na">pathMatchers</span><span class="p">(</span><span class="s">&quot;/tusbank/accounts/**&quot;</span><span class="p">).</span><span class="na">hasRole</span><span class="p">(</span><span class="s">&quot;ACCOUNTS&quot;</span><span class="p">)</span>
+<span class="w">            </span><span class="p">.</span><span class="na">pathMatchers</span><span class="p">(</span><span class="s">&quot;/tusbank/cards/**&quot;</span><span class="p">).</span><span class="na">hasRole</span><span class="p">(</span><span class="s">&quot;CARDS&quot;</span><span class="p">)</span>
+<span class="w">            </span><span class="p">.</span><span class="na">pathMatchers</span><span class="p">(</span><span class="s">&quot;/tusbank/loans/**&quot;</span><span class="p">).</span><span class="na">hasRole</span><span class="p">(</span><span class="s">&quot;LOANS&quot;</span><span class="p">))</span>
+<span class="w">            </span><span class="p">.</span><span class="na">oauth2ResourceServer</span><span class="p">(</span><span class="n">oAuth2ResourceServerSpec</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">oAuth2ResourceServerSpec</span>
+<span class="w">                </span><span class="p">.</span><span class="na">jwt</span><span class="p">(</span><span class="n">Customizer</span><span class="p">.</span><span class="na">withDefaults</span><span class="p">()));</span>
+
+<span class="w">        </span><span class="n">serverHttpSecurity</span><span class="p">.</span><span class="na">csrf</span><span class="p">(</span><span class="n">csrfSpec</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">csrfSpec</span><span class="p">.</span><span class="na">disable</span><span class="p">());</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">serverHttpSecurity</span><span class="p">.</span><span class="na">build</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
 <p>Create roles using Keycloak</p>
-<p><img alt="Keycloak Realm Roles" src="pic29.png" /> </p>
-<pre><code>Figure 29. Keycloak Realm Roles
+<p><img alt="Keycloak Realm Roles" src="pic28.png" /> </p>
+<pre><code>Figure 28. Keycloak Realm Roles
 </code></pre>
-<p><img alt="Keycloak Create Roles" src="pic30.png" /> </p>
-<pre><code>Figure 30. Keycloak Create Roles
+<p><img alt="Keycloak Create Roles" src="pic29.png" /> </p>
+<pre><code>Figure 29. Keycloak Create Roles
 </code></pre>
-<p><img alt="Keycloak Clients" src="pic31.png" /> </p>
-<pre><code>Figure 31. Keycloak Clients
+<p><img alt="Keycloak Clients" src="pic30.png" /> </p>
+<pre><code>Figure 30. Keycloak Clients
 </code></pre>
-<p><img alt="Service Accounts Roles" src="pic32.png" /> </p>
-<pre><code>Figure 32. Service Accounts Roles
+<p><img alt="Service Accounts Roles" src="pic31.png" /> </p>
+<pre><code>Figure 31. Service Accounts Roles
 </code></pre>
-<p><img alt="Assign Roles" src="pic33.png" /> </p>
-<pre><code>Figure 33. Assign Roles
+<p><img alt="Assign Roles" src="pic32.png" /> </p>
+<pre><code>Figure 32. Assign Roles
 </code></pre>
 <p>Now try to get an access token</p>
-<p><img alt="Postman Get Access Token" src="pic34.png" /></p>
-<pre><code>Figure 34. Postman Get Access Token
+<p><img alt="Postman Get Access Token" src="pic33.png" /></p>
+<pre><code>Figure 33. Postman Get Access Token
 </code></pre>
 <p>Put it into the jwt.io</p>
-<p><img alt="Decode Access Token" src="pic35.png" /></p>
-<pre><code>Figure 35. Decode Access Token
+<p><img alt="Decode Access Token" src="pic34.png" /></p>
+<pre><code>Figure 34. Decode Access Token
 </code></pre>
 <p>You can find the custom role information now included in the token.</p>
 <p>Create a new class in the config package</p>
-<p><img alt="KecloakRoleConvertor Class" src="pic36.png" /></p>
-<pre><code>Figure 36. KecloakRoleConvertor Class
+<p><img alt="KecloakRoleConvertor Class" src="pic35.png" /></p>
+<pre><code>Figure 35. KecloakRoleConvertor Class
 </code></pre>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">KecloakRoleConvertor.java</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">KecloakRoleConvertor.java</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.tus.gatewayserver.config</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.core.convert.converter.Converter</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.security.core.GrantedAuthority</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.security.core.authority.SimpleGrantedAuthority</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.security.oauth2.jwt.Jwt</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.ArrayList</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Collection</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.List</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Map</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.stream.Collectors</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">KeycloakRoleConverter</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Converter</span><span class="o">&lt;</span><span class="n">Jwt</span><span class="p">,</span><span class="w"> </span><span class="n">Collection</span><span class="o">&lt;</span><span class="n">GrantedAuthority</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Collection</span><span class="o">&lt;</span><span class="n">GrantedAuthority</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">convert</span><span class="p">(</span><span class="n">Jwt</span><span class="w"> </span><span class="n">source</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Object</span><span class="o">&gt;</span><span class="w"> </span><span class="n">realmAccess</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Object</span><span class="o">&gt;</span><span class="p">)</span><span class="w"> </span><span class="n">source</span><span class="p">.</span><span class="na">getClaims</span><span class="p">().</span><span class="na">get</span><span class="p">(</span><span class="s">&quot;realm_access&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">realmAccess</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">realmAccess</span><span class="p">.</span><span class="na">isEmpty</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">Collection</span><span class="o">&lt;</span><span class="n">GrantedAuthority</span><span class="o">&gt;</span><span class="w"> </span><span class="n">returnValue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">((</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="p">)</span><span class="w"> </span><span class="n">realmAccess</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="s">&quot;roles&quot;</span><span class="p">))</span>
+<span class="w">                </span><span class="p">.</span><span class="na">stream</span><span class="p">().</span><span class="na">map</span><span class="p">(</span><span class="n">roleName</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&quot;ROLE_&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">roleName</span><span class="p">)</span>
+<span class="w">                </span><span class="p">.</span><span class="na">map</span><span class="p">(</span><span class="n">SimpleGrantedAuthority</span><span class="p">::</span><span class="k">new</span><span class="p">)</span>
+<span class="w">                </span><span class="p">.</span><span class="na">collect</span><span class="p">(</span><span class="n">Collectors</span><span class="p">.</span><span class="na">toList</span><span class="p">());</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">returnValue</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div></td></tr></table></div>
 <p>Code provided.</p>
 <p>In the SecurityConfig.java add a new method</p>
-<p>```java title="SecurityConfig.java" linenums=""</p>
-<div class="highlight"><pre><span></span><code>Update a line in the springSecurityFilterChain method to remove the default handling.
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SecurityConfig.java</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Converter</span><span class="o">&lt;</span><span class="n">Jwt</span><span class="p">,</span><span class="w"> </span><span class="n">Mono</span><span class="o">&lt;</span><span class="n">AbstractAuthenticationToken</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="nf">grantedAuthoritiesExtractor</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">JwtAuthenticationConverter</span><span class="w"> </span><span class="n">jwtAuthenticationConverter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">JwtAuthenticationConverter</span><span class="p">();</span>
+<span class="w">            </span><span class="n">jwtAuthenticationConverter</span><span class="p">.</span><span class="na">setJwtGrantedAuthoritiesConverter</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">KeycloakRoleConverter</span><span class="p">());</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ReactiveJwtAuthenticationConverterAdapter</span><span class="p">(</span><span class="n">jwtAuthenticationConverter</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p>Update a line in the springSecurityFilterChain method to remove the default handling.</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">springSecurityFilterChain()</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@Bean</span>
+<span class="w">    </span><span class="n">SecurityWebFilterChain</span><span class="w"> </span><span class="nf">springSecurityFilterChain</span><span class="p">(</span><span class="n">ServerHttpSecurity</span><span class="w"> </span><span class="n">serverHttpSecurity</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">serverHttpSecurity</span><span class="p">.</span><span class="na">authorizeExchange</span><span class="p">(</span><span class="n">exchanges</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">exchanges</span><span class="p">.</span><span class="na">pathMatchers</span><span class="p">(</span><span class="n">HttpMethod</span><span class="p">.</span><span class="na">GET</span><span class="p">).</span><span class="na">permitAll</span><span class="p">()</span>
+<span class="w">            </span><span class="p">.</span><span class="na">pathMatchers</span><span class="p">(</span><span class="s">&quot;/tusbank/accounts/**&quot;</span><span class="p">).</span><span class="na">hasRole</span><span class="p">(</span><span class="s">&quot;ACCOUNTS&quot;</span><span class="p">)</span>
+<span class="w">            </span><span class="p">.</span><span class="na">pathMatchers</span><span class="p">(</span><span class="s">&quot;/tusbank/cards/**&quot;</span><span class="p">).</span><span class="na">hasRole</span><span class="p">(</span><span class="s">&quot;CARDS&quot;</span><span class="p">)</span>
+<span class="w">            </span><span class="p">.</span><span class="na">pathMatchers</span><span class="p">(</span><span class="s">&quot;/tusbank/loans/**&quot;</span><span class="p">).</span><span class="na">hasRole</span><span class="p">(</span><span class="s">&quot;LOANS&quot;</span><span class="p">))</span>
+<span class="w">            </span><span class="p">.</span><span class="na">oauth2ResourceServer</span><span class="p">(</span><span class="n">oAuth2ResourceServerSpec</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">oAuth2ResourceServerSpec</span>
+<span class="w">                        </span><span class="p">.</span><span class="na">jwt</span><span class="p">(</span><span class="n">jwtSpec</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">jwtSpec</span><span class="p">.</span><span class="na">jwtAuthenticationConverter</span><span class="p">(</span><span class="n">grantedAuthoritiesExtractor</span><span class="p">())));</span><span class="w"> </span>
 
-```java title=&quot;springSecurityFilterChain()&quot; linenums=&quot;&quot;
-</code></pre></div>
+<span class="w">        </span><span class="n">serverHttpSecurity</span><span class="p">.</span><span class="na">csrf</span><span class="p">(</span><span class="n">csrfSpec</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">csrfSpec</span><span class="p">.</span><span class="na">disable</span><span class="p">());</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">serverHttpSecurity</span><span class="p">.</span><span class="na">build</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
 <p>Got to Postman and create a new account. Generate a new access token as before.</p>
-<p><img alt="Postman Create New Account" src="pic37.png" /></p>
-<pre><code>Figure 37. Postman Create New Account
+<p>POST <a href="localhost:8072/tusbank/accounts/api/accounts">localhost:8072/tusbank/accounts/api/accounts</a></p>
+<p><img alt="Postman Create New Account" src="pic36.png" /></p>
+<pre><code>Figure 36. Postman Create New Account
 </code></pre>
-<p><img alt="Postman 403 Forbidden" src="pic38.png" /></p>
-<pre><code>Figure 38. 403 Forbidden
+<p>POST <a href="localhost:8072/tusbank/cards/api/cards">localhost:8072/tusbank/cards/api/cards</a></p>
+<p><img alt="Postman 403 Forbidden" src="pic37.png" /></p>
+<pre><code>Figure 37. 403 Forbidden
 </code></pre>
 <p>This is now 403 (not 401) because I am authorized but I do not have enough privileges.<br />
 In KeyCloak, create a new role for CARDS</p>
-<p><img alt="KeyCloak New Cards Role" src="pic39.png" /> </p>
-<pre><code>Figure 39. KeyCloak New Cards Role
+<p><img alt="KeyCloak New Cards Role" src="pic38.png" /> </p>
+<pre><code>Figure 38. KeyCloak New Cards Role
 </code></pre>
-<p><img alt="Service Accounts Roles" src="pic40.png" /> </p>
-<pre><code>Figure 40. Service Accounts Roles
+<p><img alt="Service Accounts Roles" src="pic39.png" /> </p>
+<pre><code>Figure 39. Service Accounts Roles
 </code></pre>
-<p><img alt="Assign Roles to tusbank-callcenter-cc" src="pic41.png" /></p>
-<pre><code>Figure 41. Assign Roles to tusbank-callcenter-cc
+<p><img alt="Assign Roles to tusbank-callcenter-cc" src="pic40.png" /></p>
+<pre><code>Figure 40. Assign Roles to tusbank-callcenter-cc
 </code></pre>
 <p>Test in Postman</p>
-<p><img alt="Test in Postman" src="pic42.png" /></p>
-<pre><code>Figure 42. Test in Postman
+<p>POST <a href="localhost:8072/tusbank/cards/api/cards?mobileNumber=5432154355">localhost:8072/tusbank/cards/api/cards?mobileNumber=5432154355</a></p>
+<p><img alt="Test in Postman" src="pic41.png" /></p>
+<pre><code>Figure 41. Test in Postman
 </code></pre>
 <p>Now also add a role for LOANS</p>
-<p><img alt="Create Loans Role" src="pic43.png" /></p>
-<pre><code>Figure 43. Create Loans Role
+<p><img alt="Create Loans Role" src="pic42.png" /></p>
+<pre><code>Figure 42. Create Loans Role
 </code></pre>
-<p><img alt="Assign Role" src="pic44.png" /></p>
-<pre><code>Figure 44. Assign Role
+<p><img alt="Assign Role" src="pic43.png" /></p>
+<pre><code>Figure 43. Assign Role
 </code></pre>
-<p><img alt="Authorisation" src="pic45.png" /></p>
-<pre><code>Figure 45. Authorisation
+<p>POST <a href="localhost:8072/tusbank/loans/api/loans?mobileNumber=5432154355">localhost:8072/tusbank/loans/api/loans?mobileNumber=5432154355</a></p>
+<p><img alt="Authorisation" src="pic44.png" /></p>
+<pre><code>Figure 44. Authorisation
 </code></pre>
 
 
