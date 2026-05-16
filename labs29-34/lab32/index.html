@@ -1998,6 +1998,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    32. Http timeouts
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -2014,6 +2032,58 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#step1-loans-contact-info" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step#1 Loans Contact-Info
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step2-simulate-slow-response" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step#2 Simulate Slow Response
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step3-repeat-for-accounts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step#3 Repeat for Accounts
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -2274,6 +2344,47 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#step1-loans-contact-info" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step#1 Loans Contact-Info
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step2-simulate-slow-response" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step#2 Simulate Slow Response
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step3-repeat-for-accounts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step#3 Repeat for Accounts
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -2299,16 +2410,73 @@
 
 
 <h1 id="lab32-http-timeouts">Lab#32 Http timeouts</h1>
-<p>One of the most common problems
-Step#1 Invoke the contact-info endpoint on the loans microservice through the gateway and it works fine, but sometimes services may respond slowly.</p>
-<p>Step#2 To simulate a slow response, add a breakpoint in the contact-info end mapping in the LoansController class</p>
+<p>One of the most common problems</p>
+<h2 id="step1-loans-contact-info">Step#1 Loans Contact-Info</h2>
+<p>Invoke the contact-info endpoint on the loans microservice through the gateway and it works fine, but sometimes services may respond slowly.</p>
+<ul>
+<li>Loans Contact Info Endpoint: <a href="http://localhost:8072/tusbank/loans/api/contact-info">http://localhost:8072/tusbank/loans/api/contact-info</a></li>
+</ul>
+<p><img alt="Loans Contact Info Endpoint" src="pic1.png" /></p>
+<pre><code>Figure 1. Loans Contact Info Endpoint
+</code></pre>
+<hr />
+<h2 id="step2-simulate-slow-response">Step#2 Simulate Slow Response</h2>
+<p>To simulate a slow response, add a breakpoint in the contact-info end mapping in the LoansController class</p>
+<p><img alt="Add Breakpoint" src="pic2.png" /></p>
+<pre><code>Figure 2. Add Breakpoint
+</code></pre>
 <p>Invoke the endpoint again through the gateway and you will see that the browser is waiting for the response.</p>
+<p><img alt="Postman contact info endpoint" src="pic3.png" /></p>
+<pre><code>Figure 3. Postman contact info endpoint
+</code></pre>
 <p>Behind the scenes there is a thread waiting on the gateway for the response from the loans service and on the loans there is thread waiting for the Rest API. </p>
-<p>You can now release the breakpoint.
-Step#3 Do the same for the accounts microservice.</p>
-<p>This is because the circuitbreaker is configured for the accounts service in the gateway. Internally the circuit breaker has default configuration related to timeout. It will wait a maximum of 1 second and after that it will go to the fallback mechanism. But the circuit breaker pattern might not be used throughout the microservices.
-We can configure timeout configurations so that services do not wait indefinitely for the response.
-Set spring.cloud.gateway.httpclient properties in the gateway application.yml.</p>
+<p><img alt="Postman contact info endpoint" src="pic3.png" /></p>
+<pre><code>Figure 4. Postman contact info endpoint
+</code></pre>
+<p>You can now release the breakpoint.</p>
+<hr />
+<h2 id="step3-repeat-for-accounts">Step#3 Repeat for Accounts</h2>
+<p>Do the same for the accounts microservice.</p>
+<ul>
+<li>Accounts Contact Info Endpoint: <a href="http://localhost:8072/tusbank/accounts/api/contact-info">http://localhost:8072/tusbank/accounts/api/contact-info</a></li>
+</ul>
+<p><img alt="Accounts Contact Info Endpoint" src="pic5.png" /></p>
+<pre><code>Figure 5. Accounts Contact Info Endpoint
+</code></pre>
+<p>This is because the circuitbreaker is configured for the accounts service in the gateway. Internally the circuit breaker has default configuration related to timeout. It will wait a maximum of 1 second and after that it will go to the fallback mechanism. But the circuit breaker pattern might not be used throughout the microservices.</p>
+<p>We can configure timeout configurations so that services do not wait indefinitely for the response.</p>
+<p>Set spring.cloud.gateway.httpclient properties in the gateway application.yml.</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Gateway: application.yml</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span></pre></div></td><td class="code"><div><pre><span></span><code>  cloud:
+    gateway:
+      server:
+        webflux:
+          discovery:
+            locator:
+              enabled: false
+              lower-case-service-id: true # lab 27
+          httpclient:
+            connect-timeout: 1000 # lab 32
+            response-timeout: 5s  # lab 32
+management:
+  endpoints:
+    web:
+</code></pre></div></td></tr></table></div>
+<p><img alt="Gateway Timeout" src="pic6.png" /></p>
+<pre><code>Figure 6. Gateway Timeout
+</code></pre>
 
 
 
