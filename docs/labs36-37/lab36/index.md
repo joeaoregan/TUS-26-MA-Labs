@@ -95,79 +95,136 @@ JWT.io <jwt.io>
  
 ## Step#4 Convert our gateway server to a resource server. Then we should send the access token to the resource server. First three new dependencies are need in the gatewayserver.
 
-![dependency](pic16.png)
-
-    Figure 16. dependency
+```xml title="Gateway: pom.xml" linenums="45"
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-oauth2-jose</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-oauth2-resource-server</artifactId>
+		</dependency>
+```
 
 Add a new class in the gateway server
 
-![SecurityConfig Class](pic17.png)
+![SecurityConfig Class](pic16.png)
 
-    Figure 17. SecurityConfig Class
+    Figure 16. SecurityConfig Class
 
 ```java title="SecurityConfig.java" linenums="1"
+package com.tus.gatewayserver.config;
 
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
+import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
+import org.springframework.security.config.web.server.ServerHttpSecurity;
+import org.springframework.security.web.server.SecurityWebFilterChain;
+
+@Configuration
+@EnableWebFluxSecurity
+public class SecurityConfig {
+
+    @Bean
+    SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity serverHttpSecurity) {
+        serverHttpSecurity.authorizeExchange(exchanges -> exchanges.pathMatchers(HttpMethod.GET).permitAll()
+            .pathMatchers("/tusbank/accounts/**").authenticated()
+            .pathMatchers("/tusbank/cards/**").authenticated()
+            .pathMatchers("/tusbank/loans/**").authenticated())
+            .oauth2ResourceServer(oAuth2ResourceServerSpec -> oAuth2ResourceServerSpec
+                .jwt(Customizer.withDefaults()));
+        
+        serverHttpSecurity.csrf(csrfSpec -> csrfSpec.disable());
+        return serverHttpSecurity.build();
+    }
+}
 ```
  
 And in application.yml add the url for the KeyCloak server.
 
-```yml title="application.yml" linenums=""
-
+```yml title="application.yml" linenums="25"
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: "http://localhost:8080/realms/master/protocol/openid-connect/certs"
 ```
 
-Restart the gateway server. Now try a “GET” request and it should be successful. No security expected.
+Restart the gateway server. Now try a "GET" request and it should be successful. No security expected.
 
-![Postman Accounts Contact Info Endpoint](pic18.png)
+GET `localhost:8072/tusbank/accounts/api/contact-info`
 
-    Figure 18. Postman Accounts Contact Info Endpoint
+![Postman Accounts Contact Info Endpoint](pic17.png)
 
-![Postman Cards Java Version Endpoint](pic19.png)
+    Figure 17. Postman Accounts Contact Info Endpoint
 
-    Figure 19. Postman Cards Java Version Endpoint
+GET `localhost:8072/tusbank/cards/api/cards/java-version`
 
-![Postman Loans Build Info Endpoint](pic20.png)
+![Postman Cards Java Version Endpoint](pic18.png)
 
-    Figure 20. Postman Loans Build Info Endpoint
+    Figure 18. Postman Cards Java Version Endpoint
+
+GET `localhost:8072/tusbank/loans/api/build-info`
+
+![Postman Loans Build Info Endpoint](pic19.png)
+
+    Figure 19. Postman Loans Build Info Endpoint
 
 Now try a method other than GET – 401 – Unauthorized is returned.
 
-![Postman Post New Account](pic21.png)
+POST `localhost:8072/tusbank/accounts/api/accounts`
 
-    Figure 21. Postman Post New Account
+```json title="Request body"
+{
+    "name": "Joe Security",
+    "email": "joe@gamil.com",
+    "mobileNumber": "5432154321"
+}
+```
+
+![Postman Post New Account](pic20.png)
+
+    Figure 20. Postman Post New Account
 
 To allow POST etc. ,we need to fetch the access token. The fetching of the token can be done as part of the Postman request. 
 
 We could copy in the token into the request header or use the feature of postman to get an access token as part of the request by setting authorization information in the Postman request..
 
-![Postman OAuth 2.0 Token](pic22.png)
+![Postman OAuth 2.0 Token](pic21.png)
 
-    Figure 22. Postman OAuth 2.0 Token
+    Figure 21. Postman OAuth 2.0 Token
 
 Scroll down to “Configure New token”
 
-![Configure New Token](pic23.png)
+![Configure New Token](pic22.png)
 
-    Figure 23. Configure New Token
+    Figure 22. Configure New Token
 
-![Get New Access Token](pic24.png)
+![Get New Access Token](pic23.png)
 
-    Figure 24. Get New Access Token
+    Figure 23. Get New Access Token
 
-![Authentication Complete](pic25.png)
+![Authentication Complete](pic24.png)
 
-    Figure 25. Authentication Complete
+    Figure 24. Authentication Complete
 
-![Use Token](pic26.png)
+![Use Token](pic25.png)
 
-    Figure 26. Use Token
+    Figure 25. Use Token
 
-![Postman Post New Account](pic27.png)
+![Postman Post New Account](pic26.png)
 
-    Figure 27. Postman Post New Account
+    Figure 26. Postman Post New Account
 
-![Postman Authorisation](pic28.png)
+![Postman Authorisation](pic27.png)
 
-    Figure 28. Postman Authorisation
+    Figure 27. Postman Authorisation
 
 Adding authorization. Configure roles based authorization  
 Update the gateway SecurityConfig class 
@@ -178,45 +235,45 @@ Update the gateway SecurityConfig class
 
 Create roles using Keycloak
 
-![Keycloak Realm Roles](pic29.png) 
+![Keycloak Realm Roles](pic28.png) 
  
-    Figure 29. Keycloak Realm Roles
+    Figure 28. Keycloak Realm Roles
 
-![Keycloak Create Roles](pic30.png) 
+![Keycloak Create Roles](pic29.png) 
  
-    Figure 30. Keycloak Create Roles
+    Figure 29. Keycloak Create Roles
 
-![Keycloak Clients](pic31.png) 
+![Keycloak Clients](pic30.png) 
  
-    Figure 31. Keycloak Clients
+    Figure 30. Keycloak Clients
 
-![Service Accounts Roles](pic32.png) 
+![Service Accounts Roles](pic31.png) 
  
-    Figure 32. Service Accounts Roles
+    Figure 31. Service Accounts Roles
 
-![Assign Roles](pic33.png) 
+![Assign Roles](pic32.png) 
  
-    Figure 33. Assign Roles
+    Figure 32. Assign Roles
  
 Now try to get an access token
 
-![Postman Get Access Token](pic34.png)
+![Postman Get Access Token](pic33.png)
 
-    Figure 34. Postman Get Access Token
+    Figure 33. Postman Get Access Token
 
 Put it into the jwt.io
 
-![Decode Access Token](pic35.png)
+![Decode Access Token](pic34.png)
 
-    Figure 35. Decode Access Token
+    Figure 34. Decode Access Token
 
 You can find the custom role information now included in the token.
 
 Create a new class in the config package
 
-![KecloakRoleConvertor Class](pic36.png)
+![KecloakRoleConvertor Class](pic35.png)
 
-    Figure 36. KecloakRoleConvertor Class
+    Figure 35. KecloakRoleConvertor Class
 
 ```java title="KecloakRoleConvertor.java" linenums="1"
 
@@ -239,45 +296,45 @@ Update a line in the springSecurityFilterChain method to remove the default hand
 
 Got to Postman and create a new account. Generate a new access token as before.
 
-![Postman Create New Account](pic37.png)
+![Postman Create New Account](pic36.png)
 
-    Figure 37. Postman Create New Account
+    Figure 36. Postman Create New Account
 
-![Postman 403 Forbidden](pic38.png)
+![Postman 403 Forbidden](pic37.png)
 
-    Figure 38. 403 Forbidden
+    Figure 37. 403 Forbidden
  
 This is now 403 (not 401) because I am authorized but I do not have enough privileges.  
 In KeyCloak, create a new role for CARDS
 
-![KeyCloak New Cards Role](pic39.png) 
+![KeyCloak New Cards Role](pic38.png) 
 
-    Figure 39. KeyCloak New Cards Role
+    Figure 38. KeyCloak New Cards Role
 
-![Service Accounts Roles](pic40.png) 
+![Service Accounts Roles](pic39.png) 
 
-    Figure 40. Service Accounts Roles
+    Figure 39. Service Accounts Roles
 
-![Assign Roles to tusbank-callcenter-cc](pic41.png)
+![Assign Roles to tusbank-callcenter-cc](pic40.png)
 
-    Figure 41. Assign Roles to tusbank-callcenter-cc
+    Figure 40. Assign Roles to tusbank-callcenter-cc
 
 Test in Postman
 
-![Test in Postman](pic42.png)
+![Test in Postman](pic41.png)
 
-    Figure 42. Test in Postman
+    Figure 41. Test in Postman
 
 Now also add a role for LOANS
 
-![Create Loans Role](pic43.png)
+![Create Loans Role](pic42.png)
 
-    Figure 43. Create Loans Role
+    Figure 42. Create Loans Role
 
-![Assign Role](pic44.png)
+![Assign Role](pic43.png)
 
-    Figure 44. Assign Role
+    Figure 43. Assign Role
 
-![Authorisation](pic45.png)
+![Authorisation](pic44.png)
 
-    Figure 45. Authorisation
+    Figure 44. Authorisation
