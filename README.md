@@ -65,6 +65,15 @@
 - [Lab#27 Making changes inside the gateway server](https://joeaoregan.github.io/TUS-26-MA-Labs/labs26-28/lab27/index.md)
 - [Lab#28 Cross cutting concerns – tracing and logging](https://joeaoregan.github.io/TUS-26-MA-Labs/labs26-28/lab28/index.md)
 
+#### Resilience
+
+- [Lab#29 Circuit Breaker Pattern](https://joeaoregan.github.io/TUS-26-MA-Labs/labs29-34/lab29/index.md)
+- [Lab#30 Circuit Breaker With Fallback](https://joeaoregan.github.io/TUS-26-MA-Labs/labs29-34/lab30/index.md)
+- [Lab#31 Circuit Breaker With Feign client](https://joeaoregan.github.io/TUS-26-MA-Labs/labs29-34/lab31/index.md)
+- [Lab#32 Http timeouts](https://joeaoregan.github.io/TUS-26-MA-Labs/labs29-34/lab32/index.md)
+- [Lab#33 Implementing the re-try pattern in the gateway](https://joeaoregan.github.io/TUS-26-MA-Labs/labs29-34/lab33/index.md)
+- [Lab#34 Redis rate limiter in the gateway and in accounts service](https://joeaoregan.github.io/TUS-26-MA-Labs/labs29-34/lab34/index.md)
+
 #### API
 
 - [API Overview](https://joeaoregan.github.io/TUS-26-MA-Labs/api/)

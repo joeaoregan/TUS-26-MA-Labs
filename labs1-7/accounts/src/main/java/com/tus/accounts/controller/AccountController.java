@@ -27,7 +27,7 @@ import jakarta.validation.constraints.Pattern; // Lab 7
 import org.springframework.validation.annotation.Validated;
 
 @RestController
-@RequestMapping(path = "/api/accounts", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(path = "/api", produces = MediaType.APPLICATION_JSON_VALUE)
 //@AllArgsConstructor
 @Validated
 public class AccountController {
@@ -68,21 +68,21 @@ public class AccountController {
 		return "Hello World";
 	}
 
-	@PostMapping()
+	@PostMapping("/accounts")
 	public ResponseEntity<ResponseDto> createAccount(@Valid @RequestBody CustomerDto customerDto) { // Lab 7
 		iAccountsService.createAccount(customerDto);
 		return ResponseEntity.status(HttpStatus.CREATED)
 				.body(new ResponseDto(AccountsConstants.STATUS_201, AccountsConstants.MESSAGE_201));
 	}
 
-	@GetMapping()
+	@GetMapping("/accounts")
 	public ResponseEntity<CustomerDto> fetchAccountDetails(
 			@RequestParam @Pattern(regexp = "(^$|[0-9]{10})", message = "Mobile number must be 10 digits") String mobileNumber) { // Lab 7
 		CustomerDto customerDto = iAccountsService.fetchAccount(mobileNumber);
 		return ResponseEntity.status(HttpStatus.OK).body(customerDto);
 	}
 
-	@PutMapping()
+	@PutMapping("/accounts")
 	public ResponseEntity<ResponseDto> updateAccountDetails(@Valid @RequestBody CustomerDto customerDto) { // Lab 7
 		boolean isUpdated = iAccountsService.updateAccount(customerDto);
 		if (isUpdated) {
@@ -94,7 +94,7 @@ public class AccountController {
 		}
 	}
 
-	@DeleteMapping()
+	@DeleteMapping("/accounts")
 	public ResponseEntity<ResponseDto> deleteAccountDetails(
 			@RequestParam @Pattern(regexp = "(^$|[0-9]{10})", message = "Mobile number must be 10 digits") String mobileNumber) { // Lab 7
 		boolean isDeleted = iAccountsService.deleteAccount(mobileNumber);
