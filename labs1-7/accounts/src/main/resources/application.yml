@@ -21,14 +21,17 @@ spring:
   config:
    import: "configserver:http://localhost:8071/" # config server port 8071
   cloud:
+    openfeign:
+      circuitbreaker:
+        enabled: true # lab 31
     compatibility-verifier:
       enabled: false # disable version check
 management:
   endpoints:
     web:
       exposure:
-        # include: "*" # Lab 19
-        include: info, shutdown # lab 22 info, lab 23 shutdown
+        include: "*" # Lab 19, 31
+        # include: info, shutdown # lab 22 info, lab 23 shutdown
   endpoint:
     shutdown:
       enabled: true
@@ -56,3 +59,11 @@ logging:
     com:
       tus:
         accounts: DEBUG
+        
+resilience4j.circuitbreaker: # lab 31
+  configs:
+    default:
+      slidingWindowSize: 10
+      permittedNumberOfCallsInHalfOpenState: 2
+      failureRateThreshold: 50
+      waitDurationInOpenState: 10000 # 10 seconds

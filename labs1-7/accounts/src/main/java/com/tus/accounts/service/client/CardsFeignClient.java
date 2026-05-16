@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tus.accounts.dto.CardsDto;
 
-@FeignClient("cards")
+@FeignClient(name = "cards", fallback = CardsFallback.class) // Lab 31
 public interface CardsFeignClient {
 
     @GetMapping(value = "/api/cards", consumes = "application/json")

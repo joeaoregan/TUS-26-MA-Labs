@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tus.accounts.dto.LoansDto;
 
-@FeignClient("loans")
+@FeignClient(name = "loans", fallback = LoansFallback.class) // Lab 31
 public interface LoansFeignClient {
-
-    @GetMapping(value = "/api/loans", consumes = "application/json")
-    public ResponseEntity<LoansDto> fetchLoanDetails(@RequestHeader("tusbank-correlation-id") String correlationId,
-            @RequestParam String mobileNumber);
+	
+	@GetMapping(value = "/api/loans", consumes = "application/json")
+	public ResponseEntity<LoansDto> fetchLoanDetails(@RequestHeader("tusbank-correlation-id") String correlationId,
+			@RequestParam String mobileNumber);
 }
