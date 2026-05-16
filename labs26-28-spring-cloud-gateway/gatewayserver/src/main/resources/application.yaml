@@ -14,6 +14,13 @@ spring:
           httpclient:
             connect-timeout: 1000 # lab 32
             response-timeout: 5s  # lab 32
+# lab 34 redis
+  data:
+    redis:
+      connect-timeout: 2s
+      host: localhost
+      port: 6379
+      timeout: 1s
 management:
   endpoints:
     web:

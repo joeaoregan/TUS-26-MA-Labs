@@ -21,6 +21,7 @@ import com.tus.accounts.dto.CustomerDto;
 import com.tus.accounts.dto.ResponseDto;
 import com.tus.accounts.service.IAccountsService;
 
+import io.github.resilience4j.ratelimiter.annotation.RateLimiter; // Lab 34
 import jakarta.validation.Valid; // Lab 7
 import jakarta.validation.constraints.Pattern; // Lab 7
 //import lombok.AllArgsConstructor;
@@ -46,10 +47,14 @@ public class AccountController {
 
 	@Autowired
 	private Environment environment;
-
+	@RateLimiter(name = "getJavaVersion", fallbackMethod = "getJavaVersionFallback") // Lab 34
 	@GetMapping("/java-version")
 	public ResponseEntity<String> getJavaVersion() {
 		return ResponseEntity.status(HttpStatus.OK).body(environment.getProperty("JAVA_HOME"));
+	}
+	
+	public ResponseEntity<String> getJavaVersionFallback(Throwable throwable) {
+		return ResponseEntity.status(HttpStatus.OK).body("JAVA 17");
 	}
 
 	@GetMapping("/build-info") // Lab 10
@@ -77,7 +82,8 @@ public class AccountController {
 
 	@GetMapping("/accounts")
 	public ResponseEntity<CustomerDto> fetchAccountDetails(
-			@RequestParam @Pattern(regexp = "(^$|[0-9]{10})", message = "Mobile number must be 10 digits") String mobileNumber) { // Lab 7
+			@RequestParam @Pattern(regexp = "(^$|[0-9]{10})", message = "Mobile number must be 10 digits") String mobileNumber) { // Lab
+																																	// 7
 		CustomerDto customerDto = iAccountsService.fetchAccount(mobileNumber);
 		return ResponseEntity.status(HttpStatus.OK).body(customerDto);
 	}
@@ -96,7 +102,8 @@ public class AccountController {
 
 	@DeleteMapping("/accounts")
 	public ResponseEntity<ResponseDto> deleteAccountDetails(
-			@RequestParam @Pattern(regexp = "(^$|[0-9]{10})", message = "Mobile number must be 10 digits") String mobileNumber) { // Lab 7
+			@RequestParam @Pattern(regexp = "(^$|[0-9]{10})", message = "Mobile number must be 10 digits") String mobileNumber) { // Lab
+																																	// 7
 		boolean isDeleted = iAccountsService.deleteAccount(mobileNumber);
 		if (isDeleted) {
 			return ResponseEntity.status(HttpStatus.OK)
