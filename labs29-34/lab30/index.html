@@ -2301,10 +2301,71 @@
 <h1 id="lab30-circuit-breaker-with-fallback">Lab#30 Circuit Breaker With Fallback</h1>
 <p>In the previous lab, we implemented the circuit breaker but it had no fallback mechanism, so a runtime exception was thrown. Throwing exceptions to the client is not a valid approach. We need a fallback mechanism to send a message to the client.
 Step#1 In the gateway application we need to create a controller class to handle the fallback.</p>
+<p><img alt="Controller package and FallbackController class" src="pic1.png" /></p>
+<pre><code>Figure 1. Controller package and FallbackController class
+</code></pre>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Gateway Server: FallbackController.java</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.tus.gatewayserver.controller</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.RequestMapping</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.RestController</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">reactor.core.publisher.Mono</span><span class="p">;</span>
+
+<span class="nd">@RestController</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">FallbackController</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;/contactSupport&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Mono</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">contactSupport</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">Mono</span><span class="p">.</span><span class="na">just</span><span class="p">(</span><span class="s">&quot;An error has occurred. Please try later or contact support.&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
 <p>Step#2 Integrate the fallback into the circuitbreaker pattern by modifying the GatewayserverApplication class. Restart the gateway.</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Gateway Server: GatewayserverApplication.java</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">    </span><span class="nd">@Bean</span>
+<span class="w">    </span><span class="n">RouteLocator</span><span class="w"> </span><span class="nf">tusBankRouteconfig</span><span class="p">(</span><span class="n">RouteLocatorBuilder</span><span class="w"> </span><span class="n">routeLocatorBuilder</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// Lab 27</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">routeLocatorBuilder</span><span class="p">.</span><span class="na">routes</span><span class="p">()</span>
+<span class="w">                </span><span class="p">.</span><span class="na">route</span><span class="p">(</span><span class="n">p</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="na">path</span><span class="p">(</span><span class="s">&quot;/tusbank/accounts/**&quot;</span><span class="p">)</span>
+<span class="w">                        </span><span class="p">.</span><span class="na">filters</span><span class="p">(</span><span class="n">f</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">f</span><span class="p">.</span><span class="na">rewritePath</span><span class="p">(</span><span class="s">&quot;/tusbank/accounts/(?&lt;segment&gt;.*)&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;/${segment}&quot;</span><span class="p">)</span>
+<span class="w">                                </span><span class="p">.</span><span class="na">addResponseHeader</span><span class="p">(</span><span class="s">&quot;X-Response-Time&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">LocalDateTime</span><span class="p">.</span><span class="na">now</span><span class="p">().</span><span class="na">toString</span><span class="p">())</span>
+<span class="w">                                </span><span class="p">.</span><span class="na">circuitBreaker</span><span class="p">(</span><span class="n">config</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">config</span><span class="p">.</span><span class="na">setName</span><span class="p">(</span><span class="s">&quot;accountsCircuitBreaker&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// lab 29</span>
+<span class="w">                                        </span><span class="p">.</span><span class="na">setFallbackUri</span><span class="p">(</span><span class="s">&quot;forward:/contactSupport&quot;</span><span class="p">)))</span><span class="w"> </span><span class="c1">// lab 30</span>
+<span class="w">                        </span><span class="p">.</span><span class="na">uri</span><span class="p">(</span><span class="s">&quot;lb://ACCOUNTS&quot;</span><span class="p">))</span>
+</code></pre></div></td></tr></table></div>
 <p>Step#3 Call the contact-info endpoint.</p>
+<p><img alt="Call Contact Info Endpoint" src="pic2.png" /></p>
+<pre><code>Figure 2. Call Contact Info Endpoint
+</code></pre>
+<p><img alt="Actuator Circuitbreakers" src="pic3.png" /></p>
+<pre><code>Figure 3. Actuator Circuitbreakers
+</code></pre>
 <p>Now add the breakpoint again in the AccountController class</p>
+<p><img alt="Add Breakpoint" src="pic4.png" /></p>
+<pre><code>Figure 4. Add Breakpoint
+</code></pre>
 <p>Call the end point again and you will see the fallback was called.</p>
+<p><img alt="Fallback message" src="pic5.png" /></p>
+<pre><code>Figure 5. Fallback message
+</code></pre>
 
 
 
