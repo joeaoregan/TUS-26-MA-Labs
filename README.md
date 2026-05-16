@@ -41,38 +41,38 @@
 
 #### Spring Cloud Config
 
-- [Lab#10 Configuration with Springboot alone](https://joeaoregan.github.io/TUS-26-MA-Labs/labs10-19/lab10/index.md)
-- [Lab#11 Configuration with Environment interface](https://joeaoregan.github.io/TUS-26-MA-Labs/labs10-19/lab11/index.md)
-- [Lab#12 Configuration with @ConfigurationProperties](https://joeaoregan.github.io/TUS-26-MA-Labs/labs10-19/lab12/index.md)
-- [Lab#13 Springboot Profiles](https://joeaoregan.github.io/TUS-26-MA-Labs/labs10-19/lab13/index.md)
-- [Lab#14 Activating Springboot Profiles](https://joeaoregan.github.io/TUS-26-MA-Labs/labs10-19/lab14/index.md)
-- [Lab#15 Getting started with SpringCloud Config](https://joeaoregan.github.io/TUS-26-MA-Labs/labs10-19/lab15/index.md)
-- [Lab#16 Modifying the microservices to use the SpringCloud Config server](https://joeaoregan.github.io/TUS-26-MA-Labs/labs10-19/lab16/index.md)
-- [Lab#17 Reading the data from the file system](http://joeaoregan.github.io/TUS-26-MA-Labs/labs10-19/lab17/index.md)
-- [Lab#18 Reading configurations from a github repo and encryption](http://joeaoregan.github.io/TUS-26-MA-Labs/labs10-19/lab18/index.md)
-- [Lab#19 Refresh configurations at runtime using actuator path](http://joeaoregan.github.io/TUS-26-MA-Labs/labs10-19/lab19/index.md)
+- [Lab#10 Configuration with Springboot alone](https://joeaoregan.github.io/TUS-26-MA-Labs/labs10-19/lab10/)
+- [Lab#11 Configuration with Environment interface](https://joeaoregan.github.io/TUS-26-MA-Labs/labs10-19/lab11/)
+- [Lab#12 Configuration with @ConfigurationProperties](https://joeaoregan.github.io/TUS-26-MA-Labs/labs10-19/lab12/)
+- [Lab#13 Springboot Profiles](https://joeaoregan.github.io/TUS-26-MA-Labs/labs10-19/lab13/)
+- [Lab#14 Activating Springboot Profiles](https://joeaoregan.github.io/TUS-26-MA-Labs/labs10-19/lab14/)
+- [Lab#15 Getting started with SpringCloud Config](https://joeaoregan.github.io/TUS-26-MA-Labs/labs10-19/lab15/)
+- [Lab#16 Modifying the microservices to use the SpringCloud Config server](https://joeaoregan.github.io/TUS-26-MA-Labs/labs10-19/lab16/)
+- [Lab#17 Reading the data from the file system](http://joeaoregan.github.io/TUS-26-MA-Labs/labs10-19/lab17/)
+- [Lab#18 Reading configurations from a github repo and encryption](http://joeaoregan.github.io/TUS-26-MA-Labs/labs10-19/lab18/)
+- [Lab#19 Refresh configurations at runtime using actuator path](http://joeaoregan.github.io/TUS-26-MA-Labs/labs10-19/lab19/)
 
 #### Eureka Discovery Service
 
-- [Lab#22 Service Discovery with Eureka](https://joeaoregan.github.io/TUS-26-MA-Labs/labs22-25/lab22/index.md)
-- [Lab#23 De-Registration from Eureka and Heartbeats](https://joeaoregan.github.io/TUS-26-MA-Labs/labs22-25/lab23/index.md)
-- [Lab#24 Feign Client code changes to invoke other microservices](https://joeaoregan.github.io/TUS-26-MA-Labs/labs22-25/lab24/index.md)
-- [Lab#25 Load Balancing Demonstration](https://joeaoregan.github.io/TUS-26-MA-Labs/labs22-25/lab25/index.md)
+- [Lab#22 Service Discovery with Eureka](https://joeaoregan.github.io/TUS-26-MA-Labs/labs22-25/lab22/)
+- [Lab#23 De-Registration from Eureka and Heartbeats](https://joeaoregan.github.io/TUS-26-MA-Labs/labs22-25/lab23/)
+- [Lab#24 Feign Client code changes to invoke other microservices](https://joeaoregan.github.io/TUS-26-MA-Labs/labs22-25/lab24/)
+- [Lab#25 Load Balancing Demonstration](https://joeaoregan.github.io/TUS-26-MA-Labs/labs22-25/lab25/)
 
 #### Spring Cloud Gateway
 
-- [Lab#26 Building a Gateway with Spring Cloud](https://joeaoregan.github.io/TUS-26-MA-Labs/labs26-28/lab26/index.md)
-- [Lab#27 Making changes inside the gateway server](https://joeaoregan.github.io/TUS-26-MA-Labs/labs26-28/lab27/index.md)
-- [Lab#28 Cross cutting concerns – tracing and logging](https://joeaoregan.github.io/TUS-26-MA-Labs/labs26-28/lab28/index.md)
+- [Lab#26 Building a Gateway with Spring Cloud](https://joeaoregan.github.io/TUS-26-MA-Labs/labs26-28/lab26/)
+- [Lab#27 Making changes inside the gateway server](https://joeaoregan.github.io/TUS-26-MA-Labs/labs26-28/lab27/)
+- [Lab#28 Cross cutting concerns – tracing and logging](https://joeaoregan.github.io/TUS-26-MA-Labs/labs26-28/lab28/)
 
 #### Resilience
 
-- [Lab#29 Circuit Breaker Pattern](https://joeaoregan.github.io/TUS-26-MA-Labs/labs29-34/lab29/index.md)
-- [Lab#30 Circuit Breaker With Fallback](https://joeaoregan.github.io/TUS-26-MA-Labs/labs29-34/lab30/index.md)
-- [Lab#31 Circuit Breaker With Feign client](https://joeaoregan.github.io/TUS-26-MA-Labs/labs29-34/lab31/index.md)
-- [Lab#32 Http timeouts](https://joeaoregan.github.io/TUS-26-MA-Labs/labs29-34/lab32/index.md)
-- [Lab#33 Implementing the re-try pattern in the gateway](https://joeaoregan.github.io/TUS-26-MA-Labs/labs29-34/lab33/index.md)
-- [Lab#34 Redis rate limiter in the gateway and in accounts service](https://joeaoregan.github.io/TUS-26-MA-Labs/labs29-34/lab34/index.md)
+- [Lab#29 Circuit Breaker Pattern](https://joeaoregan.github.io/TUS-26-MA-Labs/labs29-34/lab29/)
+- [Lab#30 Circuit Breaker With Fallback](https://joeaoregan.github.io/TUS-26-MA-Labs/labs29-34/lab30/)
+- [Lab#31 Circuit Breaker With Feign client](https://joeaoregan.github.io/TUS-26-MA-Labs/labs29-34/lab31/)
+- [Lab#32 Http timeouts](https://joeaoregan.github.io/TUS-26-MA-Labs/labs29-34/lab32/)
+- [Lab#33 Implementing the re-try pattern in the gateway](https://joeaoregan.github.io/TUS-26-MA-Labs/labs29-34/lab33/)
+- [Lab#34 Redis rate limiter in the gateway and in accounts service](https://joeaoregan.github.io/TUS-26-MA-Labs/labs29-34/lab34/)
 
 #### API
 
