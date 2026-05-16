@@ -2301,24 +2301,134 @@
 <h1 id="lab29-circuit-breaker-pattern">Lab#29 Circuit Breaker Pattern</h1>
 <p>In this lab we will implement the circuit breaker pattern in the gateway and in the accounts microservice.</p>
 <p>Step#1 In the pom of the gateway server add the following dependency</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Gateway Server: application.yml</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">        </span><span class="nt">&lt;dependency&gt;</span>
+<span class="w">            </span><span class="nt">&lt;groupId&gt;</span>org.springframework.cloud<span class="nt">&lt;/groupId&gt;</span>
+<span class="w">            </span><span class="nt">&lt;artifactId&gt;</span>spring-cloud-starter-circuitbreaker-reactor-resilience4j<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/dependency&gt;</span>
+</code></pre></div></td></tr></table></div>
 <p>Step#2 Now in the Main class of the gateway server and we can use the inbuilt circuit breaker filter. It accepts some lambda configurations. Update the application.yml to include some configuration for the crcuit breaker.</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Gateway Server: GatewayserverApplication.java</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">    </span><span class="nd">@Bean</span>
+<span class="w">    </span><span class="n">RouteLocator</span><span class="w"> </span><span class="nf">tusBankRouteconfig</span><span class="p">(</span><span class="n">RouteLocatorBuilder</span><span class="w"> </span><span class="n">routeLocatorBuilder</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// Lab 27</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">routeLocatorBuilder</span><span class="p">.</span><span class="na">routes</span><span class="p">()</span>
+<span class="w">                </span><span class="p">.</span><span class="na">route</span><span class="p">(</span><span class="n">p</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">p</span>
+<span class="w">                </span><span class="p">.</span><span class="na">path</span><span class="p">(</span><span class="s">&quot;/tusbank/accounts/**&quot;</span><span class="p">)</span>
+<span class="w">                </span><span class="p">.</span><span class="na">filters</span><span class="p">(</span><span class="n">f</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">f</span><span class="p">.</span><span class="na">rewritePath</span><span class="p">(</span><span class="s">&quot;/tusbank/accounts/(?&lt;segment&gt;.*)&quot;</span><span class="p">,</span><span class="s">&quot;/${segment}&quot;</span><span class="p">)</span>
+<span class="w">                        </span><span class="p">.</span><span class="na">addResponseHeader</span><span class="p">(</span><span class="s">&quot;X-Response-Time&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">LocalDateTime</span><span class="p">.</span><span class="na">now</span><span class="p">().</span><span class="na">toString</span><span class="p">())</span>
+<span class="w">                        </span><span class="p">.</span><span class="na">circuitBreaker</span><span class="p">(</span><span class="n">config</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">config</span><span class="p">.</span><span class="na">setName</span><span class="p">(</span><span class="s">&quot;accountsCircuitBreaker&quot;</span><span class="p">)))</span><span class="w"> </span><span class="c1">// lab 29</span>
+<span class="w">                </span><span class="p">.</span><span class="na">uri</span><span class="p">(</span><span class="s">&quot;lb://ACCOUNTS&quot;</span><span class="p">))</span>
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Gateway Server: application.yml</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span></pre></div></td><td class="code"><div><pre><span></span><code>        gatewayserver: DEBUG
+
+resilience4j.circuitbreaker:
+  configs:
+    default:
+      slidingWindowSize: 10
+      permittedNumberOfCallsInHalfOpenState: 2
+      failureRateThreshold: 50
+      waitDurationInOpenState: 10000
+</code></pre></div></td></tr></table></div>
 <p>Step#3 Now start the config server, the eureka server, and accounts microservice, followed by the gateway server. Check the eureka dashboard.</p>
+<p><img alt="Eureka Dashboard" src="pic1.png" /></p>
+<pre><code>Figure 1. Eureka Dashboard
+</code></pre>
 <p>Step#4 Open the actuator endpoint for the gateway to see all the endpoints.</p>
+<p><img alt="Actuator Endpoints" src="pic2.png" /></p>
+<pre><code>Figure 2. Actuator Endpoints
+</code></pre>
 <p>Open the “circuitbreaker” url and you will see that circuitBreakers is empty. circuitBreaker imformation will be populated here when testing the accounts microservice.</p>
-<p>Step#5 To test the circuitbreaker we will use the info endpoint already implemented in the accounts microservice.
- After calling the “contact-info” API, refresh the “circuitbreaker” endpoint in the gateway. You will see that the circuit breaker information has been populated.</p>
+<p><img alt="Actuator Circuitbreakers" src="pic3.png" /></p>
+<pre><code>Figure 3. Actuator Circuitbreakers
+</code></pre>
+<p>Step#5 To test the circuitbreaker we will use the info endpoint already implemented in the accounts microservice.</p>
+<p><img alt="Actuator Circuitbreakers" src="pic4.png" /></p>
+<pre><code>Figure 4. Actuator Circuitbreakers
+</code></pre>
+<p>After calling the “contact-info” API, refresh the “circuitbreaker” endpoint in the gateway. You will see that the circuit breaker information has been populated.</p>
+<p><img alt="Actuator Circuitbreakerevents" src="pic5.png" /></p>
+<pre><code>Figure 5. Actuator Circuitbreakerevents
+</code></pre>
 <p>We can also look at the circuit breaker events.</p>
+<p><img alt="Actuator Circuitbreakerevents" src="pic6.png" /></p>
+<pre><code>Figure 6. Actuator Circuitbreakerevents
+</code></pre>
 <p>If you call the contact-info end-point another two times you will see that the circuit breaker events are updated with the new events.</p>
+<p><img alt="Actuator Circuitbreakers" src="pic7.png" /></p>
+<pre><code>Figure 7. Actuator Circuitbreakers
+</code></pre>
+<p><img alt="AccountController Breakpoint" src="pic8.png" /></p>
+<pre><code>Figure 8. AccountController Breakpoint
+</code></pre>
 <p>Step#6 To activate the circuitbreaker pattern, add a breakpoint in the AccountController so that the response will not be returned to the gateway.</p>
+<p><img alt="Debug Accounts" src="pic9.png" /></p>
+<pre><code>Figure 9. Debug Accounts
+</code></pre>
+<p><img alt="Debug Accounts" src="pic10.png" /></p>
+<pre><code>Figure 10. Make Sure Accounts is in Debug Mode
+</code></pre>
 <p>Call the contact-info endpoint and you will get a timeout.</p>
+<p><img alt="Whitelabel Error Page" src="pic11.png" /></p>
+<pre><code>Figure 11. Whitelabel Error Page
+</code></pre>
+<p><img alt="Actuator Circuitbreaker Events" src="pic12.png" /></p>
+<pre><code>Figure 12. Actuator Circuitbreaker Events
+</code></pre>
 <p>Circuit breaker is still CLOSED because only one of four calls has failed.</p>
+<p><img alt="Circuit Breaker Still Closed" src="pic13.png" /></p>
+<pre><code>Figure 13. Circuit Breaker Still Closed
+</code></pre>
 <p>Refresh the “contact-info” multiple times. At some point you will see the status change from 504 to 503.</p>
+<p><img alt="Whitelabel Error Page Status 503" src="pic14.png" /></p>
+<pre><code>Figure 14. Whitelabel Error Page Status 503
+</code></pre>
 <p>Now check the circuit breaker information and you will see that the status is open.</p>
+<p><img alt="Circuit Breaker Open" src="pic15.png" /></p>
+<pre><code>Figure 15. Circuit Breaker Open
+</code></pre>
 <p>And the event data shows that the failure rate was exceeded.</p>
+<p><img alt="Failure Rate Exceeded" src="pic16.png" /></p>
+<pre><code>Figure 16. Failure Rate Exceeded
+</code></pre>
 <p>Then we have a state transition from ‘CLOSED_TO_OPEN’ and further requests are not permitted which means that the gateway will not send the requests.</p>
+<p><img alt="Closed To Open" src="pic17.png" /></p>
+<pre><code>Figure 17. Closed To Open
+</code></pre>
 <p>Step#7 After at least 10 seconds, invoke the “contact-info” end point again. The error code has changed to 504 again and there is a transition ‘OPEN_TO_HALF_OPEN’</p>
+<p><img alt="White Label Error Status 504" src="pic18.png" /></p>
+<pre><code>Figure 18. White Label Error Status 504
+</code></pre>
+<p><img alt="Open to Half Open" src="pic19.png" /></p>
+<pre><code>Figure 19. Open to Half Open
+</code></pre>
 <p>Step#8 Remove the breakpoint in the code. Invoke the endpoint.</p>
+<p><img alt="Contact Info Endpoint" src="pic20.png" /></p>
+<pre><code>Figure 20. Contact Info Endpoint
+</code></pre>
+<p><img alt="Remove Breakpoint" src="pic21.png" /></p>
+<pre><code>Figure 21. Remove Breakpoint
+</code></pre>
 <p>You should also get a “HALF_OPEN_TO_CLOSED” transition and state of circuit breaker will be closed.</p>
+<p><img alt="Half Open to Closed" src="pic22.png" /></p>
+<pre><code>Figure 22. Half Open to Closed
+</code></pre>
 
 
 
