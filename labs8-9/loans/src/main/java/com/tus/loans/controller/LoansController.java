@@ -30,87 +30,87 @@ import jakarta.validation.constraints.Pattern;
 //import lombok.AllArgsConstructor;
 
 @RestController
-@RequestMapping(path = "/api/loans", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(path = "/api", produces = MediaType.APPLICATION_JSON_VALUE)
 //@AllArgsConstructor
 @Validated
 public class LoansController {
 
-    private ILoansService iLoansService;
+	private ILoansService iLoansService;
 
-    private static final Logger logger = LoggerFactory.getLogger(LoansController.class);
+	private static final Logger logger = LoggerFactory.getLogger(LoansController.class);
 
-    private LoansContactInfoDto loansContactInfoDto;
+	private LoansContactInfoDto loansContactInfoDto;
 
-    public LoansController(ILoansService iLoansService, LoansContactInfoDto loansContactInfoDto) {
-        this.iLoansService = iLoansService;
-        this.loansContactInfoDto = loansContactInfoDto;
-    }
+	public LoansController(ILoansService iLoansService, LoansContactInfoDto loansContactInfoDto) {
+		this.iLoansService = iLoansService;
+		this.loansContactInfoDto = loansContactInfoDto;
+	}
 
-    @Value("${build.version}")
-    private String buildVersion;
+	@Value("${build.version}")
+	private String buildVersion;
 
-    @Autowired
-    private Environment environment;
+	@Autowired
+	private Environment environment;
 
-    @GetMapping("/java-version")
-    public ResponseEntity<String> getJavaVersion() {
-        return ResponseEntity.status(HttpStatus.OK).body(environment.getProperty("JAVA_HOME"));
-    }
+	@GetMapping("/java-version")
+	public ResponseEntity<String> getJavaVersion() {
+		return ResponseEntity.status(HttpStatus.OK).body(environment.getProperty("JAVA_HOME"));
+	}
 
-    @GetMapping("/build-info")
-    public ResponseEntity<String> getBuildInfo() {
-        return ResponseEntity.status(HttpStatus.OK).body(buildVersion);
-    }
+	@GetMapping("/build-info")
+	public ResponseEntity<String> getBuildInfo() {
+		return ResponseEntity.status(HttpStatus.OK).body(buildVersion);
+	}
 
-    @GetMapping("/contact-info")
-    public ResponseEntity<LoansContactInfoDto> getContactInfo() {
-        return ResponseEntity.status(HttpStatus.OK).body(loansContactInfoDto);
-    }
+	@GetMapping("/contact-info")
+	public ResponseEntity<LoansContactInfoDto> getContactInfo() {
+		return ResponseEntity.status(HttpStatus.OK).body(loansContactInfoDto);
+	}
 
-    @GetMapping("/sayHello")
-    public String sayHello() {
-        return "Hello World";
-    }
+	@GetMapping("/sayHello")
+	public String sayHello() {
+		return "Hello World";
+	}
 
-    @PostMapping()
-    public ResponseEntity<ResponseDto> createAccount(
-            @RequestParam @Pattern(regexp = "(^$|[0-9]{10})", message = "Mobile number must be 10 digits") String mobileNumber) {
-        iLoansService.createLoan(mobileNumber);
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .body(new ResponseDto(LoansConstants.STATUS_201, LoansConstants.MESSAGE_201));
-    }
+	@PostMapping("/loans")
+	public ResponseEntity<ResponseDto> createAccount(
+			@RequestParam @Pattern(regexp = "(^$|[0-9]{10})", message = "Mobile number must be 10 digits") String mobileNumber) {
+		iLoansService.createLoan(mobileNumber);
+		return ResponseEntity.status(HttpStatus.CREATED)
+				.body(new ResponseDto(LoansConstants.STATUS_201, LoansConstants.MESSAGE_201));
+	}
 
-    @GetMapping()
-    public ResponseEntity<LoansDto> fetchLoanDetails(@RequestHeader("tusbank-correlation-id") String correlationId,
-            @RequestParam @Pattern(regexp = "(^$|[0-9]{10})", message = "Mobile number must be 10 digits") String mobileNumber) {
-        LoansDto loansDto = iLoansService.fetchLoan(mobileNumber);
-        logger.debug("TusBank-correlation-id: found:{}", correlationId);
-        System.out.println("Build Version: " + buildVersion);
-        return ResponseEntity.status(HttpStatus.OK).body(loansDto);
-    }
+	@GetMapping("/loans")
+	public ResponseEntity<LoansDto> fetchLoanDetails(@RequestHeader("tusbank-correlation-id") String correlationId,
+			@RequestParam @Pattern(regexp = "(^$|[0-9]{10})", message = "Mobile number must be 10 digits") String mobileNumber) {
+		LoansDto loansDto = iLoansService.fetchLoan(mobileNumber);
+		logger.debug("TusBank-correlation-id: found:{}", correlationId);
+		System.out.println("Build Version: " + buildVersion);
+		return ResponseEntity.status(HttpStatus.OK).body(loansDto);
+	}
 
-    @PutMapping()
-    public ResponseEntity<ResponseDto> updateLoanDetails(@Valid @RequestBody LoansDto loansDto) {
-        boolean isUpdated = iLoansService.updateLoan(loansDto);
-        if (isUpdated) {
-            return ResponseEntity.status(HttpStatus.OK)
-                    .body(new ResponseDto(LoansConstants.STATUS_200, LoansConstants.MESSAGE_200));
-        } else {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ResponseDto(LoansConstants.STATUS_500, LoansConstants.MESSAGE_500));
-        }
-    }
+	@PutMapping("/loans")
+	public ResponseEntity<ResponseDto> updateLoanDetails(@Valid @RequestBody LoansDto loansDto) {
+		boolean isUpdated = iLoansService.updateLoan(loansDto);
+		if (isUpdated) {
+			return ResponseEntity.status(HttpStatus.OK)
+					.body(new ResponseDto(LoansConstants.STATUS_200, LoansConstants.MESSAGE_200));
+		} else {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body(new ResponseDto(LoansConstants.STATUS_500, LoansConstants.MESSAGE_500));
+		}
+	}
 
-    @DeleteMapping()
-    public ResponseEntity<ResponseDto> deleteLoanDetails(
-            @RequestParam @Pattern(regexp = "(^$|[0-9]{10})", message = "Mobile number must be 10 digits") String mobileNumber) {
-        boolean isDeleted = iLoansService.deleteLoan(mobileNumber);
-        if (isDeleted) {
-            return ResponseEntity.status(HttpStatus.OK)
-                    .body(new ResponseDto(LoansConstants.STATUS_200, LoansConstants.MESSAGE_200));
-        } else {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ResponseDto(LoansConstants.STATUS_500, LoansConstants.MESSAGE_500));
-        }
-    }
+	@DeleteMapping("/loans")
+	public ResponseEntity<ResponseDto> deleteLoanDetails(
+			@RequestParam @Pattern(regexp = "(^$|[0-9]{10})", message = "Mobile number must be 10 digits") String mobileNumber) {
+		boolean isDeleted = iLoansService.deleteLoan(mobileNumber);
+		if (isDeleted) {
+			return ResponseEntity.status(HttpStatus.OK)
+					.body(new ResponseDto(LoansConstants.STATUS_200, LoansConstants.MESSAGE_200));
+		} else {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body(new ResponseDto(LoansConstants.STATUS_500, LoansConstants.MESSAGE_500));
+		}
+	}
 }

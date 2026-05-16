@@ -11,6 +11,9 @@ spring:
             locator:
               enabled: false
               lower-case-service-id: true # lab 27
+          httpclient:
+            connect-timeout: 1000 # lab 32
+            response-timeout: 5s  # lab 32
 management:
   endpoints:
     web:
