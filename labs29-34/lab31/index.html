@@ -2299,25 +2299,298 @@
 
 
 <h1 id="lab31-circuit-breaker-with-feign-client">Lab#31 Circuit Breaker With Feign client</h1>
-<p>In this lab we implement the circuit breaker inside the accounts microservice. The accounts microservice uses Feign client to invoke cards and loans microservice.
-If Spring Cloud CircuitBreaker is on the classpath and spring.cloud.openfeign.circuitbreaker.enabled=true, Feign will wrap all the methods with a circuit breaker.
-Step#1 In the pom in the accounts microservice, add the dependency and change the version of spring-cloud.</p>
+<p>In this lab we implement the circuit breaker inside the accounts microservice. The accounts microservice uses Feign client to invoke cards and loans microservice.  </p>
+<p>If Spring Cloud CircuitBreaker is on the classpath and spring.cloud.openfeign.circuitbreaker.enabled=true, Feign will wrap all the methods with a circuit breaker.  </p>
+<p>Step#1 In the pom in the accounts microservice, add the dependency and change the version of spring-cloud.</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Accounts: pom.xml (existing)</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">    </span><span class="nt">&lt;modelVersion&gt;</span>4.0.0<span class="nt">&lt;/modelVersion&gt;</span>
+<span class="w">    </span><span class="nt">&lt;parent&gt;</span>
+<span class="w">        </span><span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
+<span class="w">        </span><span class="nt">&lt;artifactId&gt;</span>spring-boot-starter-parent<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">        </span><span class="nt">&lt;version&gt;</span>3.5.13<span class="nt">&lt;/version&gt;</span>
+<span class="w">        </span><span class="nt">&lt;relativePath/&gt;</span><span class="w"> </span>
+<span class="w">    </span><span class="nt">&lt;/parent&gt;</span>
+<span class="w">    </span><span class="nt">&lt;groupId&gt;</span>com.tus<span class="nt">&lt;/groupId&gt;</span>
+<span class="w">    </span><span class="nt">&lt;artifactId&gt;</span>ma-labs-accounts-8081<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">    </span><span class="nt">&lt;version&gt;</span>0.0.1-SNAPSHOT<span class="nt">&lt;/version&gt;</span>
+
+<span class="w">    </span><span class="nt">&lt;properties&gt;</span>
+<span class="w">        </span><span class="nt">&lt;java.version&gt;</span>17<span class="nt">&lt;/java.version&gt;</span>
+<span class="w">        </span><span class="cm">&lt;!-- Lab 16: Spring Cloud Version --&gt;</span>
+<span class="w">        </span><span class="nt">&lt;spring-cloud.version&gt;</span>2024.0.0<span class="nt">&lt;/spring-cloud.version&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/properties&gt;</span>
+</code></pre></div></td></tr></table></div>
 <p>Note: Changed in all services for compatibility reasons</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Accounts: pom.xml</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">          </span><span class="nt">&lt;artifactId&gt;</span>spring-cloud-starter-openfeign<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/dependency&gt;</span>
+<span class="w">        </span><span class="cm">&lt;!-- Lab31 Circuit Breaker Pattern --&gt;</span>
+<span class="w">        </span><span class="nt">&lt;dependency&gt;</span>
+<span class="w">            </span><span class="nt">&lt;groupId&gt;</span>org.springframework.cloud<span class="nt">&lt;/groupId&gt;</span>
+<span class="w">            </span><span class="nt">&lt;artifactId&gt;</span>spring-cloud-starter-circuitbreaker-reactor-resilience4j<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/dependency&gt;</span>
+<span class="w">        </span><span class="nt">&lt;dependency&gt;</span>
+<span class="w">            </span><span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
+</code></pre></div></td></tr></table></div>
 <p>And in application.yml</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Accounts: application.yml</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span></pre></div></td><td class="code"><div><pre><span></span><code>  config:
+   import: &quot;configserver:http://localhost:8071/&quot; # config server port 8071
+  cloud:
+    openfeign:
+      circuitbreaker:
+        enabled: true
+</code></pre></div></td></tr></table></div>
 <p>Add in the parameters for the circuit breaker in the application.yml for the accounts service.</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Accounts: application.yml</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span></pre></div></td><td class="code"><div><pre><span></span><code>resilience4j.circuitbreaker:
+  configs:
+    default:
+      slidingWindowSize: 10
+      permittedNumberOfCallsInHalfOpenState: 2
+      failureRateThreshold: 50
+      waitDurationInOpenState: 10000 # 10 seconds
+</code></pre></div></td></tr></table></div>
 <p>Step#2 Implementing the fallbacks. Create a new class called LoansFallback in the accounts microservice</p>
+<p><img alt="Loans Fallback" src="pic1.png" /></p>
+<pre><code>Figure 1. Loans Fallback
+</code></pre>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Accounts: LoansFallback.java</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.tus.accounts.service.client</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.http.ResponseEntity</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.stereotype.Component</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.tus.accounts.dto.LoansDto</span><span class="p">;</span>
+
+<span class="nd">@Component</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">LoansFallback</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">LoansFeignClient</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="o">&lt;</span><span class="n">LoansDto</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">fetchLoanDetails</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">correlationId</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">mobileNumber</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
 <p>Step#3 Create a similar class called CardsFallback</p>
+<p><img alt="Cards Fallback" src="pic2.png" /></p>
+<pre><code>Figure 2. Cards Fallback
+</code></pre>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Accounts: CardsFallback.java</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.tus.accounts.service.client</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.http.ResponseEntity</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.stereotype.Component</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.tus.accounts.dto.CardsDto</span><span class="p">;</span>
+
+<span class="nd">@Component</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">CardsFallback</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">CardsFeignClient</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="o">&lt;</span><span class="n">CardsDto</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">fetchCardDetails</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">correlationId</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">mobileNumber</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
 <p>Update the LoansFeignClient interface and the CardsFeignClient interface.</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Accounts: LoansFaignClient.java</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@FeignClient</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;loans&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">fallback</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LoansFallback</span><span class="p">.</span><span class="na">class</span><span class="p">)</span><span class="w"> </span><span class="c1">// Lab 31</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">LoansFeignClient</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@GetMapping</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/api/loans&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">consumes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;application/json&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="o">&lt;</span><span class="n">LoansDto</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">fetchLoanDetails</span><span class="p">(</span><span class="nd">@RequestHeader</span><span class="p">(</span><span class="s">&quot;tusbank-correlation-id&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">correlationId</span><span class="p">,</span>
+<span class="w">            </span><span class="nd">@RequestParam</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">mobileNumber</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Accounts: CardsFeignClient.java</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@FeignClient</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;cards&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">fallback</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CardsFallback</span><span class="p">.</span><span class="na">class</span><span class="p">)</span><span class="w"> </span><span class="c1">// Lab 31</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">CardsFeignClient</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@GetMapping</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/api/cards&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">consumes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;application/json&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="o">&lt;</span><span class="n">CardsDto</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">fetchCardDetails</span><span class="p">(</span><span class="nd">@RequestHeader</span><span class="p">(</span><span class="s">&quot;tusbank-correlation-id&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">correlationId</span><span class="p">,</span>
+<span class="w">            </span><span class="nd">@RequestParam</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">mobileNumber</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
 <p>Add the if statements in the CustomersServiceImpl class.</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Accounts: CustomersServiceImpl.java</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">loansDtoResponseEntity</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// Lab 31</span>
+<span class="w">            </span><span class="n">customerDetailsDto</span><span class="p">.</span><span class="na">setLoansDto</span><span class="p">(</span><span class="n">loansDtoResponseEntity</span><span class="p">.</span><span class="na">getBody</span><span class="p">());</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="n">ResponseEntity</span><span class="o">&lt;</span><span class="n">CardsDto</span><span class="o">&gt;</span><span class="w"> </span><span class="n">cardsDtoResponseEntity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cardsFeignClient</span><span class="p">.</span><span class="na">fetchCardDetails</span><span class="p">(</span><span class="n">correlationId</span><span class="p">,</span>
+<span class="w">                </span><span class="n">mobileNumber</span><span class="p">);</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">cardsDtoResponseEntity</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// Lab 31</span>
+<span class="w">            </span><span class="n">customerDetailsDto</span><span class="p">.</span><span class="na">setCardsDto</span><span class="p">(</span><span class="n">cardsDtoResponseEntity</span><span class="p">.</span><span class="na">getBody</span><span class="p">());</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">customerDetailsDto</span><span class="p">;</span>
+</code></pre></div></td></tr></table></div>
 <p>Step#3 Start all the services, config, eureka, accounts, cards and loans followed by gateway.</p>
+<ul>
+<li>Eureka Dashboard: <a href="http://localhost:8070/">http://localhost:8070/</a></li>
+</ul>
+<p><img alt="Eureka Dashboard" src="pic3.png" /></p>
+<pre><code>Figure 3. Eureka Dashboard
+</code></pre>
 <p>Open the actuator of accounts microservice. First make sure that the actuator endpoints are enabled by checking the application.yml</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Accounts: application.yml</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span></pre></div></td><td class="code"><div><pre><span></span><code>management:
+  endpoints:
+    web:
+      exposure:
+        include: &quot;*&quot; # Lab 19, 31
+        # include: info, shutdown # lab 22 info, lab 23 shutdown
+  endpoint:
+    shutdown:
+      enabled: true
+</code></pre></div></td></tr></table></div>
+<ul>
+<li>Accounts Actuator Endpoints: <a href="http://localhost:8081/actuator">http://localhost:8081/actuator</a></li>
+</ul>
+<p><img alt="Actuator Endpoints" src="pic4.png" /></p>
+<pre><code>Figure 4. Actuator Endpoints
+</code></pre>
 <p>Check the circuit breakers link. Right now there are no circuit breakers because we did not send any request yet.</p>
-<p>Call the fetch customer details endpoint. Note: account, loan and card previously created for this mobile number.</p>
+<ul>
+<li>Circuit Breakers: <a href="http://localhost:8081/actuator/circuitbreakers">http://localhost:8081/actuator/circuitbreakers</a></li>
+</ul>
+<p><img alt="Actuator Circuitbreakers" src="pic5.png" /></p>
+<pre><code>Figure 5. Actuator Circuitbreakers
+</code></pre>
+<p>Call the fetch customer details endpoint. </p>
+<ul>
+<li>Fetch Customer Details Endpoint: <a href="http://localhost:8072/tusbank/accounts/api/customers?mobileNumber=1234567899">http://localhost:8072/tusbank/accounts/api/customers?mobileNumber=1234567899</a></li>
+</ul>
+<p><img alt="Accounts Fetch Customer Details Endpoint" src="pic6.png" /></p>
+<pre><code>Figure 6. Accounts Fetch Customer Details Endpoint
+</code></pre>
+<hr />
+<p>Note: account, loan and card previously created for this mobile number.  </p>
+<p>POST <code>localhost:8072/tusbank/accounts/api/accounts</code></p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Joe O&#39;Regan&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;joe@student.tus.ie&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;mobileNumber&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1234567899&quot;</span><span class="w">    </span>
+<span class="p">}</span>
+</code></pre></div>
+<p>POST <code>localhost:8072/tusbank/loans/api/loans?mobileNumber=1234567899</code></p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;joe@student.tus.ie&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;loanType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Home Loan&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;totalLoan&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">100000</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;amountPaid&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;outstandingAmoutn&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">100000</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>POST <code>localhost:8072/tusbank/cards/api/cards?mobileNumber=1234567899</code></p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Joe O&#39;Regan&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;joe@student.tus.ie&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;mobileNumber&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0871234567&quot;</span><span class="w">    </span>
+<span class="p">}</span>
+</code></pre></div>
+<hr />
 <p>Now refresh the actuator end point</p>
+<p><img alt="Actuator Circuitbreakers" src="pic7.png" /></p>
+<pre><code>Figure 7. Actuator Circuitbreakers
+</code></pre>
 <p>And look at the circuit breaker events.</p>
+<p><img alt="Actuator Circuitbreaker Events" src="pic8.png" /></p>
+<pre><code>Figure 8. Actuator Circuitbreaker Events
+</code></pre>
+<hr />
 <p>Step#4 To look at the negative situation, first stop the loans microservice from the springboot dashboard</p>
+<p><img alt="Stop Loans Microservice" src="pic9.png" /></p>
+<pre><code>Figure 9. Stop Loans Microservice
+</code></pre>
 <p>Call the fetch customer details endpoint again</p>
+<p><img alt="Call Fetch Customer Details Endpoint" src="pic10.png" /></p>
+<pre><code>Figure 10. Call Fetch Customer Details Endpoint
+</code></pre>
 <p>Try calling the endpoint a number of times and the circuit breaker will move to the open state.</p>
+<p><img alt="Circuit Breaker Moves To Open State" src="pic11.png" /></p>
+<pre><code>Figure 11. Circuit Breaker Moves To Open State
+</code></pre>
+<p><img alt="Call Fetch Customer Details Endpoint" src="pic12.png" /></p>
+<pre><code>Figure 12. Closed to Open State
+</code></pre>
 
 
 
