@@ -8,8 +8,26 @@
 
 ![Maven](https://img.shields.io/badge/Maven-C71A36?style=for-the-badge\&logo=apache-maven\&logoColor=white)
 ![Java](https://img.shields.io/badge/Java-17-ED8B00?style=for-the-badge\&logo=openjdk\&logoColor=white)
-![Spring Boot](https://img.shields.io/badge/Spring\_Boot-3.1.4-6DB33F?style=for-the-badge\&logo=spring-boot\&logoColor=white)
+![Spring Boot](https://img.shields.io/badge/Spring\_Boot-3.5.13-6DB33F?style=for-the-badge\&logo=spring-boot\&logoColor=white)
 ![Material for MkDocs](https://img.shields.io/badge/Material_for_MkDocs-526CFE?style=for-the-badge&logo=materialformkdocs&logoColor=white)
+
+![H2 Database](https://img.shields.io/badge/H2-In--Memory_DB-blue?logo=databricks&logoColor=white)
+![Hibernate](https://img.shields.io/badge/Hibernate-JPA-59666C?logo=hibernate&logoColor=white)
+![Lombok](https://img.shields.io/badge/Lombok-Enabled-BC043C)
+![Jakarta Validation](https://img.shields.io/badge/Jakarta-Validation-blue?logo=jakarta-ee&logoColor=white)
+![Spring Boot Actuator](https://img.shields.io/badge/Actuator-Enabled-6DB33F?logo=spring-boot&logoColor=white)
+
+![Spring Cloud](https://img.shields.io/badge/Spring_Cloud-2024.0.0-6DB33F?logo=spring&logoColor=white)
+![Spring Cloud Config](https://img.shields.io/badge/Spring_Cloud-Config-6DB33F?logo=spring&logoColor=white)
+![Eureka](https://img.shields.io/badge/Eureka-Service_Discovery-6DB33F?logo=netflix&logoColor=white)
+![OpenFeign](https://img.shields.io/badge/OpenFeign-Service_Calls-6DB33F?logo=spring&logoColor=white)
+![Resilience4j](https://img.shields.io/badge/Resilience4j-Circuit_Breaker-informational?logo=java&logoColor=white)
+
+![Spring Cloud Gateway](https://img.shields.io/badge/Spring_Cloud-Gateway-6DB33F?logo=spring&logoColor=white)
+![WebFlux](https://img.shields.io/badge/Spring-WebFlux%2FReactive-6DB33F?logo=spring&logoColor=white)
+![Redis](https://img.shields.io/badge/Redis-Rate_Limiting-DC382D?logo=redis&logoColor=white)
+![Spring Security](https://img.shields.io/badge/Spring_Security-OAuth2%2FJWT-6DB33F?logo=springsecurity&logoColor=white)
+![Keycloak](https://img.shields.io/badge/Keycloak-IAM%2FJWT-4D4D4D?logo=keycloak&logoColor=white)
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/joeaoregan/TUS-26-MA-Labs?style=flat-square\&color=orange)
 ![Last Commit](https://img.shields.io/github/last-commit/joeaoregan/TUS-26-MA-Labs?style=flat-square\&color=blue)
